@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace BM.Droid
 {
-    [Activity(Label = "BM.Droid", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "@string/ApplicationName", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
