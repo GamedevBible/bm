@@ -1,7 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:fillViewport="true"
+    android:background="@drawable/gradient_blue_down_up"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-</LinearLayout>
+    android:layout_height="match_parent">
+    <android.support.percent.PercentFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/textFieldLayout"
+        android:layout_alignParentTop="true">
+        <ImageView
+            android:layout_width="0dp"
+            app:layout_heightPercent="40%"
+            android:layout_height="0dp"
+            app:layout_aspectRatio="100%"
+            android:layout_gravity="center"
+            android:background="@color/transparent"
+            android:src="@drawable/logoBible"/>
+    </android.support.percent.PercentFrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:id="@+id/textFieldLayout">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:background="@color/transparent"
+          android:text="Введите ваше имя:"/>
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:background="@color/transparent"
+                    android:id="@+id/name"
+                    android:maxLines="1"
+                    android:ems="14" />
+        </android.support.design.widget.TextInputLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
+            android:text="Войти"
+            android:id="@+id/enterButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:ems="18" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Я незнакомец"
+            android:id="@+id/enterAnonimButton"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:ems="18" />
+    </LinearLayout>
+</RelativeLayout>
