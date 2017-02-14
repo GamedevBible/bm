@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:fillViewport="true"
     android:background="@drawable/gradient_blue_down_up"
     android:layout_width="match_parent"
@@ -41,7 +40,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:background="@color/transparent"
+                    android:maxLength="20"
+                    android:textColor="@color/dark_gray"
                     android:id="@+id/name"
                     android:maxLines="1"
                     android:ems="14" />
