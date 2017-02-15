@@ -9,9 +9,10 @@ namespace BM.Droid.Sources
     [Activity(Label = "@string/ApplicationName", Theme = "@style/AppTheme.Main", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : AppCompatActivity
     {
-        private Button _enterAnonimButton;
-        private Button _enterButton;
-        private EditText _name;
+        private Button _startButton;
+        private Button _recordsButton;
+        private Button _guideButton;
+        private Button _contactsButton;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -19,25 +20,38 @@ namespace BM.Droid.Sources
             
             SetContentView (Resource.Layout.main);
 
-            _name = FindViewById<EditText>(Resource.Id.name);
-            _enterButton = FindViewById<Button>(Resource.Id.enterButton);
-            _enterAnonimButton = FindViewById<Button>(Resource.Id.enterAnonimButton);
+            _startButton = FindViewById<Button>(Resource.Id.startButton);
+            _recordsButton = FindViewById<Button>(Resource.Id.recordsButton);
+            _guideButton = FindViewById<Button>(Resource.Id.guideButton);
+            _contactsButton = FindViewById<Button>(Resource.Id.contactsButton);
 
-            _enterButton.Click += OnEnterButtonClicked;
-            _enterAnonimButton.Click += OnEnterAnonimButtonClicked;
+            _startButton.Click += OnButtonClicked;
+            _recordsButton.Click += OnButtonClicked;
+            _guideButton.Click += OnButtonClicked;
+            _contactsButton.Click += OnButtonClicked;
         }
 
-        private void OnEnterAnonimButtonClicked(object sender, EventArgs e)
+        private void OnButtonClicked(object sender, EventArgs e)
         {
-            StartActivity(MainMenuActivity.CreateStartIntent(this, "Незнакомец"));
-        }
+            var clickedButton = (Button)sender;
 
-        private void OnEnterButtonClicked(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(_name.Text))
-                return;
-
-            StartActivity(MainMenuActivity.CreateStartIntent(this, _name.Text));
+            switch (clickedButton.Id)
+            {
+                case Resource.Id.startButton:
+                    Toast.MakeText(this, "Нажата кнопка НАЧАТЬ ИГРУ", ToastLength.Short).Show();
+                    break;
+                case Resource.Id.recordsButton:
+                    Toast.MakeText(this, "Нажата кнопка МОИ РЕКОРДЫ", ToastLength.Short).Show();
+                    break;
+                case Resource.Id.guideButton:
+                    Toast.MakeText(this, "Нажата кнопка СПРАВКА", ToastLength.Short).Show();
+                    break;
+                case Resource.Id.contactsButton:
+                    Toast.MakeText(this, "Нажата кнопка КОНТАКТЫ", ToastLength.Short).Show();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
