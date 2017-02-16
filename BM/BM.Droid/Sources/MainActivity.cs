@@ -39,6 +39,7 @@ namespace BM.Droid.Sources
             {
                 case Resource.Id.startButton:
                     Toast.MakeText(this, "Нажата кнопка НАЧАТЬ ИГРУ", ToastLength.Short).Show();
+                    StartActivity(GameActivity.CreateStartIntent(this));
                     break;
                 case Resource.Id.recordsButton:
                     Toast.MakeText(this, "Нажата кнопка МОИ РЕКОРДЫ", ToastLength.Short).Show();
