@@ -1993,8 +1993,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f06001f
 			public const int collapseActionView = 2131099679;
 			
-			// aapt resource value: 0x7f060079
-			public const int contactsButton = 2131099769;
+			// aapt resource value: 0x7f060077
+			public const int contactsButton = 2131099767;
 			
 			// aapt resource value: 0x7f06004a
 			public const int contentPanel = 2131099722;
@@ -2029,8 +2029,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f06000e
 			public const int disableHome = 2131099662;
 			
-			// aapt resource value: 0x7f060073
-			public const int divider = 2131099763;
+			// aapt resource value: 0x7f060078
+			public const int divider = 2131099768;
 			
 			// aapt resource value: 0x7f06005c
 			public const int edit_query = 2131099740;
@@ -2068,8 +2068,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060038
 			public const int @fixed = 2131099704;
 			
-			// aapt resource value: 0x7f060078
-			public const int guideButton = 2131099768;
+			// aapt resource value: 0x7f060076
+			public const int guideButton = 2131099766;
 			
 			// aapt resource value: 0x7f060072
 			public const int helpButtonsLayout = 2131099762;
@@ -2149,17 +2149,17 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060007
 			public const int progress_horizontal = 2131099655;
 			
-			// aapt resource value: 0x7f060075
-			public const int question = 2131099765;
-			
 			// aapt resource value: 0x7f060074
-			public const int questionLayout = 2131099764;
+			public const int question = 2131099764;
+			
+			// aapt resource value: 0x7f060079
+			public const int questionLayout = 2131099769;
 			
 			// aapt resource value: 0x7f060054
 			public const int radio = 2131099732;
 			
-			// aapt resource value: 0x7f060077
-			public const int recordsButton = 2131099767;
+			// aapt resource value: 0x7f060075
+			public const int recordsButton = 2131099765;
 			
 			// aapt resource value: 0x7f060030
 			public const int right = 2131099696;
@@ -2254,8 +2254,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060031
 			public const int start = 2131099697;
 			
-			// aapt resource value: 0x7f060076
-			public const int startButton = 2131099766;
+			// aapt resource value: 0x7f060073
+			public const int startButton = 2131099763;
 			
 			// aapt resource value: 0x7f06007d
 			public const int status_bar_latest_event_content = 2131099773;

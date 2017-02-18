@@ -17,107 +17,91 @@
         android:orientation="horizontal">
         <android.support.v7.widget.AppCompatImageButton
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/chevron_double_left"
             android:layout_weight="1"
             android:layout_centerVertical="true"/>
         <android.support.v7.widget.AppCompatImageButton
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/phone_in_talk"
             android:layout_weight="1"
             android:layout_centerVertical="true"/>
         <android.support.v7.widget.AppCompatImageButton
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/account_multiple"
             android:layout_weight="1"
             android:layout_centerVertical="true"/>
         <android.support.v7.widget.AppCompatImageButton
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/format_list_checks"
             android:layout_weight="1"
             android:layout_centerVertical="true"/>
     </LinearLayout>
-    <android.support.percent.PercentFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_below="@+id/helpButtonsLayout"
-        android:layout_above="@+id/divider"
-        android:id="@+id/questionLayout">
-        <TextView
-            android:layout_width="match_parent"
-            app:layout_heightPercent="70%"
-            android:layout_height="0dp"
-            android:textSize="16sp"
-            app:layout_aspectRatio="100%"
-            android:layout_gravity="center"
-            android:maxLines="20"
-            android:scrollbars="vertical"
-            android:gravity="center"
-            android:padding="15dp"
-            android:id="@+id/question"
-            android:text="Это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это 
-            текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это 
-            текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это текст вопроса это "
-            android:background="@drawable/rounded_corners"/>
-    </android.support.percent.PercentFrameLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/divider"
-        android:layout_centerVertical="true"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/divider"
-        android:orientation="vertical"
-        android:gravity="center">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="5dp"
-            android:layout_centerHorizontal="true"
-            android:text="Вариант 1"
-            android:id="@+id/startButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:ems="18" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
-            android:text="Вариант 2"
-            android:id="@+id/recordsButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:ems="18" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
-            android:text="Вариант 3"
-            android:id="@+id/guideButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:ems="18" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Вариант 4"
-            android:layout_marginBottom="15dp"
-            android:id="@+id/contactsButton"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:ems="18" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:ems="20"
+        android:layout_height="127sp"
+        android:textSize="17sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/startButton"
+        android:maxLines="20"
+        android:scrollbars="vertical"
+        android:gravity="center"
+        android:id="@+id/question"
+        android:padding="10dp"
+        android:text="В каком году началась Великая Отечественная Война?"
+        android:background="@drawable/rounded_corners"/>
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="10dp"
+         android:layout_centerInParent="true"
+         android:layout_centerHorizontal="true"
+         android:text="1939"
+         android:id="@+id/startButton"
+         style="@style/Widget.AppCompat.Button.Colored"
+         android:ems="18" />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="10dp"
+         android:layout_below="@+id/startButton"
+         android:text="1918"
+         android:id="@+id/recordsButton"
+         style="@style/Widget.AppCompat.Button.Colored"
+         android:ems="18" />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:layout_marginBottom="10dp"
+         android:layout_below="@+id/recordsButton"
+         android:text="1941"
+         android:id="@+id/guideButton"
+         style="@style/Widget.AppCompat.Button.Colored"
+         android:ems="18" />
+     <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:layout_below="@+id/guideButton"
+         android:text="1906"
+         android:layout_marginBottom="15dp"
+         android:id="@+id/contactsButton"
+         style="@style/Widget.AppCompat.Button.Colored"
+         android:ems="18" />
 </RelativeLayout>
