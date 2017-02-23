@@ -16,29 +16,33 @@
         android:layout_marginEnd="10dp"
         android:orientation="horizontal">
         <android.support.v7.widget.AppCompatImageButton
-            android:layout_width="50dp"
+            android:layout_width="0dp"
             android:layout_height="60dp"
+            android:id="@+id/backButton"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/chevron_double_left"
             android:layout_weight="1"
             android:layout_centerVertical="true"/>
         <android.support.v7.widget.AppCompatImageButton
-            android:layout_width="50dp"
+            android:layout_width="0dp"
             android:layout_height="60dp"
+            android:id="@+id/callButton"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/phone_in_talk"
             android:layout_weight="1"
             android:layout_centerVertical="true"/>
         <android.support.v7.widget.AppCompatImageButton
-            android:layout_width="50dp"
+            android:layout_width="0dp"
             android:layout_height="60dp"
+            android:id="@+id/peopleButton"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/account_multiple"
             android:layout_weight="1"
             android:layout_centerVertical="true"/>
         <android.support.v7.widget.AppCompatImageButton
-            android:layout_width="50dp"
+            android:layout_width="0dp"
             android:layout_height="60dp"
+            android:id="@+id/fiftyButton"
             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/format_list_checks"
             android:layout_weight="1"
@@ -56,7 +60,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/startButton"
+        android:layout_above="@+id/variant1Button"
         android:maxLines="20"
         android:scrollbars="vertical"
         android:gravity="center"
@@ -71,7 +75,7 @@
          android:layout_centerInParent="true"
          android:layout_centerHorizontal="true"
          android:text="1939"
-         android:id="@+id/startButton"
+         android:id="@+id/variant1Button"
          style="@style/Widget.AppCompat.Button.Colored"
          android:ems="18" />
      <Button
@@ -79,9 +83,9 @@
          android:layout_height="wrap_content"
          android:layout_centerHorizontal="true"
          android:layout_marginBottom="10dp"
-         android:layout_below="@+id/startButton"
+         android:layout_below="@+id/variant1Button"
          android:text="1918"
-         android:id="@+id/recordsButton"
+         android:id="@+id/variant2Button"
          style="@style/Widget.AppCompat.Button.Colored"
          android:ems="18" />
      <Button
@@ -89,19 +93,29 @@
          android:layout_height="wrap_content"
          android:layout_centerHorizontal="true"
          android:layout_marginBottom="10dp"
-         android:layout_below="@+id/recordsButton"
+         android:layout_below="@+id/variant2Button"
          android:text="1941"
-         android:id="@+id/guideButton"
+         android:id="@+id/variant3Button"
          style="@style/Widget.AppCompat.Button.Colored"
          android:ems="18" />
      <Button
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_centerHorizontal="true"
-         android:layout_below="@+id/guideButton"
+         android:layout_below="@+id/variant3Button"
          android:text="1906"
          android:layout_marginBottom="15dp"
-         android:id="@+id/contactsButton"
+         android:id="@+id/variant4Button"
          style="@style/Widget.AppCompat.Button.Colored"
+         android:ems="18" />
+      <Button
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:layout_alignParentBottom="true"
+         android:text="0 очков"
+         android:layout_margin="10dp"
+         android:id="@+id/pointsButton"
+         style="@style/Widget.AppCompat.Button.Borderless.Colored"
          android:ems="18" />
 </RelativeLayout>

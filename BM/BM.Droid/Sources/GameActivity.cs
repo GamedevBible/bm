@@ -17,7 +17,10 @@ namespace BM.Droid.Sources
     [Activity(Label = "GameActivity", Theme = "@style/AppTheme.Main")]
     public class GameActivity : AppCompatActivity
     {
+        bool _doubleBackToExitPressedOnce = false;
         private TextView _question;
+        private ImageButton _backButton;
+        private Button _pointsButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,8 +28,70 @@ namespace BM.Droid.Sources
 
             SetContentView(Resource.Layout.game);
 
-            _question = FindViewById<TextView>(Resource.Id.question);
-            _question.MovementMethod = new ScrollingMovementMethod();
+            //_question = FindViewById<TextView>(Resource.Id.question);
+            //_question.MovementMethod = new ScrollingMovementMethod();
+
+            _backButton = FindViewById<ImageButton>(Resource.Id.backButton);
+            _pointsButton = FindViewById<Button>(Resource.Id.pointsButton);
+
+            _backButton.Click += OnImageButtonClicked;
+            _pointsButton.Click += OnButtonClicked;
+        }
+
+        private void OnImageButtonClicked(object sender, EventArgs e)
+        {
+            var buttonClicked = (ImageButton)sender;
+            switch (buttonClicked.Id)
+            {
+                case Resource.Id.backButton:
+                    Finish();
+                    break;
+            }
+            }
+
+        private void OnButtonClicked(object sender, EventArgs e)
+        {
+            var buttonClicked = (Button)sender;
+            switch (buttonClicked.Id)
+            {
+                case Resource.Id.backButton:
+                    Finish();
+                    break;
+                case Resource.Id.pointsButton:
+                    var ft = SupportFragmentManager.BeginTransaction();
+                    var prev = SupportFragmentManager.FindFragmentByTag(nameof(PointsFragment));
+                    if (prev != null)
+                    {
+                        ft.Remove(prev);
+                    }
+                    ft.AddToBackStack(null);
+
+                    // Create and show the dialog.
+                    var dialog = PointsFragment.NewInstance(1);
+                    dialog.Show(ft, nameof(PointsFragment));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public override void OnBackPressed()
+        {
+            if (_doubleBackToExitPressedOnce)
+            {
+                base.OnBackPressed();
+                Java.Lang.JavaSystem.Exit(0);
+                return;
+            }
+
+
+            this._doubleBackToExitPressedOnce = true;
+            Toast.MakeText(this, "Нажмите еще раз для выхода", ToastLength.Short).Show();
+
+            new Handler().PostDelayed(() =>
+            {
+                _doubleBackToExitPressedOnce = false;
+            }, 2000);
         }
 
         public static Intent CreateStartIntent(Context context, string message = null)

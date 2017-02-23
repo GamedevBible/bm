@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/bm_blue</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
         <!--<item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>-->
         <!--<item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>-->
     </style>
