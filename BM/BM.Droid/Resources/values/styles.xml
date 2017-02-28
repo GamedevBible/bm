@@ -15,5 +15,16 @@
         <item name="android:windowTranslucentStatus">false</item>
         <!--<item name="android:windowTranslucentNavigation">true</item>-->
     </style>
+  
+    <style name="PointsDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowAnimationStyle">@style/PointsDialogAnimation</item>
+    </style>
+
+    <style name="PointsDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_down_out</item>
+        <!--<item name="android:windowEnterAnimation">@android:anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_top</item>-->
+    </style>
 
 </resources>

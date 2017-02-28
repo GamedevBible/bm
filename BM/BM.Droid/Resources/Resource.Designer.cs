@@ -79,6 +79,12 @@ namespace BM.Droid
 			// aapt resource value: 0x7f04000f
 			public const int design_snackbar_out = 2130968591;
 			
+			// aapt resource value: 0x7f040010
+			public const int slide_down_out = 2130968592;
+			
+			// aapt resource value: 0x7f040011
+			public const int slide_up_in = 2130968593;
+			
 			static Animation()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -1018,32 +1024,32 @@ namespace BM.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0b004c
-			public const int abc_background_cache_hint_selector_material_dark = 2131427404;
-			
 			// aapt resource value: 0x7f0b004d
-			public const int abc_background_cache_hint_selector_material_light = 2131427405;
+			public const int abc_background_cache_hint_selector_material_dark = 2131427405;
 			
 			// aapt resource value: 0x7f0b004e
-			public const int abc_color_highlight_material = 2131427406;
+			public const int abc_background_cache_hint_selector_material_light = 2131427406;
+			
+			// aapt resource value: 0x7f0b004f
+			public const int abc_color_highlight_material = 2131427407;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int abc_input_method_navigation_guard = 2131427328;
 			
-			// aapt resource value: 0x7f0b004f
-			public const int abc_primary_text_disable_only_material_dark = 2131427407;
-			
 			// aapt resource value: 0x7f0b0050
-			public const int abc_primary_text_disable_only_material_light = 2131427408;
+			public const int abc_primary_text_disable_only_material_dark = 2131427408;
 			
 			// aapt resource value: 0x7f0b0051
-			public const int abc_primary_text_material_dark = 2131427409;
+			public const int abc_primary_text_disable_only_material_light = 2131427409;
 			
 			// aapt resource value: 0x7f0b0052
-			public const int abc_primary_text_material_light = 2131427410;
+			public const int abc_primary_text_material_dark = 2131427410;
 			
 			// aapt resource value: 0x7f0b0053
-			public const int abc_search_url_text = 2131427411;
+			public const int abc_primary_text_material_light = 2131427411;
+			
+			// aapt resource value: 0x7f0b0054
+			public const int abc_search_url_text = 2131427412;
 			
 			// aapt resource value: 0x7f0b0001
 			public const int abc_search_url_text_normal = 2131427329;
@@ -1054,11 +1060,11 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0003
 			public const int abc_search_url_text_selected = 2131427331;
 			
-			// aapt resource value: 0x7f0b0054
-			public const int abc_secondary_text_material_dark = 2131427412;
-			
 			// aapt resource value: 0x7f0b0055
-			public const int abc_secondary_text_material_light = 2131427413;
+			public const int abc_secondary_text_material_dark = 2131427413;
+			
+			// aapt resource value: 0x7f0b0056
+			public const int abc_secondary_text_material_light = 2131427414;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int accent_material_dark = 2131427332;
@@ -1078,14 +1084,14 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0009
 			public const int background_material_light = 2131427337;
 			
-			// aapt resource value: 0x7f0b004a
-			public const int black_transparent = 2131427402;
-			
-			// aapt resource value: 0x7f0b0046
-			public const int bm_blue = 2131427398;
+			// aapt resource value: 0x7f0b004b
+			public const int black_transparent = 2131427403;
 			
 			// aapt resource value: 0x7f0b0047
-			public const int bm_dark_blue = 2131427399;
+			public const int bm_blue = 2131427399;
+			
+			// aapt resource value: 0x7f0b0048
+			public const int bm_dark_blue = 2131427400;
 			
 			// aapt resource value: 0x7f0b000a
 			public const int bright_foreground_disabled_material_dark = 2131427338;
@@ -1177,6 +1183,9 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0045
 			public const int light_gray = 2131427397;
 			
+			// aapt resource value: 0x7f0b0046
+			public const int lighter_gray = 2131427398;
+			
 			// aapt resource value: 0x7f0b001c
 			public const int material_blue_grey_800 = 2131427356;
 			
@@ -1213,11 +1222,11 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0027
 			public const int material_grey_900 = 2131427367;
 			
-			// aapt resource value: 0x7f0b0048
-			public const int mercury = 2131427400;
-			
 			// aapt resource value: 0x7f0b0049
-			public const int mercury_transparent = 2131427401;
+			public const int mercury = 2131427401;
+			
+			// aapt resource value: 0x7f0b004a
+			public const int mercury_transparent = 2131427402;
 			
 			// aapt resource value: 0x7f0b0028
 			public const int primary_dark_material_dark = 2131427368;
@@ -1267,11 +1276,11 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0037
 			public const int switch_thumb_disabled_material_light = 2131427383;
 			
-			// aapt resource value: 0x7f0b0056
-			public const int switch_thumb_material_dark = 2131427414;
-			
 			// aapt resource value: 0x7f0b0057
-			public const int switch_thumb_material_light = 2131427415;
+			public const int switch_thumb_material_dark = 2131427415;
+			
+			// aapt resource value: 0x7f0b0058
+			public const int switch_thumb_material_light = 2131427416;
 			
 			// aapt resource value: 0x7f0b0038
 			public const int switch_thumb_normal_material_dark = 2131427384;
@@ -1279,8 +1288,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0039
 			public const int switch_thumb_normal_material_light = 2131427385;
 			
-			// aapt resource value: 0x7f0b004b
-			public const int transparent = 2131427403;
+			// aapt resource value: 0x7f0b004c
+			public const int transparent = 2131427404;
 			
 			static Color()
 			{
@@ -2156,49 +2165,49 @@ namespace BM.Droid
 			public const int pointsButton = 2131099787;
 			
 			// aapt resource value: 0x7f060080
-			public const int points_1 = 2131099776;
-			
-			// aapt resource value: 0x7f060077
-			public const int points_10 = 2131099767;
-			
-			// aapt resource value: 0x7f060076
-			public const int points_11 = 2131099766;
-			
-			// aapt resource value: 0x7f060075
-			public const int points_12 = 2131099765;
-			
-			// aapt resource value: 0x7f060074
-			public const int points_13 = 2131099764;
-			
-			// aapt resource value: 0x7f060073
-			public const int points_14 = 2131099763;
-			
-			// aapt resource value: 0x7f060072
-			public const int points_15 = 2131099762;
+			public const int points_0 = 2131099776;
 			
 			// aapt resource value: 0x7f06007f
-			public const int points_2 = 2131099775;
+			public const int points_1 = 2131099775;
+			
+			// aapt resource value: 0x7f060076
+			public const int points_10 = 2131099766;
+			
+			// aapt resource value: 0x7f060075
+			public const int points_11 = 2131099765;
+			
+			// aapt resource value: 0x7f060074
+			public const int points_12 = 2131099764;
+			
+			// aapt resource value: 0x7f060073
+			public const int points_13 = 2131099763;
+			
+			// aapt resource value: 0x7f060072
+			public const int points_14 = 2131099762;
 			
 			// aapt resource value: 0x7f06007e
-			public const int points_3 = 2131099774;
+			public const int points_2 = 2131099774;
 			
 			// aapt resource value: 0x7f06007d
-			public const int points_4 = 2131099773;
+			public const int points_3 = 2131099773;
 			
 			// aapt resource value: 0x7f06007c
-			public const int points_5 = 2131099772;
+			public const int points_4 = 2131099772;
 			
 			// aapt resource value: 0x7f06007b
-			public const int points_6 = 2131099771;
+			public const int points_5 = 2131099771;
 			
 			// aapt resource value: 0x7f06007a
-			public const int points_7 = 2131099770;
+			public const int points_6 = 2131099770;
 			
 			// aapt resource value: 0x7f060079
-			public const int points_8 = 2131099769;
+			public const int points_7 = 2131099769;
 			
 			// aapt resource value: 0x7f060078
-			public const int points_9 = 2131099768;
+			public const int points_8 = 2131099768;
+			
+			// aapt resource value: 0x7f060077
+			public const int points_9 = 2131099767;
 			
 			// aapt resource value: 0x7f060006
 			public const int progress_circular = 2131099654;
@@ -2566,19 +2575,16 @@ namespace BM.Droid
 			public const int notification_template_part_time = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int points_textview = 2130903088;
+			public const int select_dialog_item_material = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int select_dialog_item_material = 2130903089;
+			public const int select_dialog_multichoice_material = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public const int select_dialog_multichoice_material = 2130903090;
+			public const int select_dialog_singlechoice_material = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public const int select_dialog_singlechoice_material = 2130903091;
-			
-			// aapt resource value: 0x7f030034
-			public const int support_simple_spinner_dropdown_item = 2130903092;
+			public const int support_simple_spinner_dropdown_item = 2130903091;
 			
 			static Layout()
 			{
@@ -3160,6 +3166,12 @@ namespace BM.Droid
 			
 			// aapt resource value: 0x7f09001b
 			public const int Platform_Widget_AppCompat_Spinner = 2131296283;
+			
+			// aapt resource value: 0x7f090159
+			public const int PointsDialog = 2131296601;
+			
+			// aapt resource value: 0x7f09015a
+			public const int PointsDialogAnimation = 2131296602;
 			
 			// aapt resource value: 0x7f090028
 			public const int RtlOverlay_DialogWindowTitle_AppCompat = 2131296296;

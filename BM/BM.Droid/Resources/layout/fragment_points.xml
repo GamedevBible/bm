@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -15,105 +16,105 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_15"
+            android:id="@+id/points_14"
             android:text="15 - 1 000 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_14"
+            android:id="@+id/points_13"
             android:text="14 - 500 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_13"
+            android:id="@+id/points_12"
             android:text="13 - 250 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_12"
+            android:id="@+id/points_11"
             android:text="12 - 125 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_11"
+            android:id="@+id/points_10"
             android:text="11 - 64 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_10"
+            android:id="@+id/points_9"
             android:text="10 - 32 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_9"
+            android:id="@+id/points_8"
             android:text="9 - 16 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_8"
+            android:id="@+id/points_7"
             android:text="8 - 8 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_7"
+            android:id="@+id/points_6"
             android:text="7 - 4 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_6"
+            android:id="@+id/points_5"
             android:text="6 - 2 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_5"
+            android:id="@+id/points_4"
             android:text="5 - 1 000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_4"
+            android:id="@+id/points_3"
             android:text="4 - 500"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_3"
+            android:id="@+id/points_2"
             android:text="3 - 300"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_2"
+            android:id="@+id/points_1"
             android:text="2 - 200"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/bm_blue"
+            android:textColor="@color/dark_gray"
             android:layout_marginBottom="10dp"
-            android:id="@+id/points_1"
+            android:id="@+id/points_0"
             android:text="1 - 100"/>
     </LinearLayout>
 </ScrollView>

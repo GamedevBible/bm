@@ -66,8 +66,12 @@ namespace BM.Droid.Sources
                     }
                     ft.AddToBackStack(null);
 
-                    // Create and show the dialog.
-                    var dialog = PointsFragment.NewInstance(1);
+                    /*********************** Потом нужно передавать реальный номер вопроса **********************************/
+                    Random rand = new Random();
+                    int temp;
+                    temp = rand.Next(0, 15);
+                    
+                    var dialog = PointsFragment.NewInstance(temp);
                     dialog.Show(ft, nameof(PointsFragment));
                     break;
                 default:
@@ -80,13 +84,13 @@ namespace BM.Droid.Sources
             if (_doubleBackToExitPressedOnce)
             {
                 base.OnBackPressed();
-                Java.Lang.JavaSystem.Exit(0);
+                Finish();
                 return;
             }
 
 
             this._doubleBackToExitPressedOnce = true;
-            Toast.MakeText(this, "Нажмите еще раз для выхода", ToastLength.Short).Show();
+            Toast.MakeText(this, "Нажмите еще раз чтобы вернуться в меню", ToastLength.Short).Show();
 
             new Handler().PostDelayed(() =>
             {
