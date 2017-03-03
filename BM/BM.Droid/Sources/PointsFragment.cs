@@ -1,12 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
@@ -14,7 +9,7 @@ using Android.Support.V4.Content;
 
 namespace BM.Droid.Sources
 {
-    class PointsFragment : AppCompatDialogFragment
+    internal class PointsFragment : AppCompatDialogFragment
     {
         private const string _questionNumberTag = nameof(_questionNumberTag);
 

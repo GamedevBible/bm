@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sources\CallFriendFragment.cs" />
     <Compile Include="Sources\GameActivity.cs" />
     <Compile Include="Sources\MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -130,7 +131,9 @@
     <AndroidResource Include="Resources\layout-land\main.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout-land\game.xml" />
+    <AndroidResource Include="Resources\layout-land\game.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\chevron_double_left.xml" />
@@ -157,7 +160,18 @@
     <AndroidResource Include="Resources\anim\slide_down_out.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout-land\fragment_points.xml" />
+    <AndroidResource Include="Resources\layout-land\fragment_points.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragment_call_friend.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BM\BM.Portable.csproj">
+      <Project>{387B1CAC-E7CB-4C09-A556-0779B237983A}</Project>
+      <Name>BM.Portable</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

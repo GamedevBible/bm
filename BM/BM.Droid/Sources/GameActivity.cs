@@ -21,6 +21,7 @@ namespace BM.Droid.Sources
         private TextView _question;
         private ImageButton _backButton;
         private Button _pointsButton;
+        private ImageButton _callButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,9 +33,11 @@ namespace BM.Droid.Sources
             //_question.MovementMethod = new ScrollingMovementMethod();
 
             _backButton = FindViewById<ImageButton>(Resource.Id.backButton);
+            _callButton = FindViewById<ImageButton>(Resource.Id.callButton);
             _pointsButton = FindViewById<Button>(Resource.Id.pointsButton);
 
             _backButton.Click += OnImageButtonClicked;
+            _callButton.Click += OnImageButtonClicked;
             _pointsButton.Click += OnButtonClicked;
         }
 
@@ -46,6 +49,21 @@ namespace BM.Droid.Sources
                 case Resource.Id.backButton:
                     Finish();
                     break;
+                case Resource.Id.callButton:
+                    var ft = SupportFragmentManager.BeginTransaction();
+                    var prev = SupportFragmentManager.FindFragmentByTag(nameof(CallFriendFragment));
+                    if (prev != null)
+                    {
+                        ft.Remove(prev);
+                    }
+                    ft.AddToBackStack(null);
+
+                    var dialog = CallFriendFragment.NewInstance(new Question { Level = 10, Variant1 = "1939",
+                    Variant2 = "1918", Variant3 = "1941", Variant4 = "1906", Answer = 3});
+                    dialog.Show(ft, nameof(CallFriendFragment));
+                    break;
+                default:
+                    break;
             }
             }
 
@@ -54,9 +72,6 @@ namespace BM.Droid.Sources
             var buttonClicked = (Button)sender;
             switch (buttonClicked.Id)
             {
-                case Resource.Id.backButton:
-                    Finish();
-                    break;
                 case Resource.Id.pointsButton:
                     var ft = SupportFragmentManager.BeginTransaction();
                     var prev = SupportFragmentManager.FindFragmentByTag(nameof(PointsFragment));
