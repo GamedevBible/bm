@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
 using Android.Text.Method;
+using Android.Support.V4.Content;
 
 namespace BM.Droid.Sources
 {
@@ -28,7 +29,7 @@ namespace BM.Droid.Sources
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.game);
-
+            
             //_question = FindViewById<TextView>(Resource.Id.question);
             //_question.MovementMethod = new ScrollingMovementMethod();
 
@@ -39,6 +40,19 @@ namespace BM.Droid.Sources
             _backButton.Click += OnImageButtonClicked;
             _callButton.Click += OnImageButtonClicked;
             _pointsButton.Click += OnButtonClicked;
+
+            if (savedInstanceState != null)
+            {
+                _callButton.Enabled = savedInstanceState.GetBoolean(nameof(_callButton.Enabled));
+                _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, _callButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
+            }
+        }
+
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            outState.PutBoolean(nameof(_callButton.Enabled), _callButton.Enabled);
         }
 
         private void OnImageButtonClicked(object sender, EventArgs e)
@@ -50,6 +64,8 @@ namespace BM.Droid.Sources
                     Finish();
                     break;
                 case Resource.Id.callButton:
+                    _callButton.Enabled = false;
+                    _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     var ft = SupportFragmentManager.BeginTransaction();
                     var prev = SupportFragmentManager.FindFragmentByTag(nameof(CallFriendFragment));
                     if (prev != null)

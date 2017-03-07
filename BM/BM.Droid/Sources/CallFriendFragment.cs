@@ -1,23 +1,20 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
 using System.Threading.Tasks;
-using BM;
 
 namespace BM.Droid.Sources
 {
     internal class CallFriendFragment : AppCompatDialogFragment
     {
         private const string _questionTag = nameof(_questionTag);
+        private bool _thisFragmentNeedToClose;
+        private bool _thisFragmentWasRecreated;
         private Question _question;
         private TextView _answer;
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
@@ -25,7 +22,7 @@ namespace BM.Droid.Sources
             var view = LayoutInflater.From(Activity).Inflate(Resource.Layout.fragment_call_friend, null);
 
             InitTextViews(view);
-
+            
             _question = (Question)Arguments.GetSerializable(_questionTag);
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(Activity, Resource.Style.AlertDialogTheme)
@@ -37,34 +34,76 @@ namespace BM.Droid.Sources
             return dialog;
         }
 
+        public override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            outState.PutBoolean(nameof(_thisFragmentNeedToClose), _thisFragmentNeedToClose);
+            outState.PutBoolean(nameof(_thisFragmentWasRecreated), _thisFragmentWasRecreated);
+        }
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            base.OnActivityCreated(savedInstanceState);
+
+            if (savedInstanceState != null)
+            {
+                _thisFragmentNeedToClose = savedInstanceState.GetBoolean(nameof(_thisFragmentNeedToClose));
+                _thisFragmentWasRecreated = savedInstanceState.GetBoolean(nameof(_thisFragmentWasRecreated));
+            }
+        }
+
         public override void OnResume()
         {
             base.OnResume();
 
-            InitCall(_question);
+            if (!_thisFragmentNeedToClose)
+                InitCall(_question);
+            else
+            {
+                Dismiss();
+            }
+        }
+
+        public override void OnDestroyView()
+        {
+            base.OnDestroyView();
         }
 
         private async void InitCall(Question question)
         {
-            _answer.Text = "Звоним другу...";
+            if (_thisFragmentWasRecreated)
+            {
+                _answer.Text = "Перезваниваем другу...";
+            }
+            else
+            {
+                _answer.Text = "Звоним другу...";
+            }
+
+            _thisFragmentWasRecreated = true;
             await Task.Delay(1500);
+
             _answer.Text = "Задаем вопрос...";
 
             if (question.Level < 5)
             {
                 await Task.Delay(1500);
-                _answer.Text = $"Я знаю! Ответ: {GetCorrectAnswer(question)}";
+                _answer.Text = !_thisFragmentNeedToClose ? $"Я знаю! Ответ: {GetCorrectAnswer(question)}" : "Жаль, но связь прервалась...";
+                _thisFragmentNeedToClose = true;
             }
             else 
             if (question.Level >= 5 && question.Level < 10)
             {
                 await Task.Delay(1500);
-                _answer.Text = $"Хм... Ну... {GetCorrectMiddleAnswer(question)}";
+                _answer.Text = !_thisFragmentNeedToClose ? $"Хм... Ну... {GetCorrectMiddleAnswer(question)}" : "Жаль, но связь прервалась...";
+                _thisFragmentNeedToClose = true;
             }
             else
             {
                 await Task.Delay(2500);
-                _answer.Text = $"Тяжелый вопрос... {GetCorrectHardAnswer(question)}";
+                _answer.Text = !_thisFragmentNeedToClose ? $"Тяжелый вопрос... {GetCorrectHardAnswer(question)}" : "Жаль, но связь прервалась...";
+                _thisFragmentNeedToClose = true;
             }
         }
 
