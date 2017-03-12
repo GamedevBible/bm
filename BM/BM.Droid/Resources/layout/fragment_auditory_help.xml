@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:id="@+id/answer1"
+        android:text="1. "/>/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:id="@+id/answer2"
+        android:text="2. "/>/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:id="@+id/answer3"
+        android:text="3. "/>/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:id="@+id/answer4"
+        android:text="4. "/>/>
+</LinearLayout>

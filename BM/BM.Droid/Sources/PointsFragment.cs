@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
 using Android.Support.V4.Content;
+using Android.Content;
 
 namespace BM.Droid.Sources
 {
@@ -40,6 +41,11 @@ namespace BM.Droid.Sources
             }
 
             return dialog;
+        }
+
+        private void ConfirmButtonClicked(object sender, DialogClickEventArgs e)
+        {
+            Dismiss();
         }
 
         private void InitTextViews(View view)

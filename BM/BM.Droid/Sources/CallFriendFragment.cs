@@ -13,8 +13,9 @@ namespace BM.Droid.Sources
     internal class CallFriendFragment : AppCompatDialogFragment
     {
         private const string _questionTag = nameof(_questionTag);
-        private bool _thisFragmentNeedToClose;
+        private bool _friendGaveAnswer;
         private bool _thisFragmentWasRecreated;
+        private string _friendsAnswer;
         private Question _question;
         private TextView _answer;
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
@@ -38,8 +39,9 @@ namespace BM.Droid.Sources
         {
             base.OnSaveInstanceState(outState);
 
-            outState.PutBoolean(nameof(_thisFragmentNeedToClose), _thisFragmentNeedToClose);
+            outState.PutBoolean(nameof(_friendGaveAnswer), _friendGaveAnswer);
             outState.PutBoolean(nameof(_thisFragmentWasRecreated), _thisFragmentWasRecreated);
+            outState.PutString(nameof(_friendsAnswer), _friendGaveAnswer? _answer.Text : string.Empty);
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -48,8 +50,9 @@ namespace BM.Droid.Sources
 
             if (savedInstanceState != null)
             {
-                _thisFragmentNeedToClose = savedInstanceState.GetBoolean(nameof(_thisFragmentNeedToClose));
+                _friendGaveAnswer = savedInstanceState.GetBoolean(nameof(_friendGaveAnswer));
                 _thisFragmentWasRecreated = savedInstanceState.GetBoolean(nameof(_thisFragmentWasRecreated));
+                _friendsAnswer = savedInstanceState.GetString(nameof(_friendsAnswer));
             }
         }
 
@@ -57,11 +60,11 @@ namespace BM.Droid.Sources
         {
             base.OnResume();
 
-            if (!_thisFragmentNeedToClose)
+            if (!_friendGaveAnswer)
                 InitCall(_question);
             else
             {
-                Dismiss();
+                _answer.Text = _friendsAnswer;
             }
         }
 
@@ -89,21 +92,21 @@ namespace BM.Droid.Sources
             if (question.Level < 5)
             {
                 await Task.Delay(1500);
-                _answer.Text = !_thisFragmentNeedToClose ? $"Я знаю! Ответ: {GetCorrectAnswer(question)}" : "Жаль, но связь прервалась...";
-                _thisFragmentNeedToClose = true;
+                _answer.Text = !_friendGaveAnswer ? $"Я знаю! Ответ: {GetCorrectAnswer(question)}" : "Жаль, но связь прервалась...";
+                _friendGaveAnswer = true;
             }
             else 
             if (question.Level >= 5 && question.Level < 10)
             {
                 await Task.Delay(1500);
-                _answer.Text = !_thisFragmentNeedToClose ? $"Хм... Ну... {GetCorrectMiddleAnswer(question)}" : "Жаль, но связь прервалась...";
-                _thisFragmentNeedToClose = true;
+                _answer.Text = !_friendGaveAnswer ? $"Хм... Ну... {GetCorrectMiddleAnswer(question)}" : "Жаль, но связь прервалась...";
+                _friendGaveAnswer = true;
             }
             else
             {
                 await Task.Delay(2500);
-                _answer.Text = !_thisFragmentNeedToClose ? $"Тяжелый вопрос... {GetCorrectHardAnswer(question)}" : "Жаль, но связь прервалась...";
-                _thisFragmentNeedToClose = true;
+                _answer.Text = !_friendGaveAnswer ? $"Тяжелый вопрос... {GetCorrectHardAnswer(question)}" : "Жаль, но связь прервалась...";
+                _friendGaveAnswer = true;
             }
         }
 

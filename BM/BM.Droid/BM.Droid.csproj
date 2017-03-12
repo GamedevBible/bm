@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sources\AuditoryHelpFragment.cs" />
     <Compile Include="Sources\CallFriendFragment.cs" />
     <Compile Include="Sources\GameActivity.cs" />
     <Compile Include="Sources\MainActivity.cs" />
@@ -142,7 +143,9 @@
     <AndroidResource Include="Resources\drawable\account_multiple.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\phone_in_talk.xml" />
+    <AndroidResource Include="Resources\drawable\phone_in_talk.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\format_list_checks.xml" />
@@ -172,6 +175,9 @@
       <Project>{387B1CAC-E7CB-4C09-A556-0779B237983A}</Project>
       <Name>BM.Portable</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\fragment_auditory_help.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.4.0.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

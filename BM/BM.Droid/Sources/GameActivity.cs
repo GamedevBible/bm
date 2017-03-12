@@ -23,6 +23,7 @@ namespace BM.Droid.Sources
         private ImageButton _backButton;
         private Button _pointsButton;
         private ImageButton _callButton;
+        private ImageButton _peopleButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,16 +36,20 @@ namespace BM.Droid.Sources
 
             _backButton = FindViewById<ImageButton>(Resource.Id.backButton);
             _callButton = FindViewById<ImageButton>(Resource.Id.callButton);
+            _peopleButton = FindViewById<ImageButton>(Resource.Id.peopleButton);
             _pointsButton = FindViewById<Button>(Resource.Id.pointsButton);
 
             _backButton.Click += OnImageButtonClicked;
             _callButton.Click += OnImageButtonClicked;
+            _peopleButton.Click += OnImageButtonClicked;
             _pointsButton.Click += OnButtonClicked;
 
             if (savedInstanceState != null)
             {
-                _callButton.Enabled = savedInstanceState.GetBoolean(nameof(_callButton.Enabled));
+                _callButton.Enabled = savedInstanceState.GetBoolean(nameof(_callButton));
                 _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, _callButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
+                _peopleButton.Enabled = savedInstanceState.GetBoolean(nameof(_peopleButton));
+                _peopleButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, _peopleButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
             }
         }
 
@@ -52,12 +57,14 @@ namespace BM.Droid.Sources
         {
             base.OnSaveInstanceState(outState);
 
-            outState.PutBoolean(nameof(_callButton.Enabled), _callButton.Enabled);
+            outState.PutBoolean(nameof(_callButton), _callButton.Enabled);
+            outState.PutBoolean(nameof(_peopleButton), _peopleButton.Enabled);
         }
 
         private void OnImageButtonClicked(object sender, EventArgs e)
         {
             var buttonClicked = (ImageButton)sender;
+            var ft = SupportFragmentManager.BeginTransaction();
             switch (buttonClicked.Id)
             {
                 case Resource.Id.backButton:
@@ -66,22 +73,49 @@ namespace BM.Droid.Sources
                 case Resource.Id.callButton:
                     _callButton.Enabled = false;
                     _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
-                    var ft = SupportFragmentManager.BeginTransaction();
-                    var prev = SupportFragmentManager.FindFragmentByTag(nameof(CallFriendFragment));
-                    if (prev != null)
-                    {
-                        ft.Remove(prev);
-                    }
-                    ft.AddToBackStack(null);
+                    RemoveFragmentIfOpened(ft, nameof(CallFriendFragment));
 
-                    var dialog = CallFriendFragment.NewInstance(new Question { Level = 10, Variant1 = "1939",
-                    Variant2 = "1918", Variant3 = "1941", Variant4 = "1906", Answer = 3});
-                    dialog.Show(ft, nameof(CallFriendFragment));
+                    var dialogCallFriend = CallFriendFragment.NewInstance(new Question
+                    {
+                        Level = 10,
+                        Variant1 = "1939",
+                        Variant2 = "1918",
+                        Variant3 = "1941",
+                        Variant4 = "1906",
+                        Answer = 3
+                    });
+                    dialogCallFriend.Show(ft, nameof(CallFriendFragment));
+                    break;
+                case Resource.Id.peopleButton:
+                    _peopleButton.Enabled = false;
+                    _peopleButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
+                    RemoveFragmentIfOpened(ft, nameof(AuditoryHelpFragment));
+
+                    var dialogPeopleHelp = AuditoryHelpFragment.NewInstance(new Question
+                    {
+                        Level = 10,
+                        Variant1 = "1939",
+                        Variant2 = "1918",
+                        Variant3 = "1941",
+                        Variant4 = "1906",
+                        Answer = 3
+                    });
+                    dialogPeopleHelp.Show(ft, nameof(AuditoryHelpFragment));
                     break;
                 default:
                     break;
             }
             }
+
+        private void RemoveFragmentIfOpened(Android.Support.V4.App.FragmentTransaction ft, string fragmentName)
+        {
+            var prev = SupportFragmentManager.FindFragmentByTag(fragmentName);
+            if (prev != null)
+            {
+                ft.Remove(prev);
+            }
+            ft.AddToBackStack(null);
+        }
 
         private void OnButtonClicked(object sender, EventArgs e)
         {
