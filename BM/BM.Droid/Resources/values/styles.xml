@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/bm_blue</item>
         <item name="colorPrimaryDark">@color/bm_dark_blue</item>
         <item name="colorAccent">@color/bm_blue</item>
+        <item name="colorButtonNormal">@color/transparent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentTransitions">true</item>

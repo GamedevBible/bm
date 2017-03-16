@@ -41,7 +41,11 @@ namespace BM.Droid.Sources
 
             outState.PutBoolean(nameof(_friendGaveAnswer), _friendGaveAnswer);
             outState.PutBoolean(nameof(_thisFragmentWasRecreated), _thisFragmentWasRecreated);
-            outState.PutString(nameof(_friendsAnswer), _friendGaveAnswer? _answer.Text : string.Empty);
+            outState.PutString(nameof(_friendsAnswer), _friendGaveAnswer ? 
+                string.IsNullOrWhiteSpace(_answer.Text) ? 
+                    "Жаль, но связь прервалась..." : 
+                    _answer.Text : 
+                "Жаль, но связь прервалась...");
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -66,11 +70,6 @@ namespace BM.Droid.Sources
             {
                 _answer.Text = _friendsAnswer;
             }
-        }
-
-        public override void OnDestroyView()
-        {
-            base.OnDestroyView();
         }
 
         private async void InitCall(Question question)
