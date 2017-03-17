@@ -1024,32 +1024,32 @@ namespace BM.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0b004e
-			public const int abc_background_cache_hint_selector_material_dark = 2131427406;
-			
 			// aapt resource value: 0x7f0b004f
-			public const int abc_background_cache_hint_selector_material_light = 2131427407;
+			public const int abc_background_cache_hint_selector_material_dark = 2131427407;
 			
 			// aapt resource value: 0x7f0b0050
-			public const int abc_color_highlight_material = 2131427408;
+			public const int abc_background_cache_hint_selector_material_light = 2131427408;
+			
+			// aapt resource value: 0x7f0b0051
+			public const int abc_color_highlight_material = 2131427409;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int abc_input_method_navigation_guard = 2131427328;
 			
-			// aapt resource value: 0x7f0b0051
-			public const int abc_primary_text_disable_only_material_dark = 2131427409;
-			
 			// aapt resource value: 0x7f0b0052
-			public const int abc_primary_text_disable_only_material_light = 2131427410;
+			public const int abc_primary_text_disable_only_material_dark = 2131427410;
 			
 			// aapt resource value: 0x7f0b0053
-			public const int abc_primary_text_material_dark = 2131427411;
+			public const int abc_primary_text_disable_only_material_light = 2131427411;
 			
 			// aapt resource value: 0x7f0b0054
-			public const int abc_primary_text_material_light = 2131427412;
+			public const int abc_primary_text_material_dark = 2131427412;
 			
 			// aapt resource value: 0x7f0b0055
-			public const int abc_search_url_text = 2131427413;
+			public const int abc_primary_text_material_light = 2131427413;
+			
+			// aapt resource value: 0x7f0b0056
+			public const int abc_search_url_text = 2131427414;
 			
 			// aapt resource value: 0x7f0b0001
 			public const int abc_search_url_text_normal = 2131427329;
@@ -1060,11 +1060,11 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0003
 			public const int abc_search_url_text_selected = 2131427331;
 			
-			// aapt resource value: 0x7f0b0056
-			public const int abc_secondary_text_material_dark = 2131427414;
-			
 			// aapt resource value: 0x7f0b0057
-			public const int abc_secondary_text_material_light = 2131427415;
+			public const int abc_secondary_text_material_dark = 2131427415;
+			
+			// aapt resource value: 0x7f0b0058
+			public const int abc_secondary_text_material_light = 2131427416;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int accent_material_dark = 2131427332;
@@ -1084,17 +1084,17 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0009
 			public const int background_material_light = 2131427337;
 			
-			// aapt resource value: 0x7f0b004c
-			public const int black_transparent = 2131427404;
-			
-			// aapt resource value: 0x7f0b0048
-			public const int bm_blue = 2131427400;
+			// aapt resource value: 0x7f0b004d
+			public const int black_transparent = 2131427405;
 			
 			// aapt resource value: 0x7f0b0049
-			public const int bm_dark_blue = 2131427401;
+			public const int bm_blue = 2131427401;
 			
-			// aapt resource value: 0x7f0b0047
-			public const int bm_white = 2131427399;
+			// aapt resource value: 0x7f0b004a
+			public const int bm_dark_blue = 2131427402;
+			
+			// aapt resource value: 0x7f0b0048
+			public const int bm_white = 2131427400;
 			
 			// aapt resource value: 0x7f0b000a
 			public const int bright_foreground_disabled_material_dark = 2131427338;
@@ -1225,11 +1225,11 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0027
 			public const int material_grey_900 = 2131427367;
 			
-			// aapt resource value: 0x7f0b004a
-			public const int mercury = 2131427402;
-			
 			// aapt resource value: 0x7f0b004b
-			public const int mercury_transparent = 2131427403;
+			public const int mercury = 2131427403;
+			
+			// aapt resource value: 0x7f0b004c
+			public const int mercury_transparent = 2131427404;
 			
 			// aapt resource value: 0x7f0b0028
 			public const int primary_dark_material_dark = 2131427368;
@@ -1273,17 +1273,20 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0035
 			public const int secondary_text_disabled_material_light = 2131427381;
 			
+			// aapt resource value: 0x7f0b0047
+			public const int shadow_gray = 2131427399;
+			
 			// aapt resource value: 0x7f0b0036
 			public const int switch_thumb_disabled_material_dark = 2131427382;
 			
 			// aapt resource value: 0x7f0b0037
 			public const int switch_thumb_disabled_material_light = 2131427383;
 			
-			// aapt resource value: 0x7f0b0058
-			public const int switch_thumb_material_dark = 2131427416;
-			
 			// aapt resource value: 0x7f0b0059
-			public const int switch_thumb_material_light = 2131427417;
+			public const int switch_thumb_material_dark = 2131427417;
+			
+			// aapt resource value: 0x7f0b005a
+			public const int switch_thumb_material_light = 2131427418;
 			
 			// aapt resource value: 0x7f0b0038
 			public const int switch_thumb_normal_material_dark = 2131427384;
@@ -1291,8 +1294,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f0b0039
 			public const int switch_thumb_normal_material_light = 2131427385;
 			
-			// aapt resource value: 0x7f0b004d
-			public const int transparent = 2131427405;
+			// aapt resource value: 0x7f0b004e
+			public const int transparent = 2131427406;
 			
 			static Color()
 			{
@@ -1870,34 +1873,40 @@ namespace BM.Droid
 			public const int account_multiple = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int chevron_double_left = 2130837580;
+			public const int button_background = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int design_fab_background = 2130837581;
+			public const int button_disabled = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int design_snackbar_background = 2130837582;
+			public const int chevron_double_left = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int format_list_checks = 2130837583;
+			public const int design_fab_background = 2130837583;
 			
 			// aapt resource value: 0x7f020050
-			public const int gradient_blue_down_up = 2130837584;
+			public const int design_snackbar_background = 2130837584;
 			
 			// aapt resource value: 0x7f020051
-			public const int Icon = 2130837585;
+			public const int format_list_checks = 2130837585;
 			
 			// aapt resource value: 0x7f020052
-			public const int logoBible = 2130837586;
-			
-			// aapt resource value: 0x7f020055
-			public const int notification_template_icon_bg = 2130837589;
+			public const int gradient_blue_down_up = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int phone_in_talk = 2130837587;
+			public const int Icon = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int rounded_corners = 2130837588;
+			public const int logoBible = 2130837588;
+			
+			// aapt resource value: 0x7f020057
+			public const int notification_template_icon_bg = 2130837591;
+			
+			// aapt resource value: 0x7f020055
+			public const int phone_in_talk = 2130837589;
+			
+			// aapt resource value: 0x7f020056
+			public const int rounded_corners = 2130837590;
 			
 			static Drawable()
 			{
@@ -1912,8 +1921,8 @@ namespace BM.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060096
-			public const int action0 = 2131099798;
+			// aapt resource value: 0x7f06009a
+			public const int action0 = 2131099802;
 			
 			// aapt resource value: 0x7f06005a
 			public const int action_bar = 2131099738;
@@ -1939,8 +1948,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f06005b
 			public const int action_context_bar = 2131099739;
 			
-			// aapt resource value: 0x7f06009a
-			public const int action_divider = 2131099802;
+			// aapt resource value: 0x7f06009e
+			public const int action_divider = 2131099806;
 			
 			// aapt resource value: 0x7f060003
 			public const int action_menu_divider = 2131099651;
@@ -1993,14 +2002,14 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060044
 			public const int buttonPanel = 2131099716;
 			
-			// aapt resource value: 0x7f060091
-			public const int buttonsLayout = 2131099793;
+			// aapt resource value: 0x7f060095
+			public const int buttonsLayout = 2131099797;
 			
 			// aapt resource value: 0x7f060088
 			public const int callButton = 2131099784;
 			
-			// aapt resource value: 0x7f060097
-			public const int cancel_action = 2131099799;
+			// aapt resource value: 0x7f06009b
+			public const int cancel_action = 2131099803;
 			
 			// aapt resource value: 0x7f06002b
 			public const int center = 2131099691;
@@ -2014,8 +2023,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060052
 			public const int checkbox = 2131099730;
 			
-			// aapt resource value: 0x7f06009d
-			public const int chronometer = 2131099805;
+			// aapt resource value: 0x7f0600a1
+			public const int chronometer = 2131099809;
 			
 			// aapt resource value: 0x7f060033
 			public const int clip_horizontal = 2131099699;
@@ -2026,8 +2035,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f06001f
 			public const int collapseActionView = 2131099679;
 			
-			// aapt resource value: 0x7f060095
-			public const int contactsButton = 2131099797;
+			// aapt resource value: 0x7f060099
+			public const int contactsButton = 2131099801;
 			
 			// aapt resource value: 0x7f06004a
 			public const int contentPanel = 2131099722;
@@ -2068,8 +2077,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f06001c
 			public const int end = 2131099676;
 			
-			// aapt resource value: 0x7f0600a2
-			public const int end_padder = 2131099810;
+			// aapt resource value: 0x7f0600a6
+			public const int end_padder = 2131099814;
 			
 			// aapt resource value: 0x7f060023
 			public const int enterAlways = 2131099683;
@@ -2101,8 +2110,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060038
 			public const int @fixed = 2131099704;
 			
-			// aapt resource value: 0x7f060094
-			public const int guideButton = 2131099796;
+			// aapt resource value: 0x7f060098
+			public const int guideButton = 2131099800;
 			
 			// aapt resource value: 0x7f060086
 			public const int helpButtonsLayout = 2131099782;
@@ -2122,8 +2131,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f06003f
 			public const int image = 2131099711;
 			
-			// aapt resource value: 0x7f0600a1
-			public const int info = 2131099809;
+			// aapt resource value: 0x7f0600a5
+			public const int info = 2131099813;
 			
 			// aapt resource value: 0x7f060000
 			public const int item_touch_helper_previous_elevation = 2131099648;
@@ -2131,11 +2140,11 @@ namespace BM.Droid
 			// aapt resource value: 0x7f06002f
 			public const int left = 2131099695;
 			
-			// aapt resource value: 0x7f06009b
-			public const int line1 = 2131099803;
-			
 			// aapt resource value: 0x7f06009f
-			public const int line3 = 2131099807;
+			public const int line1 = 2131099807;
+			
+			// aapt resource value: 0x7f0600a3
+			public const int line3 = 2131099811;
 			
 			// aapt resource value: 0x7f06000b
 			public const int listMode = 2131099659;
@@ -2143,8 +2152,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060041
 			public const int list_item = 2131099713;
 			
-			// aapt resource value: 0x7f060099
-			public const int media_actions = 2131099801;
+			// aapt resource value: 0x7f06009d
+			public const int media_actions = 2131099805;
 			
 			// aapt resource value: 0x7f06001d
 			public const int middle = 2131099677;
@@ -2179,8 +2188,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060029
 			public const int pin = 2131099689;
 			
-			// aapt resource value: 0x7f060090
-			public const int pointsButton = 2131099792;
+			// aapt resource value: 0x7f060094
+			public const int pointsButton = 2131099796;
 			
 			// aapt resource value: 0x7f060085
 			public const int points_0 = 2131099781;
@@ -2239,8 +2248,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060054
 			public const int radio = 2131099732;
 			
-			// aapt resource value: 0x7f060093
-			public const int recordsButton = 2131099795;
+			// aapt resource value: 0x7f060097
+			public const int recordsButton = 2131099799;
 			
 			// aapt resource value: 0x7f060030
 			public const int right = 2131099696;
@@ -2335,11 +2344,11 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060031
 			public const int start = 2131099697;
 			
-			// aapt resource value: 0x7f060092
-			public const int startButton = 2131099794;
+			// aapt resource value: 0x7f060096
+			public const int startButton = 2131099798;
 			
-			// aapt resource value: 0x7f060098
-			public const int status_bar_latest_event_content = 2131099800;
+			// aapt resource value: 0x7f06009c
+			public const int status_bar_latest_event_content = 2131099804;
 			
 			// aapt resource value: 0x7f060065
 			public const int submit_area = 2131099749;
@@ -2347,17 +2356,17 @@ namespace BM.Droid
 			// aapt resource value: 0x7f06000d
 			public const int tabMode = 2131099661;
 			
-			// aapt resource value: 0x7f0600a0
-			public const int text = 2131099808;
+			// aapt resource value: 0x7f0600a4
+			public const int text = 2131099812;
 			
-			// aapt resource value: 0x7f06009e
-			public const int text2 = 2131099806;
+			// aapt resource value: 0x7f0600a2
+			public const int text2 = 2131099810;
 			
 			// aapt resource value: 0x7f06004d
 			public const int textSpacerNoButtons = 2131099725;
 			
-			// aapt resource value: 0x7f06009c
-			public const int time = 2131099804;
+			// aapt resource value: 0x7f0600a0
+			public const int time = 2131099808;
 			
 			// aapt resource value: 0x7f060043
 			public const int title = 2131099715;
@@ -2380,17 +2389,29 @@ namespace BM.Droid
 			// aapt resource value: 0x7f060014
 			public const int useLogo = 2131099668;
 			
-			// aapt resource value: 0x7f06008b
-			public const int variant1Button = 2131099787;
-			
 			// aapt resource value: 0x7f06008d
-			public const int variant2Button = 2131099789;
+			public const int variant1Button = 2131099789;
 			
-			// aapt resource value: 0x7f06008e
-			public const int variant3Button = 2131099790;
+			// aapt resource value: 0x7f06008b
+			public const int variant1Layout = 2131099787;
 			
 			// aapt resource value: 0x7f06008f
-			public const int variant4Button = 2131099791;
+			public const int variant2Button = 2131099791;
+			
+			// aapt resource value: 0x7f06008e
+			public const int variant2Layout = 2131099790;
+			
+			// aapt resource value: 0x7f060091
+			public const int variant3Button = 2131099793;
+			
+			// aapt resource value: 0x7f060090
+			public const int variant3Layout = 2131099792;
+			
+			// aapt resource value: 0x7f060093
+			public const int variant4Button = 2131099795;
+			
+			// aapt resource value: 0x7f060092
+			public const int variant4Layout = 2131099794;
 			
 			// aapt resource value: 0x7f06000a
 			public const int view_offset_helper = 2131099658;
