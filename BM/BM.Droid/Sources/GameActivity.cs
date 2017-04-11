@@ -12,6 +12,7 @@ using Android.Widget;
 using Android.Support.V7.App;
 using Android.Text.Method;
 using Android.Support.V4.Content;
+using Android.Content.Res;
 
 namespace BM.Droid.Sources
 {
@@ -35,12 +36,17 @@ namespace BM.Droid.Sources
         private ImageButton _twoVariantsButton;
         private Question _currentQuestion;
         private bool _needEnableButtons;
+        private QuestionsDatabase _questionsDatabase = null;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.game);
+
+            _questionsDatabase = new QuestionsDatabase(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
+
+            var questions = _questionsDatabase.GetAllItems();
 
             _currentQuestion = new Question
             {
