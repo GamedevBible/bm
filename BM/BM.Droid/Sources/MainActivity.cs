@@ -38,14 +38,11 @@ namespace BM.Droid.Sources
             switch (clickedButton.Id)
             {
                 case Resource.Id.startButton:
-                    Toast.MakeText(this, "Нажата кнопка НАЧАТЬ ИГРУ", ToastLength.Short).Show();
                     StartActivity(GameActivity.CreateStartIntent(this));
                     break;
                 case Resource.Id.recordsButton:
-                    Toast.MakeText(this, "Нажата кнопка МОИ РЕКОРДЫ", ToastLength.Short).Show();
                     break;
                 case Resource.Id.guideButton:
-                    Toast.MakeText(this, "Нажата кнопка СПРАВКА", ToastLength.Short).Show();
                     break;
                 case Resource.Id.contactsButton:
                     Toast.MakeText(this, "Нажата кнопка КОНТАКТЫ", ToastLength.Short).Show();

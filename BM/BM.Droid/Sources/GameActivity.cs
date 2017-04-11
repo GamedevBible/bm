@@ -13,6 +13,7 @@ using Android.Support.V7.App;
 using Android.Text.Method;
 using Android.Support.V4.Content;
 using Android.Content.Res;
+using System.Threading.Tasks;
 
 namespace BM.Droid.Sources
 {
@@ -34,9 +35,11 @@ namespace BM.Droid.Sources
         private ImageButton _callButton;
         private ImageButton _peopleButton;
         private ImageButton _twoVariantsButton;
-        private Question _currentQuestion;
+        private int _currentQuestion;
         private bool _needEnableButtons;
         private QuestionsDatabase _questionsDatabase = null;
+        private IReadOnlyList<questions> _gameQuestions = null;
+        private ProgressDialog _progressDialog;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -44,26 +47,11 @@ namespace BM.Droid.Sources
 
             SetContentView(Resource.Layout.game);
 
-            _questionsDatabase = new QuestionsDatabase(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
-
-            var questions = _questionsDatabase.GetAllItems();
-
-            _currentQuestion = new Question
-            {
-                Id = 1,
-                QuestionText = "В каком году началась Великая Отечественная Война?",
-                Level = 10,
-                Variant1 = "1939",
-                Variant2 = "1918",
-                Variant3 = "1941",
-                Variant4 = "1906",
-                Answer = 3
-            };
-
             _needEnableButtons = false;
             //_question = FindViewById<TextView>(Resource.Id.question);
             //_question.MovementMethod = new ScrollingMovementMethod();
             _question = FindViewById<TextView>(Resource.Id.question);
+            _question.MovementMethod = new ScrollingMovementMethod();
             _variant1Button = FindViewById<Button>(Resource.Id.variant1Button);
             _variant2Button = FindViewById<Button>(Resource.Id.variant2Button);
             _variant3Button = FindViewById<Button>(Resource.Id.variant3Button);
@@ -78,6 +66,11 @@ namespace BM.Droid.Sources
             _variant3Layout = FindViewById<FrameLayout>(Resource.Id.variant3Layout);
             _variant4Layout = FindViewById<FrameLayout>(Resource.Id.variant4Layout);
 
+            _progressDialog = new ProgressDialog(this, Resource.Style.ProgressDialogTheme) { Indeterminate = true };
+            _progressDialog.SetCancelable(false);
+            _progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
+            _progressDialog.SetMessage("Загрузка...");
+
             _variant1Layout.Click += OnAnswerButtonClick;
             _variant2Layout.Click += OnAnswerButtonClick;
             _variant3Layout.Click += OnAnswerButtonClick;
@@ -88,8 +81,8 @@ namespace BM.Droid.Sources
             _twoVariantsButton.Click += OnImageButtonClicked;
             _pointsButton.Click += OnButtonClicked;
 
-            InstallCurrentQuestion(_currentQuestion);
-
+            InitQuestionsAndStart();
+                        
             if (savedInstanceState != null)
             {
                 _callButton.Enabled = savedInstanceState.GetBoolean(nameof(_callButton));
@@ -115,6 +108,22 @@ namespace BM.Droid.Sources
             }
         }
 
+        private async void InitQuestionsAndStart()
+        {
+            if (!_progressDialog.IsShowing)
+                _progressDialog.Show();
+
+            _questionsDatabase = new QuestionsDatabase(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
+
+            _gameQuestions = await Task.Run(() => _questionsDatabase.GetAllItems());
+
+            if (_progressDialog.IsShowing)
+                _progressDialog.Dismiss();
+
+            _currentQuestion = 0;
+            InstallCurrentQuestion(_currentQuestion);
+        }
+
         protected override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
@@ -133,28 +142,40 @@ namespace BM.Droid.Sources
             }
         }
 
-        private void InstallCurrentQuestion(Question currentQuestion)
+        private void InstallCurrentQuestion(int currentQuestion)
         {
-            _question.Text = currentQuestion.QuestionText;
-            _variant1Button.Text = currentQuestion.Variant1;
-            _variant2Button.Text = currentQuestion.Variant2;
-            _variant3Button.Text = currentQuestion.Variant3;
-            _variant4Button.Text = currentQuestion.Variant4;
+            if (currentQuestion > 14)
+                return;
+
+            _question.Text = _gameQuestions[currentQuestion].questionText;
+            _question.ScrollTo(0, 0);
+            _variant1Button.Text = _gameQuestions[currentQuestion].variant1;
+            _variant2Button.Text = _gameQuestions[currentQuestion].variant2;
+            _variant3Button.Text = _gameQuestions[currentQuestion].variant3;
+            _variant4Button.Text = _gameQuestions[currentQuestion].variant4;
         }
 
         private void OnAnswerButtonClick(object sender, EventArgs e)
         {
-            _currentQuestion = new Question
+            var buttonClicked = (FrameLayout)sender;
+
+            switch (buttonClicked.Id)
             {
-                Id = 2,
-                QuestionText = "Сколько дней в високосном году?",
-                Level = 10,
-                Variant1 = "366",
-                Variant2 = "29",
-                Variant3 = "365",
-                Variant4 = "28",
-                Answer = 1
-            };
+                case Resource.Id.variant1Layout:
+                    _currentQuestion++;
+                    break;
+                case Resource.Id.variant2Layout:
+                    _currentQuestion++;
+                    break;
+                case Resource.Id.variant3Layout:
+                    _currentQuestion++;
+                    break;
+                case Resource.Id.variant4Layout:
+                    _currentQuestion++;
+                    break;
+                default:
+                    break;
+            }
 
             if (_needEnableButtons)
             {
@@ -186,7 +207,7 @@ namespace BM.Droid.Sources
                     _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     RemoveFragmentIfOpened(ft, nameof(CallFriendFragment));
 
-                    var dialogCallFriend = CallFriendFragment.NewInstance(_currentQuestion);
+                    var dialogCallFriend = CallFriendFragment.NewInstance(ToQuestion(_gameQuestions[_currentQuestion]));
                     dialogCallFriend.Cancelable = false;
                     dialogCallFriend.Show(ft, nameof(CallFriendFragment));
                     break;
@@ -195,27 +216,43 @@ namespace BM.Droid.Sources
                     _peopleButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     RemoveFragmentIfOpened(ft, nameof(AuditoryHelpFragment));
 
-                    var dialogPeopleHelp = AuditoryHelpFragment.NewInstance(_currentQuestion);
+                    var dialogPeopleHelp = AuditoryHelpFragment.NewInstance(ToQuestion(_gameQuestions[_currentQuestion]));
                     dialogPeopleHelp.Cancelable = false;
                     dialogPeopleHelp.Show(ft, nameof(AuditoryHelpFragment));
                     break;
                 case Resource.Id.fiftyButton:
                     _twoVariantsButton.Enabled = false;
                     _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
-                    LeaveTwoVariants(_currentQuestion);
+                    LeaveTwoVariants(_gameQuestions[_currentQuestion]);
                     break;
                 default:
                     break;
             }
             }
 
-        private void LeaveTwoVariants(Question currentQuestion)
+        private Question ToQuestion(questions questionFromDb)
+        {
+            return new Question
+            {
+                Id = questionFromDb._id,
+                QuestionText = questionFromDb.questionText,
+                Level = questionFromDb.level,
+                Variant1 = questionFromDb.variant1,
+                Variant2 = questionFromDb.variant2,
+                Variant3 = questionFromDb.variant3,
+                Variant4 = questionFromDb.variant4,
+                Answer = questionFromDb.answer
+            };
+
+        }
+
+        private void LeaveTwoVariants(questions currentQuestion)
         {
             Random rand = new Random();
             int temp;
             temp = rand.Next(1, 4);
 
-            switch (currentQuestion.Answer)
+            switch (currentQuestion.answer)
             {
                 case 1:
                     if (temp == 1)
@@ -320,13 +357,8 @@ namespace BM.Droid.Sources
                         ft.Remove(prev);
                     }
                     ft.AddToBackStack(null);
-
-                    /*********************** Потом нужно передавать реальный номер вопроса **********************************/
-                    Random rand = new Random();
-                    int temp;
-                    temp = rand.Next(0, 15);
                     
-                    var dialog = PointsFragment.NewInstance(temp);
+                    var dialog = PointsFragment.NewInstance(_currentQuestion);
                     dialog.Show(ft, nameof(PointsFragment));
                     break;
                 default:

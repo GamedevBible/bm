@@ -3215,11 +3215,14 @@ namespace BM.Droid
 			// aapt resource value: 0x7f09001b
 			public const int Platform_Widget_AppCompat_Spinner = 2131296283;
 			
-			// aapt resource value: 0x7f09015a
-			public const int PointsDialog = 2131296602;
-			
 			// aapt resource value: 0x7f09015b
-			public const int PointsDialogAnimation = 2131296603;
+			public const int PointsDialog = 2131296603;
+			
+			// aapt resource value: 0x7f09015c
+			public const int PointsDialogAnimation = 2131296604;
+			
+			// aapt resource value: 0x7f09015a
+			public const int ProgressDialogTheme = 2131296602;
 			
 			// aapt resource value: 0x7f090028
 			public const int RtlOverlay_DialogWindowTitle_AppCompat = 2131296296;

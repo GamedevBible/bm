@@ -23,6 +23,13 @@
         <item name="colorAccent">@color/bm_blue</item>
     </style>
 
+  <style name="ProgressDialogTheme" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+    <item name="colorPrimary">@color/bm_blue</item>
+    <item name="colorPrimaryDark">@color/bm_dark_blue</item>
+    <item name="colorAccent">@color/bm_blue</item>
+    <item name="android:windowBackground">@color/transparent</item>
+  </style>
+  
   <style name="PointsDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowAnimationStyle">@style/PointsDialogAnimation</item>
     </style>

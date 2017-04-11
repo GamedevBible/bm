@@ -16,9 +16,24 @@ namespace BM.Droid
 
         public IReadOnlyList<questions> GetAllItems()
         {
+            List<questions> tempQuestions = new List<questions>();
+            List<questions> readyQuestions = new List<questions>();
+
             BeginTransaction();
-            var result = Table<questions>().OrderBy(t => t.level);
-            return result.ToList();
+
+            for (int i = 1; i < 16; i++)
+            {
+                tempQuestions = Table<questions>().Where(t => t.level == i).ToList();
+                var count = tempQuestions.Count;
+
+                Random rand = new Random();
+                int temp;
+                temp = rand.Next(0, count);
+
+                readyQuestions.Add(tempQuestions[temp]);
+            }
+
+            return readyQuestions;
         }
     }
 }
