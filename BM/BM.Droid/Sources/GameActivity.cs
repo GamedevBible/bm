@@ -81,6 +81,7 @@ namespace BM.Droid.Sources
             _twoVariantsButton.Click += OnImageButtonClicked;
             _pointsButton.Click += OnButtonClicked;
 
+            CopyDatabase("");
             InitQuestionsAndStart();
                         
             if (savedInstanceState != null)
@@ -105,6 +106,31 @@ namespace BM.Droid.Sources
                     _variant3Button.SetBackgroundResource(_variant3Layout.Enabled ? Resource.Drawable.button_background : Resource.Drawable.button_disabled);
                     _variant4Button.SetBackgroundResource(_variant4Layout.Enabled ? Resource.Drawable.button_background : Resource.Drawable.button_disabled);
                 }
+            }
+        }
+
+        private void CopyDatabase(string dataBaseName)
+        {
+            dataBaseName = "millionaire.db";
+            var dbPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)+"/"+dataBaseName;
+
+            if (!System.IO.File.Exists(dbPath))
+            {
+                var dbAssetStream = Assets.Open(dataBaseName);
+                var dbFileStream = new System.IO.FileStream(dbPath, System.IO.FileMode.OpenOrCreate);
+                var buffer = new byte[1024];
+
+                int b = buffer.Length;
+                int length;
+
+                while ((length = dbAssetStream.Read(buffer, 0, b)) > 0)
+                {
+                    dbFileStream.Write(buffer, 0, length);
+                }
+
+                dbFileStream.Flush();
+                dbFileStream.Close();
+                dbAssetStream.Close();
             }
         }
 
