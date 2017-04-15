@@ -93,6 +93,8 @@ namespace BM.Droid.Sources
                 _twoVariantsButton.Enabled = savedInstanceState.GetBoolean(nameof(_twoVariantsButton));
                 _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, _twoVariantsButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
                 _needEnableButtons = savedInstanceState.GetBoolean(nameof(_needEnableButtons));
+                _currentQuestion = savedInstanceState.GetInt(nameof(_currentQuestion));
+                //_pointsButton.Text = ValuesConverter.LevelToPoints(_gameQuestions[_currentQuestion].level) + " очков";
 
                 if (_needEnableButtons)
                 {
@@ -158,6 +160,7 @@ namespace BM.Droid.Sources
             outState.PutBoolean(nameof(_peopleButton), _peopleButton.Enabled);
             outState.PutBoolean(nameof(_twoVariantsButton), _twoVariantsButton.Enabled);
             outState.PutBoolean(nameof(_needEnableButtons), _needEnableButtons);
+            outState.PutInt(nameof(_currentQuestion), _currentQuestion);
 
             if (_needEnableButtons)
             {
@@ -179,6 +182,8 @@ namespace BM.Droid.Sources
             _variant2Button.Text = _gameQuestions[currentQuestion].variant2;
             _variant3Button.Text = _gameQuestions[currentQuestion].variant3;
             _variant4Button.Text = _gameQuestions[currentQuestion].variant4;
+
+            _pointsButton.Text = ValuesConverter.LevelToPoints(_gameQuestions[_currentQuestion].level) + " очков";
         }
 
         private void OnAnswerButtonClick(object sender, EventArgs e)
@@ -400,7 +405,6 @@ namespace BM.Droid.Sources
                 Finish();
                 return;
             }
-
 
             this._doubleBackToExitPressedOnce = true;
             Toast.MakeText(this, "Нажмите еще раз чтобы вернуться в меню", ToastLength.Short).Show();

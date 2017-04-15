@@ -7,6 +7,7 @@ using Android.Widget;
 using Android.Support.V7.App;
 using Android.Support.V4.Content;
 using Android.Content;
+using System;
 
 namespace BM.Droid.Sources
 {
@@ -15,11 +16,15 @@ namespace BM.Droid.Sources
         private const string _questionNumberTag = nameof(_questionNumberTag);
 
         private List<TextView> _textViews = new List<TextView>();
+        private LinearLayout _pointsLayout;
+        int _currentPoints;
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
             var view = LayoutInflater.From(Activity).Inflate(Resource.Layout.fragment_points, null);
 
+            _pointsLayout = view.FindViewById<LinearLayout>(Resource.Id.pointsLayout);
+            
             InitTextViews(view);
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(Activity, Resource.Style.PointsDialog)
@@ -27,13 +32,13 @@ namespace BM.Droid.Sources
                 .SetView(view)
                 .Create();
 
-            var currentPoints = Arguments.GetInt(_questionNumberTag);
+            _currentPoints = Arguments.GetInt(_questionNumberTag);
 
             for (int i = 0; i < 15; i++)
             {
                 _textViews[i].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.lighter_gray)));
                 
-                if (i == currentPoints)
+                if (i == _currentPoints)
                 {
                     _textViews[i].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
                     break;
@@ -41,6 +46,36 @@ namespace BM.Droid.Sources
             }
 
             return dialog;
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+
+            _pointsLayout.Click += OnPointsLayoutClick;
+
+            for (int i = 0; i < 15; i++)
+            {
+                _textViews[i].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.lighter_gray)));
+
+                if (i == _currentPoints)
+                {
+                    _textViews[i].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
+                    break;
+                }
+            }
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+
+            _pointsLayout.Click -= OnPointsLayoutClick;
+        }
+
+        private void OnPointsLayoutClick(object sender, EventArgs e)
+        {
+            Dismiss();
         }
 
         private void ConfirmButtonClicked(object sender, DialogClickEventArgs e)
