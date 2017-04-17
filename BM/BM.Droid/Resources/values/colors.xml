@@ -12,5 +12,7 @@
   <color name="mercury_transparent">#60E6E6E6</color>
   <color name="black_transparent">#50000000</color>
   <color name="transparent">#00000000</color>
+  <color name="good_answer">#00FF00</color>
+  <color name="bad_answer">#FF0000</color>
   
 </resources>

@@ -14,6 +14,7 @@ using Android.Text.Method;
 using Android.Support.V4.Content;
 using Android.Content.Res;
 using System.Threading.Tasks;
+using Android.Animation;
 
 namespace BM.Droid.Sources
 {
@@ -40,6 +41,8 @@ namespace BM.Droid.Sources
         private QuestionsDatabase _questionsDatabase = null;
         private IReadOnlyList<questions> _gameQuestions = null;
         private ProgressDialog _progressDialog;
+        private int _goodColor;
+        private int _defaultColor;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -69,7 +72,7 @@ namespace BM.Droid.Sources
             _progressDialog = new ProgressDialog(this, Resource.Style.ProgressDialogTheme) { Indeterminate = true };
             _progressDialog.SetCancelable(false);
             _progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
-            _progressDialog.SetMessage("Загрузка...");
+            _progressDialog.SetMessage("Загрузка вопросов...");
 
             _variant1Layout.Click += OnAnswerButtonClick;
             _variant2Layout.Click += OnAnswerButtonClick;
@@ -267,6 +270,21 @@ namespace BM.Droid.Sources
         private void OnAnswerButtonClick(object sender, EventArgs e)
         {
             var buttonClicked = (FrameLayout)sender;
+
+            _defaultColor = ContextCompat.GetColor(this, Resource.Color.bm_blue);
+            _goodColor = ContextCompat.GetColor(this, Resource.Color.good_answer);
+            ValueAnimator anim = ObjectAnimator.OfInt(_variant1Button, "backgroundColor",
+                _defaultColor, _goodColor);
+            anim.SetEvaluator(new ArgbEvaluator());
+            anim.RepeatMode = ValueAnimatorRepeatMode.Reverse;
+            anim.RepeatCount = 1;
+            anim.SetDuration(900);
+            anim.SetupStartValues();
+            anim.AnimationEnd += ((s, args) =>
+            {
+                _variant1Button.SetBackgroundResource(Resource.Drawable.button_background);
+            });
+            anim.Start();
 
             switch (buttonClicked.Id)
             {
