@@ -176,6 +176,84 @@ namespace BM.Droid.Sources
             if (currentQuestion > 14)
                 return;
 
+            var question = _gameQuestions[currentQuestion];
+
+            // На какое место поставить первый
+            Random rand = new Random();
+            int temp;
+            temp = rand.Next(2, 5);
+
+            switch(temp)
+            {
+                case 2:
+                    var c2 = question.variant2;
+                    question.variant2 = question.variant1;
+                    question.variant1 = c2;
+                    if (question.answer == 2)
+                        _gameQuestions[currentQuestion].answer = 1;
+                    else if (question.answer == 1)
+                        _gameQuestions[currentQuestion].answer = 2;
+                    break;
+                case 3:
+                    var c3 = question.variant3;
+                    question.variant3 = question.variant1;
+                    question.variant1 = c3;
+                    if (question.answer == 3)
+                        _gameQuestions[currentQuestion].answer = 1;
+                    else if (question.answer == 1)
+                        _gameQuestions[currentQuestion].answer = 3;
+                    break;
+                case 4:
+                    var c4 = question.variant4;
+                    question.variant4 = question.variant1;
+                    question.variant1 = c4;
+                    if (question.answer == 4)
+                        _gameQuestions[currentQuestion].answer = 1;
+                    else if (question.answer == 1)
+                        _gameQuestions[currentQuestion].answer = 4;
+                    break;
+                default:
+                    break;
+            }
+
+            // На какое место поставить второй
+            Random rand2 = new Random();
+            int temp2;
+            temp2 = rand.Next(2, 5);
+
+            switch (temp2)
+            {
+                case 2:
+                    var c2 = question.variant1;
+                    question.variant1 = question.variant2;
+                    question.variant2 = c2;
+                    if (question.answer == 1)
+                        _gameQuestions[currentQuestion].answer = 2;
+                    else if (question.answer == 2)
+                        _gameQuestions[currentQuestion].answer = 1;
+                    break;
+                case 3:
+                    var c3 = question.variant3;
+                    question.variant3 = question.variant2;
+                    question.variant2 = c3;
+                    if (question.answer == 3)
+                        _gameQuestions[currentQuestion].answer = 2;
+                    else if (question.answer == 2)
+                        _gameQuestions[currentQuestion].answer = 3;
+                    break;
+                case 4:
+                    var c4 = question.variant4;
+                    question.variant4 = question.variant2;
+                    question.variant2 = c4;
+                    if (question.answer == 4)
+                        _gameQuestions[currentQuestion].answer = 2;
+                    else if (question.answer == 2)
+                        _gameQuestions[currentQuestion].answer = 4;
+                    break;
+                default:
+                    break;
+            }
+
             _question.Text = _gameQuestions[currentQuestion].questionText;
             _question.ScrollTo(0, 0);
             _variant1Button.Text = _gameQuestions[currentQuestion].variant1;
