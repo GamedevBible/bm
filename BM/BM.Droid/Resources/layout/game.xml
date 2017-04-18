@@ -158,4 +158,11 @@
          android:id="@+id/pointsButton"
          style="@style/Widget.AppCompat.Button.Borderless.Colored"
          android:ems="18" />
+    <View
+      android:id="@+id/inactiveView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/transparent"
+      android:clickable="true"
+      android:visibility="gone"/>
 </RelativeLayout>

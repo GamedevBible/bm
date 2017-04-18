@@ -1,20 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
 using Android.Text.Method;
 using Android.Support.V4.Content;
-using Android.Content.Res;
 using System.Threading.Tasks;
 using Android.Animation;
+using Android.Views;
 
 namespace BM.Droid.Sources
 {
@@ -27,6 +23,7 @@ namespace BM.Droid.Sources
         private Button _variant2Button;
         private Button _variant3Button;
         private Button _variant4Button;
+        private View _inactiveView;
         private FrameLayout _variant1Layout;
         private FrameLayout _variant2Layout;
         private FrameLayout _variant3Layout;
@@ -43,6 +40,18 @@ namespace BM.Droid.Sources
         private ProgressDialog _progressDialog;
         private int _goodColor;
         private int _defaultColor;
+        private int _badColor;
+        private bool _inactive;
+
+        private bool Inactive
+        {
+            get { return _inactive; }
+            set
+            {
+                _inactiveView.Visibility = value ? ViewStates.Visible : ViewStates.Gone;
+                _inactive = value;
+            }
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -53,6 +62,7 @@ namespace BM.Droid.Sources
             _needEnableButtons = false;
             //_question = FindViewById<TextView>(Resource.Id.question);
             //_question.MovementMethod = new ScrollingMovementMethod();
+            _inactiveView = FindViewById(Resource.Id.inactiveView);
             _question = FindViewById<TextView>(Resource.Id.question);
             _question.MovementMethod = new ScrollingMovementMethod();
             _variant1Button = FindViewById<Button>(Resource.Id.variant1Button);
@@ -84,6 +94,10 @@ namespace BM.Droid.Sources
             _twoVariantsButton.Click += OnImageButtonClicked;
             _pointsButton.Click += OnButtonClicked;
 
+            _defaultColor = ContextCompat.GetColor(this, Resource.Color.bm_blue);
+            _goodColor = ContextCompat.GetColor(this, Resource.Color.good_answer);
+            _badColor = ContextCompat.GetColor(this, Resource.Color.bad_answer);
+
             CopyDatabase("");
             InitQuestionsAndStart();
                         
@@ -97,7 +111,6 @@ namespace BM.Droid.Sources
                 _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, _twoVariantsButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
                 _needEnableButtons = savedInstanceState.GetBoolean(nameof(_needEnableButtons));
                 _currentQuestion = savedInstanceState.GetInt(nameof(_currentQuestion));
-                //_pointsButton.Text = ValuesConverter.LevelToPoints(_gameQuestions[_currentQuestion].level) + " очков";
 
                 if (_needEnableButtons)
                 {
@@ -177,7 +190,10 @@ namespace BM.Droid.Sources
         private void InstallCurrentQuestion(int currentQuestion)
         {
             if (currentQuestion > 14)
+            {
+                Finish();
                 return;
+            }
 
             var question = _gameQuestions[currentQuestion];
 
@@ -269,36 +285,38 @@ namespace BM.Droid.Sources
 
         private void OnAnswerButtonClick(object sender, EventArgs e)
         {
-            var buttonClicked = (FrameLayout)sender;
+            if (Inactive)
+                return;
+            Inactive = true;
 
-            _defaultColor = ContextCompat.GetColor(this, Resource.Color.bm_blue);
-            _goodColor = ContextCompat.GetColor(this, Resource.Color.good_answer);
-            ValueAnimator anim = ObjectAnimator.OfInt(_variant1Button, "backgroundColor",
-                _defaultColor, _goodColor);
-            anim.SetEvaluator(new ArgbEvaluator());
-            anim.RepeatMode = ValueAnimatorRepeatMode.Reverse;
-            anim.RepeatCount = 1;
-            anim.SetDuration(900);
-            anim.SetupStartValues();
-            anim.AnimationEnd += ((s, args) =>
-            {
-                _variant1Button.SetBackgroundResource(Resource.Drawable.button_background);
-            });
-            anim.Start();
+            var question = _gameQuestions[_currentQuestion];
+            var buttonClicked = (FrameLayout)sender;
 
             switch (buttonClicked.Id)
             {
                 case Resource.Id.variant1Layout:
-                    _currentQuestion++;
+                    if(question.answer == 1)
+                        StartAnimationButtonClick(_variant1Button, true);
+                    else
+                        StartAnimationButtonClick(_variant1Button, false, question.answer);
                     break;
                 case Resource.Id.variant2Layout:
-                    _currentQuestion++;
+                    if (question.answer == 2)
+                        StartAnimationButtonClick(_variant2Button, true);
+                    else
+                        StartAnimationButtonClick(_variant2Button, false, question.answer);
                     break;
                 case Resource.Id.variant3Layout:
-                    _currentQuestion++;
+                    if (question.answer == 3)
+                        StartAnimationButtonClick(_variant3Button, true);
+                    else
+                        StartAnimationButtonClick(_variant3Button, false, question.answer);
                     break;
                 case Resource.Id.variant4Layout:
-                    _currentQuestion++;
+                    if (question.answer == 4)
+                        StartAnimationButtonClick(_variant4Button, true);
+                    else
+                        StartAnimationButtonClick(_variant4Button, false, question.answer);
                     break;
                 default:
                     break;
@@ -316,8 +334,72 @@ namespace BM.Droid.Sources
                 _variant4Button.SetBackgroundResource(Resource.Drawable.button_background);
                 _needEnableButtons = false;
             }
+        }
 
-            InstallCurrentQuestion(_currentQuestion);
+        private void StartAnimationButtonClick(Button button, bool isGoodAnswer, int goodAnswer = 1)
+        {
+            ValueAnimator anim = ObjectAnimator.OfInt(button, "backgroundColor",
+                _defaultColor, isGoodAnswer ? _goodColor : _badColor);
+            anim.SetEvaluator(new ArgbEvaluator());
+            anim.RepeatMode = ValueAnimatorRepeatMode.Reverse;
+            anim.RepeatCount = 1;
+            anim.SetDuration(1000);
+            anim.SetupStartValues();
+            anim.AnimationEnd += ((s, args) =>
+            {
+                if (!isGoodAnswer)
+                {
+                    button.SetBackgroundResource(Resource.Drawable.button_background);
+                    ShowGoodAnswer(goodAnswer);
+                }
+                else
+                {
+                    button.SetBackgroundResource(Resource.Drawable.button_background);
+                    _currentQuestion++;
+                    InstallCurrentQuestion(_currentQuestion);
+                    Inactive = false;
+                }
+            });
+            anim.Start();
+        }
+
+        private void ShowGoodAnswer(int answer)
+        {
+            Button goodButton = _variant1Button;
+
+            switch (answer)
+            {
+                case 1:
+                    goodButton = _variant1Button;
+                    break;
+                case 2:
+                    goodButton = _variant2Button;
+                    break;
+                case 3:
+                    goodButton = _variant3Button;
+                    break;
+                case 4:
+                    goodButton = _variant4Button;
+                    break;
+                default:
+                    break;
+            }
+
+            ValueAnimator anim = ObjectAnimator.OfInt(goodButton, "backgroundColor",
+                _defaultColor, _goodColor);
+            anim.SetEvaluator(new ArgbEvaluator());
+            anim.RepeatMode = ValueAnimatorRepeatMode.Reverse;
+            anim.RepeatCount = 1;
+            anim.SetDuration(1000);
+            anim.SetupStartValues();
+            anim.AnimationEnd += ((s, args) =>
+            {
+                goodButton.SetBackgroundResource(Resource.Drawable.button_background);
+                _currentQuestion++;
+                InstallCurrentQuestion(_currentQuestion);
+                Inactive = false;
+            });
+            anim.Start();
         }
 
         private void OnImageButtonClicked(object sender, EventArgs e)

@@ -64,6 +64,9 @@ namespace BM.Droid.Sources
                     break;
                 }
             }
+
+            if (_currentPoints > 14)
+                _textViews[14].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
         }
 
         public override void OnStop()
