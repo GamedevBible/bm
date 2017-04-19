@@ -188,54 +188,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="42dp" />
               </FrameLayout>
-            <!--Button
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="10dp"
-                  android:layout_marginLeft="10dp"
-                  android:layout_marginStart="10dp"
-                  android:layout_marginRight="10dp"
-                  android:layout_marginEnd="10dp"
-                  android:text="1939"
-                  android:id="@+id/variant1Button"
-                  style="@style/Widget.AppCompat.Button.Colored"
-                  android:ems="18" />
-              <Button
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="10dp"
-                  android:layout_marginLeft="10dp"
-                  android:layout_marginStart="10dp"
-                  android:layout_marginRight="10dp"
-                  android:layout_marginEnd="10dp"
-                  android:text="1918"
-                  android:id="@+id/variant2Button"
-                  style="@style/Widget.AppCompat.Button.Colored"
-                  android:ems="18" />
-              <Button
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="10dp"
-                  android:layout_marginLeft="10dp"
-                  android:layout_marginStart="10dp"
-                  android:layout_marginRight="10dp"
-                  android:layout_marginEnd="10dp"
-                  android:text="1941"
-                  android:id="@+id/variant3Button"
-                  style="@style/Widget.AppCompat.Button.Colored"
-                  android:ems="18" />
-              <Button
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="1906"
-                  android:layout_marginBottom="10dp"
-                  android:layout_marginLeft="10dp"
-                  android:layout_marginStart="10dp"
-                  android:layout_marginRight="10dp"
-                  android:layout_marginEnd="10dp"
-                  android:id="@+id/variant4Button"
-                  style="@style/Widget.AppCompat.Button.Colored"
-                  android:ems="18" /-->
           </LinearLayout>
     </LinearLayout>
+  <View
+      android:id="@+id/inactiveView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/transparent"
+      android:clickable="true"
+      android:visibility="gone"/>
 </RelativeLayout>
