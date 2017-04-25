@@ -14,7 +14,7 @@ namespace BM.Droid
         {
         }
 
-        public IReadOnlyList<questions> GetAllItems()
+        public List<questions> GetAllItems()
         {
             List<questions> tempQuestions = new List<questions>();
             List<questions> readyQuestions = new List<questions>();
@@ -34,6 +34,17 @@ namespace BM.Droid
             }
 
             return readyQuestions;
+        }
+
+        public questions GetLastItem(int id)
+        {
+            questions lastQuestion;
+
+            BeginTransaction();
+
+            lastQuestion = Table<questions>().Where(t => t._id == id).ToList()[0];
+
+            return lastQuestion;
         }
     }
 }

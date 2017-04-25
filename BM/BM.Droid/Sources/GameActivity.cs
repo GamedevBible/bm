@@ -17,6 +17,8 @@ namespace BM.Droid.Sources
     [Activity(Label = "GameActivity", Theme = "@style/AppTheme.Main")]
     public class GameActivity : AppCompatActivity
     {
+        private string _lastQuestionIdTag = nameof(_lastQuestionIdTag);
+        private int _lastQuestionId = -1;
         bool _doubleBackToExitPressedOnce = false;
         private TextView _question;
         private Button _variant1Button;
@@ -36,7 +38,7 @@ namespace BM.Droid.Sources
         private int _currentQuestion;
         private bool _needEnableButtons;
         private QuestionsDatabase _questionsDatabase = null;
-        private IReadOnlyList<questions> _gameQuestions = null;
+        private List<questions> _gameQuestions = null;
         private ProgressDialog _progressDialog;
         private int _goodColor;
         private int _defaultColor;
@@ -99,7 +101,6 @@ namespace BM.Droid.Sources
             _badColor = GetColor(Resource.Color.bad_answer);
 
             CopyDatabase("");
-            InitQuestionsAndStart();
                         
             if (savedInstanceState != null)
             {
@@ -111,6 +112,7 @@ namespace BM.Droid.Sources
                 _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(GetColor(_twoVariantsButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
                 _needEnableButtons = savedInstanceState.GetBoolean(nameof(_needEnableButtons));
                 _currentQuestion = savedInstanceState.GetInt(nameof(_currentQuestion));
+                _lastQuestionId = savedInstanceState.GetInt(nameof(_lastQuestionIdTag));
 
                 if (_needEnableButtons)
                 {
@@ -125,6 +127,8 @@ namespace BM.Droid.Sources
                     _variant4Button.SetBackgroundResource(_variant4Layout.Enabled ? Resource.Drawable.button_background : Resource.Drawable.button_disabled);
                 }
             }
+
+            InitQuestionsAndStart();
         }
 
         private void CopyDatabase(string dataBaseName)
@@ -164,7 +168,14 @@ namespace BM.Droid.Sources
             if (_progressDialog.IsShowing)
                 _progressDialog.Dismiss();
 
-            _currentQuestion = 0;
+            if (_lastQuestionId == -1)
+                _currentQuestion = 0;
+            else
+            {
+                _questionsDatabase = new QuestionsDatabase(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
+                _gameQuestions[_currentQuestion] = await Task.Run(() => _questionsDatabase.GetLastItem(_lastQuestionId));
+            }
+
             InstallCurrentQuestion(_currentQuestion);
         }
 
@@ -177,6 +188,7 @@ namespace BM.Droid.Sources
             outState.PutBoolean(nameof(_twoVariantsButton), _twoVariantsButton.Enabled);
             outState.PutBoolean(nameof(_needEnableButtons), _needEnableButtons);
             outState.PutInt(nameof(_currentQuestion), _currentQuestion);
+            outState.PutInt(nameof(_lastQuestionIdTag), _gameQuestions[_currentQuestion]._id);
 
             if (_needEnableButtons)
             {
