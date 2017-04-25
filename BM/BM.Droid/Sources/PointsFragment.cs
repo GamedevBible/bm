@@ -36,11 +36,11 @@ namespace BM.Droid.Sources
 
             for (int i = 0; i < 15; i++)
             {
-                _textViews[i].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.lighter_gray)));
+                _textViews[i].SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.lighter_gray)));
                 
                 if (i == _currentPoints)
                 {
-                    _textViews[i].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
+                    _textViews[i].SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.bm_blue)));
                     break;
                 }
             }
@@ -56,17 +56,17 @@ namespace BM.Droid.Sources
 
             for (int i = 0; i < 15; i++)
             {
-                _textViews[i].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.lighter_gray)));
+                _textViews[i].SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.lighter_gray)));
 
                 if (i == _currentPoints)
                 {
-                    _textViews[i].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
+                    _textViews[i].SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.bm_blue)));
                     break;
                 }
             }
 
             if (_currentPoints > 14)
-                _textViews[14].SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
+                _textViews[14].SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.bm_blue)));
         }
 
         public override void OnStop()
