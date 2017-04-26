@@ -7,7 +7,6 @@ using Android.OS;
 using Android.Widget;
 using Android.Support.V7.App;
 using Android.Text.Method;
-using Android.Support.V4.Content;
 using System.Threading.Tasks;
 using Android.Animation;
 using Android.Views;
@@ -25,6 +24,10 @@ namespace BM.Droid.Sources
         private Button _variant2Button;
         private Button _variant3Button;
         private Button _variant4Button;
+        private int _answer1WasOn;
+        private int _answer2WasOn;
+        private int _answer3WasOn;
+        private int _answer4WasOn;
         private View _inactiveView;
         private FrameLayout _variant1Layout;
         private FrameLayout _variant2Layout;
@@ -165,9 +168,6 @@ namespace BM.Droid.Sources
 
             _gameQuestions = await Task.Run(() => _questionsDatabase.GetAllItems());
 
-            if (_progressDialog.IsShowing)
-                _progressDialog.Dismiss();
-
             if (_lastQuestionId == -1)
                 _currentQuestion = 0;
             else
@@ -175,6 +175,9 @@ namespace BM.Droid.Sources
                 _questionsDatabase = new QuestionsDatabase(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
                 _gameQuestions[_currentQuestion] = await Task.Run(() => _questionsDatabase.GetLastItem(_lastQuestionId));
             }
+
+            if (_progressDialog.IsShowing)
+                _progressDialog.Dismiss();
 
             InstallCurrentQuestion(_currentQuestion);
         }
@@ -220,6 +223,8 @@ namespace BM.Droid.Sources
                     var c2 = question.variant2;
                     question.variant2 = question.variant1;
                     question.variant1 = c2;
+                    _answer1WasOn = 2;
+                    _answer2WasOn = 1;
                     if (question.answer == 2)
                         _gameQuestions[currentQuestion].answer = 1;
                     else if (question.answer == 1)
@@ -229,6 +234,8 @@ namespace BM.Droid.Sources
                     var c3 = question.variant3;
                     question.variant3 = question.variant1;
                     question.variant1 = c3;
+                    _answer1WasOn = 3;
+                    _answer3WasOn = 1;
                     if (question.answer == 3)
                         _gameQuestions[currentQuestion].answer = 1;
                     else if (question.answer == 1)
@@ -238,6 +245,8 @@ namespace BM.Droid.Sources
                     var c4 = question.variant4;
                     question.variant4 = question.variant1;
                     question.variant1 = c4;
+                    _answer1WasOn = 4;
+                    _answer4WasOn = 1;
                     if (question.answer == 4)
                         _gameQuestions[currentQuestion].answer = 1;
                     else if (question.answer == 1)
@@ -248,7 +257,7 @@ namespace BM.Droid.Sources
             }
 
             // На какое место поставить второй
-            Random rand2 = new Random();
+            /*Random rand2 = new Random();
             int temp2;
             temp2 = rand.Next(2, 5);
 
@@ -283,7 +292,7 @@ namespace BM.Droid.Sources
                     break;
                 default:
                     break;
-            }
+            }*/
 
             _question.Text = _gameQuestions[currentQuestion].questionText;
             _question.ScrollTo(0, 0);
@@ -303,6 +312,8 @@ namespace BM.Droid.Sources
 
             var question = _gameQuestions[_currentQuestion];
             var buttonClicked = (FrameLayout)sender;
+
+            _currentQuestion++;
 
             switch (buttonClicked.Id)
             {
@@ -367,7 +378,6 @@ namespace BM.Droid.Sources
                 else
                 {
                     button.SetBackgroundResource(Resource.Drawable.button_background);
-                    _currentQuestion++;
                     InstallCurrentQuestion(_currentQuestion);
                     Inactive = false;
                 }
