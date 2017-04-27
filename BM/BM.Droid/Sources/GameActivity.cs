@@ -18,16 +18,15 @@ namespace BM.Droid.Sources
     {
         private string _lastQuestionIdTag = nameof(_lastQuestionIdTag);
         private int _lastQuestionId = -1;
+        private bool _needFinishActivity;
         bool _doubleBackToExitPressedOnce = false;
         private TextView _question;
         private Button _variant1Button;
         private Button _variant2Button;
         private Button _variant3Button;
         private Button _variant4Button;
-        private int _answer1WasOn;
-        private int _answer2WasOn;
-        private int _answer3WasOn;
-        private int _answer4WasOn;
+        private int _answer1SwapWith;
+        private bool _anotherAnswersSwap;
         private View _inactiveView;
         private FrameLayout _variant1Layout;
         private FrameLayout _variant2Layout;
@@ -116,6 +115,9 @@ namespace BM.Droid.Sources
                 _needEnableButtons = savedInstanceState.GetBoolean(nameof(_needEnableButtons));
                 _currentQuestion = savedInstanceState.GetInt(nameof(_currentQuestion));
                 _lastQuestionId = savedInstanceState.GetInt(nameof(_lastQuestionIdTag));
+                _needFinishActivity = savedInstanceState.GetBoolean(nameof(_needFinishActivity));
+                _answer1SwapWith = savedInstanceState.GetInt(nameof(_answer1SwapWith));
+                _anotherAnswersSwap = savedInstanceState.GetBoolean(nameof(_anotherAnswersSwap));
 
                 if (_needEnableButtons)
                 {
@@ -131,7 +133,10 @@ namespace BM.Droid.Sources
                 }
             }
 
-            InitQuestionsAndStart();
+            if (!_needFinishActivity)
+                InitQuestionsAndStart();
+            else
+                Finish();
         }
 
         private void CopyDatabase(string dataBaseName)
@@ -174,6 +179,7 @@ namespace BM.Droid.Sources
             {
                 _questionsDatabase = new QuestionsDatabase(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
                 _gameQuestions[_currentQuestion] = await Task.Run(() => _questionsDatabase.GetLastItem(_lastQuestionId));
+                _lastQuestionId = -1;
             }
 
             if (_progressDialog.IsShowing)
@@ -191,7 +197,13 @@ namespace BM.Droid.Sources
             outState.PutBoolean(nameof(_twoVariantsButton), _twoVariantsButton.Enabled);
             outState.PutBoolean(nameof(_needEnableButtons), _needEnableButtons);
             outState.PutInt(nameof(_currentQuestion), _currentQuestion);
-            outState.PutInt(nameof(_lastQuestionIdTag), _gameQuestions[_currentQuestion]._id);
+            if (_currentQuestion >= 0)
+                outState.PutInt(nameof(_lastQuestionIdTag), _gameQuestions[_currentQuestion]._id);
+            else
+                outState.PutInt(nameof(_lastQuestionIdTag), 0);
+            outState.PutBoolean(nameof(_needFinishActivity), _needFinishActivity);
+            outState.PutInt(nameof(_answer1SwapWith), _answer1SwapWith);
+            outState.PutBoolean(nameof(_anotherAnswersSwap), _anotherAnswersSwap);
 
             if (_needEnableButtons)
             {
@@ -204,7 +216,7 @@ namespace BM.Droid.Sources
 
         private void InstallCurrentQuestion(int currentQuestion)
         {
-            if (currentQuestion > 14)
+            if (currentQuestion > 14 || _currentQuestion == -2)
             {
                 Finish();
                 return;
@@ -212,87 +224,89 @@ namespace BM.Droid.Sources
 
             var question = _gameQuestions[currentQuestion];
 
-            // На какое место поставить первый
-            Random rand = new Random();
-            int temp;
-            temp = rand.Next(2, 5);
+            // Нужно ли перемешать
+            if (_lastQuestionId != -1)
+            {
+                Random rand = new Random();
+                _answer1SwapWith = rand.Next(2, 5);
+                _anotherAnswersSwap = rand.Next(1, 3) == 2 ? true : false;
+            }
 
-            switch(temp)
+            _lastQuestionId = question._id;
+
+            switch(_answer1SwapWith)
             {
                 case 2:
                     var c2 = question.variant2;
                     question.variant2 = question.variant1;
                     question.variant1 = c2;
-                    _answer1WasOn = 2;
-                    _answer2WasOn = 1;
                     if (question.answer == 2)
                         _gameQuestions[currentQuestion].answer = 1;
                     else if (question.answer == 1)
                         _gameQuestions[currentQuestion].answer = 2;
+
+                    //Swap another
+                    if (_anotherAnswersSwap)
+                    {
+                        c2 = question.variant3;
+                        question.variant3 = question.variant4;
+                        question.variant4 = c2;
+                        if (question.answer == 3)
+                            _gameQuestions[currentQuestion].answer = 4;
+                        else if (question.answer == 4)
+                            _gameQuestions[currentQuestion].answer = 3;
+                    }
+
                     break;
                 case 3:
                     var c3 = question.variant3;
                     question.variant3 = question.variant1;
                     question.variant1 = c3;
-                    _answer1WasOn = 3;
-                    _answer3WasOn = 1;
+                    _answer1SwapWith = 3;
                     if (question.answer == 3)
                         _gameQuestions[currentQuestion].answer = 1;
                     else if (question.answer == 1)
                         _gameQuestions[currentQuestion].answer = 3;
+
+                    //Swap another
+                    if (_anotherAnswersSwap)
+                    {
+                        c3 = question.variant2;
+                        question.variant2 = question.variant4;
+                        question.variant4 = c3;
+                        if (question.answer == 2)
+                            _gameQuestions[currentQuestion].answer = 4;
+                        else if (question.answer == 4)
+                            _gameQuestions[currentQuestion].answer = 2;
+                    }
+
                     break;
                 case 4:
                     var c4 = question.variant4;
                     question.variant4 = question.variant1;
                     question.variant1 = c4;
-                    _answer1WasOn = 4;
-                    _answer4WasOn = 1;
+                    _answer1SwapWith = 4;
                     if (question.answer == 4)
                         _gameQuestions[currentQuestion].answer = 1;
                     else if (question.answer == 1)
                         _gameQuestions[currentQuestion].answer = 4;
+
+                    //Swap another
+                    if (_anotherAnswersSwap)
+                    {
+                        c3 = question.variant2;
+                        question.variant2 = question.variant3;
+                        question.variant3 = c3;
+                        if (question.answer == 2)
+                            _gameQuestions[currentQuestion].answer = 3;
+                        else if (question.answer == 3)
+                            _gameQuestions[currentQuestion].answer = 2;
+                    }
+
                     break;
                 default:
                     break;
             }
-
-            // На какое место поставить второй
-            /*Random rand2 = new Random();
-            int temp2;
-            temp2 = rand.Next(2, 5);
-
-            switch (temp2)
-            {
-                case 2:
-                    var c2 = question.variant1;
-                    question.variant1 = question.variant2;
-                    question.variant2 = c2;
-                    if (question.answer == 1)
-                        _gameQuestions[currentQuestion].answer = 2;
-                    else if (question.answer == 2)
-                        _gameQuestions[currentQuestion].answer = 1;
-                    break;
-                case 3:
-                    var c3 = question.variant3;
-                    question.variant3 = question.variant2;
-                    question.variant2 = c3;
-                    if (question.answer == 3)
-                        _gameQuestions[currentQuestion].answer = 2;
-                    else if (question.answer == 2)
-                        _gameQuestions[currentQuestion].answer = 3;
-                    break;
-                case 4:
-                    var c4 = question.variant4;
-                    question.variant4 = question.variant2;
-                    question.variant2 = c4;
-                    if (question.answer == 4)
-                        _gameQuestions[currentQuestion].answer = 2;
-                    else if (question.answer == 2)
-                        _gameQuestions[currentQuestion].answer = 4;
-                    break;
-                default:
-                    break;
-            }*/
 
             _question.Text = _gameQuestions[currentQuestion].questionText;
             _question.ScrollTo(0, 0);
@@ -318,28 +332,44 @@ namespace BM.Droid.Sources
             switch (buttonClicked.Id)
             {
                 case Resource.Id.variant1Layout:
-                    if(question.answer == 1)
+                    if (question.answer == 1)
                         StartAnimationButtonClick(_variant1Button, true);
                     else
+                    {
+                        _needFinishActivity = true;
+                        _currentQuestion = -2;
                         StartAnimationButtonClick(_variant1Button, false, question.answer);
+                    }
                     break;
                 case Resource.Id.variant2Layout:
                     if (question.answer == 2)
                         StartAnimationButtonClick(_variant2Button, true);
                     else
+                    {
+                        _needFinishActivity = true;
+                        _currentQuestion = -2;
                         StartAnimationButtonClick(_variant2Button, false, question.answer);
+                    }
                     break;
                 case Resource.Id.variant3Layout:
                     if (question.answer == 3)
                         StartAnimationButtonClick(_variant3Button, true);
                     else
+                    {
+                        _needFinishActivity = true;
+                        _currentQuestion = -2;
                         StartAnimationButtonClick(_variant3Button, false, question.answer);
+                    }
                     break;
                 case Resource.Id.variant4Layout:
                     if (question.answer == 4)
                         StartAnimationButtonClick(_variant4Button, true);
                     else
+                    {
+                        _needFinishActivity = true;
+                        _currentQuestion = -2;
                         StartAnimationButtonClick(_variant4Button, false, question.answer);
+                    }
                     break;
                 default:
                     break;
@@ -417,7 +447,6 @@ namespace BM.Droid.Sources
             anim.AnimationEnd += ((s, args) =>
             {
                 goodButton.SetBackgroundResource(Resource.Drawable.button_background);
-                _currentQuestion++;
                 InstallCurrentQuestion(_currentQuestion);
                 Inactive = false;
             });
@@ -459,7 +488,7 @@ namespace BM.Droid.Sources
                 default:
                     break;
             }
-            }
+        }
 
         private Question ToQuestion(questions questionFromDb)
         {
