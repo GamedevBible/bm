@@ -83,28 +83,28 @@ namespace BM.Droid.Sources
             {
                 case 1:
                     _answer1.Text = $"1. {percentArray[0]}%";
-                    _answer1.SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.bm_blue)));
+                    _answer1.SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
                     _answer2.Text = $"2. {percentArray[1]}%";
                     _answer3.Text = $"3. {percentArray[2]}%";
                     _answer4.Text = $"4. {percentArray[3]}%";
                     break;
                 case 2:
                     _answer2.Text = $"2. {percentArray[0]}%";
-                    _answer2.SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.bm_blue)));
+                    _answer2.SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
                     _answer1.Text = $"1. {percentArray[1]}%";
                     _answer3.Text = $"3. {percentArray[2]}%";
                     _answer4.Text = $"4. {percentArray[3]}%";
                     break;
                 case 3:
                     _answer3.Text = $"3. {percentArray[0]}%";
-                    _answer3.SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.bm_blue)));
+                    _answer3.SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
                     _answer2.Text = $"2. {percentArray[1]}%";
                     _answer1.Text = $"1. {percentArray[2]}%";
                     _answer4.Text = $"4. {percentArray[3]}%";
                     break;
                 case 4:
                     _answer4.Text = $"4. {percentArray[0]}%";
-                    _answer4.SetTextColor(new Android.Graphics.Color(Activity.GetColor(Resource.Color.bm_blue)));
+                    _answer4.SetTextColor(new Android.Graphics.Color(ContextCompat.GetColor(Activity, Resource.Color.bm_blue)));
                     _answer2.Text = $"2. {percentArray[1]}%";
                     _answer3.Text = $"3. {percentArray[2]}%";
                     _answer1.Text = $"1. {percentArray[3]}%";

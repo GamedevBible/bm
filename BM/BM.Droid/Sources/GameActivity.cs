@@ -10,10 +10,12 @@ using Android.Text.Method;
 using System.Threading.Tasks;
 using Android.Animation;
 using Android.Views;
+using Android.Support.V4.Content;
 
 namespace BM.Droid.Sources
 {
-    [Activity(Label = "GameActivity", Theme = "@style/AppTheme.Main")]
+    [Activity(Label = "GameActivity", Theme = "@style/AppTheme.Main", 
+        Icon = "@mipmap/ic_launcher")]
     public class GameActivity : AppCompatActivity
     {
         private string _lastQuestionIdTag = nameof(_lastQuestionIdTag);
@@ -98,20 +100,20 @@ namespace BM.Droid.Sources
             _twoVariantsButton.Click += OnImageButtonClicked;
             _pointsButton.Click += OnButtonClicked;
 
-            _defaultColor = GetColor(Resource.Color.bm_blue);
-            _goodColor = GetColor(Resource.Color.good_answer);
-            _badColor = GetColor(Resource.Color.bad_answer);
+            _defaultColor =  ContextCompat.GetColor(this, Resource.Color.bm_blue);
+            _goodColor = ContextCompat.GetColor(this, Resource.Color.good_answer);
+            _badColor = ContextCompat.GetColor(this, Resource.Color.bad_answer);
 
             CopyDatabase("");
                         
             if (savedInstanceState != null)
             {
                 _callButton.Enabled = savedInstanceState.GetBoolean(nameof(_callButton));
-                _callButton.SetColorFilter(new Android.Graphics.Color(GetColor(_callButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
+                _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, _callButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
                 _peopleButton.Enabled = savedInstanceState.GetBoolean(nameof(_peopleButton));
-                _peopleButton.SetColorFilter(new Android.Graphics.Color(GetColor(_peopleButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
+                _peopleButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, _peopleButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
                 _twoVariantsButton.Enabled = savedInstanceState.GetBoolean(nameof(_twoVariantsButton));
-                _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(GetColor(_twoVariantsButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
+                _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, _twoVariantsButton.Enabled ? Resource.Color.bm_white : Resource.Color.lighter_gray)));
                 _needEnableButtons = savedInstanceState.GetBoolean(nameof(_needEnableButtons));
                 _currentQuestion = savedInstanceState.GetInt(nameof(_currentQuestion));
                 _lastQuestionId = savedInstanceState.GetInt(nameof(_lastQuestionIdTag));
@@ -464,7 +466,7 @@ namespace BM.Droid.Sources
                     break;
                 case Resource.Id.callButton:
                     _callButton.Enabled = false;
-                    _callButton.SetColorFilter(new Android.Graphics.Color(GetColor(Resource.Color.lighter_gray)));
+                    _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     RemoveFragmentIfOpened(ft, nameof(CallFriendFragment));
 
                     var dialogCallFriend = CallFriendFragment.NewInstance(ToQuestion(_gameQuestions[_currentQuestion]));
@@ -473,7 +475,7 @@ namespace BM.Droid.Sources
                     break;
                 case Resource.Id.peopleButton:
                     _peopleButton.Enabled = false;
-                    _peopleButton.SetColorFilter(new Android.Graphics.Color(GetColor(Resource.Color.lighter_gray)));
+                    _peopleButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     RemoveFragmentIfOpened(ft, nameof(AuditoryHelpFragment));
 
                     var dialogPeopleHelp = AuditoryHelpFragment.NewInstance(ToQuestion(_gameQuestions[_currentQuestion]));
@@ -482,7 +484,7 @@ namespace BM.Droid.Sources
                     break;
                 case Resource.Id.fiftyButton:
                     _twoVariantsButton.Enabled = false;
-                    _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(GetColor(Resource.Color.lighter_gray)));
+                    _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     LeaveTwoVariants(_gameQuestions[_currentQuestion]);
                     break;
                 default:

@@ -6,7 +6,8 @@ using System;
 
 namespace BM.Droid.Sources
 {
-    [Activity(Label = "@string/ApplicationName", Theme = "@style/AppTheme.Main", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "@string/ApplicationName", Theme = "@style/AppTheme.Main", MainLauncher = true,
+        Icon = "@mipmap/ic_launcher")]
     public class MainActivity : AppCompatActivity
     {
         private Button _startButton;
