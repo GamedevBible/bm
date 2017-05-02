@@ -59,9 +59,9 @@ namespace BM.Droid.Sources
             }
         }
 
-        protected override void OnStart()
+        protected override void OnResume()
         {
-            base.OnStart();
+            base.OnResume();
 
             if (_lastQuestion != -1)
             {
