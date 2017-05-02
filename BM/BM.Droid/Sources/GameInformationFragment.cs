@@ -20,6 +20,7 @@ namespace BM.Droid.Sources
         private bool _gotMillion = false;
         private TextView _questionInfo;
         private ImageView _millionImage;
+        private int _imageForMillion = -1;
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
@@ -36,42 +37,6 @@ namespace BM.Droid.Sources
                 ? "Вы дошли до самого конца и выиграли! Поздравляем!" 
                 : $"Вы дошли до {_lastQuestion}-го вопроса!";
 
-            if (_millionImage.Visibility == ViewStates.Visible)
-            {
-                Random rand = new Random();
-                int temp;
-                temp = rand.Next(1, 8);
-
-                var img = 1;
-
-                switch (temp)
-                {
-                    case 1:
-                        img = Resource.Drawable.million1;
-                        break;
-                    case 2:
-                        img = Resource.Drawable.million2;
-                        break;
-                    case 3:
-                        img = Resource.Drawable.million3;
-                        break;
-                    case 4:
-                        img = Resource.Drawable.million4;
-                        break;
-                    case 5:
-                        img = Resource.Drawable.million5;
-                        break;
-                    case 6:
-                        img = Resource.Drawable.million6;
-                        break;
-                    case 7:
-                        img = Resource.Drawable.million7;
-                        break;
-                }
-
-                _millionImage.SetImageResource(img);
-            }
-
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(Activity, Resource.Style.AlertDialogTheme)
                 .SetTitle(_gotMillion ? "МИЛЛИОН ОЧКОВ!" : "Неплохо!")
                 .SetView(view)
@@ -81,12 +46,55 @@ namespace BM.Droid.Sources
             return dialog;
         }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            if (_millionImage.Visibility == ViewStates.Visible)
+            {
+                if (_imageForMillion == -1)
+                {
+                    Random rand = new Random();
+                    int temp;
+                    temp = rand.Next(1, 8);
+
+                    switch (temp)
+                    {
+                        case 1:
+                            _imageForMillion = Resource.Drawable.million1;
+                            break;
+                        case 2:
+                            _imageForMillion = Resource.Drawable.million2;
+                            break;
+                        case 3:
+                            _imageForMillion = Resource.Drawable.million3;
+                            break;
+                        case 4:
+                            _imageForMillion = Resource.Drawable.million4;
+                            break;
+                        case 5:
+                            _imageForMillion = Resource.Drawable.million5;
+                            break;
+                        case 6:
+                            _imageForMillion = Resource.Drawable.million6;
+                            break;
+                        case 7:
+                            _imageForMillion = Resource.Drawable.million7;
+                            break;
+                    }
+                }
+
+                _millionImage.SetImageResource(_imageForMillion);
+            }
+        }
+
         public override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
 
             outState.PutInt(nameof(_questionTag), _lastQuestion);
             outState.PutBoolean(nameof(_gotMillionTag), _gotMillion);
+            outState.PutInt(nameof(_imageForMillion), _imageForMillion);
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -97,6 +105,7 @@ namespace BM.Droid.Sources
             {
                 _lastQuestion = savedInstanceState.GetInt(nameof(_questionTag));
                 _gotMillion = savedInstanceState.GetBoolean(nameof(_gotMillionTag));
+                _imageForMillion = savedInstanceState.GetInt(nameof(_imageForMillion));
             }
         }
 
