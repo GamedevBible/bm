@@ -48,6 +48,7 @@ namespace BM.Droid.Sources
         private int _defaultColor;
         private int _badColor;
         private bool _inactive;
+        private bool _gotMillion;
 
         private bool Inactive
         {
@@ -120,6 +121,7 @@ namespace BM.Droid.Sources
                 _needFinishActivity = savedInstanceState.GetBoolean(nameof(_needFinishActivity));
                 _answer1SwapWith = savedInstanceState.GetInt(nameof(_answer1SwapWith));
                 _anotherAnswersSwap = savedInstanceState.GetBoolean(nameof(_anotherAnswersSwap));
+                _gotMillion = savedInstanceState.GetBoolean(nameof(_gotMillion));
 
                 if (_needEnableButtons)
                 {
@@ -138,7 +140,13 @@ namespace BM.Droid.Sources
             if (!_needFinishActivity)
                 InitQuestionsAndStart();
             else
+            {
+                Intent myIntent = new Intent(this, typeof(MainActivity));
+                myIntent.PutExtra("lastQuestion", _currentQuestion);
+                myIntent.PutExtra("gotMillion", _gotMillion);
+                SetResult(Result.Ok, myIntent);
                 Finish();
+            }
         }
 
         private void CopyDatabase(string dataBaseName)
@@ -206,6 +214,7 @@ namespace BM.Droid.Sources
             outState.PutBoolean(nameof(_needFinishActivity), _needFinishActivity);
             outState.PutInt(nameof(_answer1SwapWith), _answer1SwapWith);
             outState.PutBoolean(nameof(_anotherAnswersSwap), _anotherAnswersSwap);
+            outState.PutBoolean(nameof(_gotMillion), _gotMillion);
 
             if (_needEnableButtons)
             {
@@ -218,8 +227,12 @@ namespace BM.Droid.Sources
 
         private void InstallCurrentQuestion(int currentQuestion)
         {
-            if (currentQuestion > 14 || _currentQuestion == -2)
+            if (currentQuestion > 14 || _needFinishActivity)
             {
+                Intent myIntent = new Intent(this, typeof(MainActivity));
+                myIntent.PutExtra("lastQuestion", _currentQuestion);
+                myIntent.PutExtra("gotMillion", _gotMillion);
+                SetResult(Result.Ok, myIntent);
                 Finish();
                 return;
             }
@@ -335,41 +348,65 @@ namespace BM.Droid.Sources
             {
                 case Resource.Id.variant1Layout:
                     if (question.answer == 1)
+                    {
+                        if (_currentQuestion > 14)
+                        {
+                            _gotMillion = true;
+                            _needFinishActivity = true;
+                        }
                         StartAnimationButtonClick(_variant1Button, true);
+                    }
                     else
                     {
                         _needFinishActivity = true;
-                        _currentQuestion = -2;
                         StartAnimationButtonClick(_variant1Button, false, question.answer);
                     }
                     break;
                 case Resource.Id.variant2Layout:
                     if (question.answer == 2)
+                    {
+                        if (_currentQuestion > 14)
+                        {
+                            _gotMillion = true;
+                            _needFinishActivity = true;
+                        }
                         StartAnimationButtonClick(_variant2Button, true);
+                    }
                     else
                     {
                         _needFinishActivity = true;
-                        _currentQuestion = -2;
                         StartAnimationButtonClick(_variant2Button, false, question.answer);
                     }
                     break;
                 case Resource.Id.variant3Layout:
                     if (question.answer == 3)
+                    {
+                        if (_currentQuestion > 14)
+                        {
+                            _gotMillion = true;
+                            _needFinishActivity = true;
+                        }
                         StartAnimationButtonClick(_variant3Button, true);
+                    }
                     else
                     {
                         _needFinishActivity = true;
-                        _currentQuestion = -2;
                         StartAnimationButtonClick(_variant3Button, false, question.answer);
                     }
                     break;
                 case Resource.Id.variant4Layout:
                     if (question.answer == 4)
+                    {
+                        if (_currentQuestion > 14)
+                        {
+                            _gotMillion = true;
+                            _needFinishActivity = true;
+                        }
                         StartAnimationButtonClick(_variant4Button, true);
+                    }  
                     else
                     {
                         _needFinishActivity = true;
-                        _currentQuestion = -2;
                         StartAnimationButtonClick(_variant4Button, false, question.answer);
                     }
                     break;

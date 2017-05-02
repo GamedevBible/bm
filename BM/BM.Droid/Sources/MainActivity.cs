@@ -3,6 +3,8 @@ using Android.Widget;
 using Android.OS;
 using Android.Support.V7.App;
 using System;
+using Android.Content;
+using Android.Runtime;
 
 namespace BM.Droid.Sources
 {
@@ -10,6 +12,10 @@ namespace BM.Droid.Sources
         Icon = "@mipmap/ic_launcher")]
     public class MainActivity : AppCompatActivity
     {
+        private const int _gameActivityCode = 11;
+        private int _lastQuestion = -1;
+        private bool _gotMillion = false;
+
         private Button _startButton;
         private Button _recordsButton;
         private Button _guideButton;
@@ -39,7 +45,7 @@ namespace BM.Droid.Sources
             switch (clickedButton.Id)
             {
                 case Resource.Id.startButton:
-                    StartActivity(GameActivity.CreateStartIntent(this));
+                    StartActivityForResult(GameActivity.CreateStartIntent(this), _gameActivityCode);
                     break;
                 case Resource.Id.recordsButton:
                     break;
@@ -50,6 +56,43 @@ namespace BM.Droid.Sources
                     break;
                 default:
                     break;
+            }
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (_lastQuestion != -1)
+            {
+                var ft = SupportFragmentManager.BeginTransaction();
+
+                var prev = SupportFragmentManager.FindFragmentByTag(nameof(GameInformationFragment));
+                if (prev != null)
+                {
+                    ft.Remove(prev);
+                }
+                ft.AddToBackStack(null);
+
+                var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gotMillion);
+                dialogCallFriend.Cancelable = false;
+                dialogCallFriend.Show(ft, nameof(GameInformationFragment));
+
+                _lastQuestion = -1;
+            }
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (resultCode == Result.Ok)
+            {
+                if (requestCode == _gameActivityCode)
+                {
+                    _lastQuestion = data.GetIntExtra("lastQuestion", -1);
+                    _gotMillion = data.GetBooleanExtra("gotMillion", false);
+                }
             }
         }
     }
