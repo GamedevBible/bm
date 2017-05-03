@@ -96,9 +96,13 @@ namespace BM.Droid.Sources
             _variant3Layout.Click += OnAnswerButtonClick;
             _variant4Layout.Click += OnAnswerButtonClick;
             _backButton.Click += OnImageButtonClicked;
+            _backButton.LongClick += OnImageButtonLongClick;
             _callButton.Click += OnImageButtonClicked;
+            _callButton.LongClick += OnImageButtonLongClick;
             _peopleButton.Click += OnImageButtonClicked;
+            _peopleButton.LongClick += OnImageButtonLongClick;
             _twoVariantsButton.Click += OnImageButtonClicked;
+            _twoVariantsButton.LongClick += OnImageButtonLongClick;
             _pointsButton.Click += OnButtonClicked;
 
             _defaultColor =  ContextCompat.GetColor(this, Resource.Color.bm_blue);
@@ -146,6 +150,28 @@ namespace BM.Droid.Sources
                 myIntent.PutExtra("gotMillion", _gotMillion);
                 SetResult(Result.Ok, myIntent);
                 Finish();
+            }
+        }
+
+        private void OnImageButtonLongClick(object sender, View.LongClickEventArgs e)
+        {
+            var buttonClicked = (ImageButton)sender;
+            switch (buttonClicked.Id)
+            {
+                case Resource.Id.backButton:
+                    Toast.MakeText(this, "Вернуться в меню", ToastLength.Short).Show();
+                    break;
+                case Resource.Id.callButton:
+                    Toast.MakeText(this, "Позвонить другу", ToastLength.Short).Show();
+                    break;
+                case Resource.Id.peopleButton:
+                    Toast.MakeText(this, "Помощь зала", ToastLength.Short).Show();
+                    break;
+                case Resource.Id.fiftyButton:
+                    Toast.MakeText(this, "Оставить два варианта", ToastLength.Short).Show();
+                    break;
+                default:
+                    break;
             }
         }
 
