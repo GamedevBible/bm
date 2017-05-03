@@ -5,6 +5,7 @@ using Android.Support.V7.App;
 using System;
 using Android.Content;
 using Android.Runtime;
+using Android.Content.PM;
 
 namespace BM.Droid.Sources
 {
@@ -13,6 +14,7 @@ namespace BM.Droid.Sources
     public class MainActivity : AppCompatActivity
     {
         private const int _gameActivityCode = 11;
+        private const int _contactsActivityCode = 14;
         private int _lastQuestion = -1;
         private bool _gotMillion = false;
 
@@ -52,7 +54,20 @@ namespace BM.Droid.Sources
                 case Resource.Id.guideButton:
                     break;
                 case Resource.Id.contactsButton:
-                    Toast.MakeText(this, "Нажата кнопка КОНТАКТЫ", ToastLength.Short).Show();
+                    StartActivityForResult(ContactsActivity.CreateStartIntent(this), _contactsActivityCode);
+
+                    /*var versionName = PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName;
+
+                    Toast.MakeText(this, versionName, ToastLength.Short).Show();
+
+                    var emailIntent = new Intent(Intent.ActionSend);
+                    // The intent does not have a URI, so declare the "text/plain" MIME type
+                    emailIntent.SetType("vnd.android.cursor.dir/email");
+                    emailIntent.PutExtra(Intent.ExtraEmail, new[] { "biblegamedev@gmail.com" }); // recipients
+                    emailIntent.PutExtra(Intent.ExtraSubject, "Message from game");
+                    emailIntent.PutExtra(Intent.ExtraText, string.Empty);
+
+                    StartActivityForResult(emailIntent, _emailRequestCode);*/
                     break;
                 default:
                     break;
