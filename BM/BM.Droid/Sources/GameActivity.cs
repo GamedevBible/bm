@@ -207,7 +207,7 @@ namespace BM.Droid.Sources
             outState.PutBoolean(nameof(_twoVariantsButton), _twoVariantsButton.Enabled);
             outState.PutBoolean(nameof(_needEnableButtons), _needEnableButtons);
             outState.PutInt(nameof(_currentQuestion), _currentQuestion);
-            if (_currentQuestion >= 0)
+            if (_currentQuestion >= 0 && _currentQuestion <= 14)
                 outState.PutInt(nameof(_lastQuestionIdTag), _gameQuestions[_currentQuestion]._id);
             else
                 outState.PutInt(nameof(_lastQuestionIdTag), 0);
