@@ -36,19 +36,34 @@ namespace BM.Droid.Sources
             _appVersion = FindViewById<TextView>(Resource.Id.appVersion);
             _contactUs = FindViewById<TextView>(Resource.Id.contactUs);
 
-            _info.Text = "Дизайн и разработка:" + "\n" + 
-                "С. Ларионов (мл.)" + "\n" + 
-                "Вопросы для игры:" + "\n" + 
-                "С. Ларионов (ст.)";
+            //if Landscape
+            if (WindowManager.DefaultDisplay.Rotation == SurfaceOrientation.Rotation90 || WindowManager.DefaultDisplay.Rotation == SurfaceOrientation.Rotation270)
+            {
+                _info.Text = "Дизайн и разработка: С. Ларионов (мл.)" + "\n" +
+                    "Вопросы для игры: С. Ларионов (ст.)";
+
+                string text = "<font>У вас есть вопросы или предложения? </font>" +
+                "<font>Желаете поддержать этот проект и наши дальнейшие проекты?</font><br>" +
+                "<font>Напишите нам: </font><font color=#03a9f4>biblegamedev@gmail.com</font>";
+
+                _contactUs.SetText(Html.FromHtml(text), TextView.BufferType.Spannable);
+            }
+            else
+            {
+                _info.Text = "Дизайн и разработка:" + "\n" +
+                    "С. Ларионов (мл.)" + "\n" +
+                    "Вопросы для игры:" + "\n" +
+                    "С. Ларионов (ст.)";
+
+                string text = "<font>У вас есть вопросы или предложения?</font><br>" +
+                "<font>Желаете поддержать этот проект и наши дальнейшие проекты?</font><br>" +
+                "<font>Напишите нам: </font><font color=#03a9f4>biblegamedev@gmail.com</font>";
+
+                _contactUs.SetText(Html.FromHtml(text), TextView.BufferType.Spannable);
+            }
 
             _appVersion.Text = 
                 $"Версия приложения {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}";
-
-            string text = "<font>У вас есть вопросы или предложения?</font><br>" +
-                "<font>Желаете поддержать этот проект и наши следующие проекты?</font><br>" +
-                "<font>Напишите нам: </font><font color=#03a9f4>biblegamedev@gmail.com</font>";
-
-            _contactUs.SetText(Html.FromHtml(text), TextView.BufferType.Spannable);
 
             _contactUs.Click += OnContactUsClicked;
             _contactUs.LongClick += OnContactUsLongClicked;
@@ -72,7 +87,19 @@ namespace BM.Droid.Sources
             emailIntent.PutExtra(Intent.ExtraSubject, "Message from game");
             emailIntent.PutExtra(Intent.ExtraText, string.Empty);
 
-            StartActivityForResult(emailIntent, _emailRequestCode);
+            try
+            {
+                StartActivityForResult(emailIntent, _emailRequestCode);
+            }
+            catch (Exception ex)
+            {
+                Android.Content.ClipboardManager clipboard = (Android.Content.ClipboardManager)GetSystemService(ClipboardService);
+                ClipData clip = ClipData.NewPlainText("label", "biblegamedev@gmail.com");
+                clipboard.PrimaryClip = clip;
+
+                Toast.MakeText(this, "Email скопирован", ToastLength.Short).Show();
+            }
+            
         }
 
         public static Intent CreateStartIntent(Context context, string message = null)
