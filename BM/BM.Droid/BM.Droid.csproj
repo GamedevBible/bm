@@ -140,6 +140,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameRecord.cs" />
+    <Compile Include="PreferencesHelper.cs" />
     <Compile Include="questions.cs" />
     <Compile Include="QuestionsDatabase.cs" />
     <Compile Include="Sources\AuditoryHelpFragment.cs" />
