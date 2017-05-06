@@ -24,6 +24,8 @@ namespace BM.Droid.Sources
         private TextView _appVersion;
         private TextView _contactUs;
         private const int _emailRequestCode = 11234;
+        private ImageButton _historiesButton;
+        private bool _historiesButtonEnabled;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,6 +37,12 @@ namespace BM.Droid.Sources
             _info.MovementMethod = new ScrollingMovementMethod();
             _appVersion = FindViewById<TextView>(Resource.Id.appVersion);
             _contactUs = FindViewById<TextView>(Resource.Id.contactUs);
+            _historiesButton = FindViewById<ImageButton>(Resource.Id.historiesButton);
+
+            if (_historiesButtonEnabled)
+                _historiesButton.SetImageResource(Resource.Drawable.book_open_page_variant);
+            else
+                _historiesButton.SetImageResource(Resource.Drawable.book_open_page_variant_disabled);
 
             //if Landscape
             if (WindowManager.DefaultDisplay.Rotation == SurfaceOrientation.Rotation90 || WindowManager.DefaultDisplay.Rotation == SurfaceOrientation.Rotation270)

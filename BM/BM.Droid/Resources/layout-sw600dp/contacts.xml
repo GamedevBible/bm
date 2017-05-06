@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:fillViewport="true" >
-  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       android:fillViewport="true"
       android:background="@drawable/gradient_blue_down_up"
@@ -11,8 +7,8 @@
       android:layout_height="match_parent">
     <TextView
         android:layout_width="wrap_content"
-        android:ems="30"
-        android:layout_height="42sp"
+        android:ems="20"
+        android:layout_height="wrap_content"
         android:textSize="15sp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
@@ -26,12 +22,12 @@
         android:id="@+id/appVersion"
         android:padding="10dp"
         android:text="Версия"
+        android:layout_above="@+id/info"
         android:background="@drawable/rounded_corners"/>
     <TextView
-        android:layout_below="@+id/appVersion"
         android:layout_width="wrap_content"
-        android:ems="30"
-        android:layout_height="67sp"
+        android:ems="20"
+        android:layout_height="wrap_content"
         android:textSize="15sp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
@@ -44,13 +40,13 @@
         android:gravity="center"
         android:id="@+id/info"
         android:padding="10dp"
+        android:layout_above="@+id/contactUs"
         android:text="Дизайн и разработка с любовью :)"
         android:background="@drawable/rounded_corners"/>
     <TextView
-        android:layout_below="@+id/info"
         android:layout_width="wrap_content"
-        android:ems="30"
-        android:layout_height="77sp"
+        android:ems="20"
+        android:layout_height="wrap_content"
         android:textSize="15sp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
@@ -58,22 +54,21 @@
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:maxLines="20"
-        android:scrollbars="vertical"
         android:gravity="center"
         android:id="@+id/contactUs"
         android:padding="10dp"
         android:text="Дизайн и разработка с любовью :)"
         android:background="@drawable/rounded_corners"/>
     <android.support.v7.widget.AppCompatImageButton
-        android:background="?attr/selectableItemBackground"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:id="@+id/historiesButton"
-        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-        app:srcCompat="@drawable/book_open_page_variant"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"/>
-  </RelativeLayout>
-</ScrollView>
+            android:background="?attr/selectableItemBackground"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/historiesButton"
+            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            app:srcCompat="@drawable/book_open_page_variant"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"/>
+</RelativeLayout>
