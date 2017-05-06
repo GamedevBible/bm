@@ -36,9 +36,11 @@ namespace BM.Droid.Sources
 
             _millionImage.Visibility = _gotMillion ? ViewStates.Visible : ViewStates.Gone;
 
-            _questionInfo.Text = _gotMillion 
-                ? "Вы дошли до самого конца и выиграли! Поздравляем!" 
-                : $"Вы дошли до {_lastQuestion}-го вопроса!";
+            _questionInfo.Text = _gotMillion
+                ? "Вы дошли до самого конца и выиграли! Поздравляем!"
+                : $"Вы смогли дойти до {_lastQuestion}-го вопроса" + (_gameWasLose 
+                    ? $", но ответили неверно. Ваши итоговые очки: {ValuesConverter.LevelToCheckPoints(_lastQuestion - 1)}" 
+                    : $"! Ваши очки: {ValuesConverter.LevelToPoints(_lastQuestion)}");
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(Activity, Resource.Style.AlertDialogTheme)
                 .SetTitle(_gotMillion ? "МИЛЛИОН ОЧКОВ!" : "Неплохо!")

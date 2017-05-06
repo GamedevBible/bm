@@ -45,5 +45,16 @@ namespace BM
                     return "0";
             }
         }
+
+        public static string LevelToCheckPoints(int level)
+        {
+            if (level < 5)
+                return "0";
+            if (level >= 5 && level < 10)
+                return "1000";
+            if (level >= 10)
+                return "32000";
+            return "0";
+        }
     }
 }
