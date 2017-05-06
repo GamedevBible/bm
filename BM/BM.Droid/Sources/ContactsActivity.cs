@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.App;
@@ -92,7 +88,7 @@ namespace BM.Droid.Sources
             // The intent does not have a URI, so declare the "text/plain" MIME type
             emailIntent.SetType("vnd.android.cursor.dir/email");
             emailIntent.PutExtra(Intent.ExtraEmail, new[] { "biblegamedev@gmail.com" }); // recipients
-            emailIntent.PutExtra(Intent.ExtraSubject, "Message from game");
+            emailIntent.PutExtra(Intent.ExtraSubject, "Message from BM game");
             emailIntent.PutExtra(Intent.ExtraText, string.Empty);
 
             try
