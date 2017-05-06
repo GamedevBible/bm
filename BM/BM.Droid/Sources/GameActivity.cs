@@ -148,6 +148,7 @@ namespace BM.Droid.Sources
                 Intent myIntent = new Intent(this, typeof(MainActivity));
                 myIntent.PutExtra("lastQuestion", _currentQuestion);
                 myIntent.PutExtra("gotMillion", _gotMillion);
+                myIntent.PutExtra("needFinishActivity", _needFinishActivity);
                 SetResult(Result.Ok, myIntent);
                 Finish();
             }
@@ -258,6 +259,7 @@ namespace BM.Droid.Sources
                 Intent myIntent = new Intent(this, typeof(MainActivity));
                 myIntent.PutExtra("lastQuestion", _currentQuestion);
                 myIntent.PutExtra("gotMillion", _gotMillion);
+                myIntent.PutExtra("needFinishActivity", _needFinishActivity);
                 SetResult(Result.Ok, myIntent);
                 Finish();
                 return;
@@ -525,6 +527,11 @@ namespace BM.Droid.Sources
             switch (buttonClicked.Id)
             {
                 case Resource.Id.backButton:
+                    Intent myIntent = new Intent(this, typeof(MainActivity));
+                    myIntent.PutExtra("lastQuestion", _currentQuestion);
+                    myIntent.PutExtra("gotMillion", _gotMillion);
+                    myIntent.PutExtra("needFinishActivity", false);
+                    SetResult(Result.Ok, myIntent);
                     Finish();
                     break;
                 case Resource.Id.callButton:
@@ -696,6 +703,11 @@ namespace BM.Droid.Sources
             if (_doubleBackToExitPressedOnce)
             {
                 base.OnBackPressed();
+                Intent myIntent = new Intent(this, typeof(MainActivity));
+                myIntent.PutExtra("lastQuestion", _currentQuestion);
+                myIntent.PutExtra("gotMillion", _gotMillion);
+                myIntent.PutExtra("needFinishActivity", false);
+                SetResult(Result.Ok, myIntent);
                 Finish();
                 return;
             }

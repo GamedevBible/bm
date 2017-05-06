@@ -16,11 +16,13 @@ namespace BM.Droid.Sources
     {
         private const string _questionTag = nameof(_questionTag);
         private const string _gotMillionTag = nameof(_gotMillionTag);
+        private const string _gameWasLoseTag = nameof(_gameWasLoseTag);
         private int _lastQuestion;
         private bool _gotMillion = false;
         private TextView _questionInfo;
         private ImageView _millionImage;
         private int _imageForMillion = -1;
+        private bool _gameWasLose;
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
@@ -30,6 +32,7 @@ namespace BM.Droid.Sources
 
             _lastQuestion = Arguments.GetInt(_questionTag);
             _gotMillion = Arguments.GetBoolean(_gotMillionTag);
+            _gameWasLose = Arguments.GetBoolean(_gameWasLoseTag);
 
             _millionImage.Visibility = _gotMillion ? ViewStates.Visible : ViewStates.Gone;
 
@@ -94,6 +97,7 @@ namespace BM.Droid.Sources
 
             outState.PutInt(nameof(_questionTag), _lastQuestion);
             outState.PutBoolean(nameof(_gotMillionTag), _gotMillion);
+            outState.PutBoolean(nameof(_gameWasLoseTag), _gameWasLose);
             outState.PutInt(nameof(_imageForMillion), _imageForMillion);
         }
 
@@ -105,15 +109,17 @@ namespace BM.Droid.Sources
             {
                 _lastQuestion = savedInstanceState.GetInt(nameof(_questionTag));
                 _gotMillion = savedInstanceState.GetBoolean(nameof(_gotMillionTag));
+                _gameWasLose = savedInstanceState.GetBoolean(nameof(_gameWasLoseTag));
                 _imageForMillion = savedInstanceState.GetInt(nameof(_imageForMillion));
             }
         }
 
-        public static GameInformationFragment NewInstance(int question, bool gotMillion = false)
+        public static GameInformationFragment NewInstance(int question, bool gameWasLose, bool gotMillion = false)
         {
             var args = new Bundle();
             args.PutInt(_questionTag, question);
             args.PutBoolean(_gotMillionTag, gotMillion);
+            args.PutBoolean(_gameWasLoseTag, gameWasLose);
 
             return new GameInformationFragment { Arguments = args };
         }

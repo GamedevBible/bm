@@ -17,6 +17,7 @@ namespace BM.Droid.Sources
         private const int _contactsActivityCode = 14;
         private int _lastQuestion = -1;
         private bool _gotMillion = false;
+        private bool _gameWasLose;
 
         private Button _startButton;
         private Button _recordsButton;
@@ -89,7 +90,7 @@ namespace BM.Droid.Sources
                 }
                 ft.AddToBackStack(null);
 
-                var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gotMillion);
+                var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gameWasLose, _gotMillion);
                 dialogCallFriend.Cancelable = false;
                 dialogCallFriend.Show(ft, nameof(GameInformationFragment));
 
@@ -107,6 +108,7 @@ namespace BM.Droid.Sources
                 {
                     _lastQuestion = data.GetIntExtra("lastQuestion", -1);
                     _gotMillion = data.GetBooleanExtra("gotMillion", false);
+                    _gameWasLose = data.GetBooleanExtra("needFinishActivity", true);
                 }
             }
         }
