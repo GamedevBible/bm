@@ -65,7 +65,7 @@ namespace BM.Droid
             return _records;
         }
 
-        public void ProcessRecord(int lastQuestion, bool gotMillion)
+        public void ProcessRecord(int lastQuestion, bool gotMillion, bool gameWasLose)
         {
             _questionNumbers.OrderByDescending(t => t);
 
@@ -86,11 +86,11 @@ namespace BM.Droid
 
             for (int i = 0; i < 7; i++)
             {
-                if (lastQuestion >= _questionNumbers[i])
+                if (ValuesConverter.LastQuestionToPoints(lastQuestion, gameWasLose) >= _questionNumbers[i])
                 {
                     _records.Insert(i, new GameRecord()
                     {
-                        QuestionNumber = lastQuestion,
+                        QuestionNumber = ValuesConverter.LastQuestionToPoints(lastQuestion, gameWasLose),
                         RecordDate = DateTime.Now.ToString("dd/MM/yyyy")
                     });
 

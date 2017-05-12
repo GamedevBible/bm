@@ -56,5 +56,20 @@ namespace BM
                 return "32000";
             return "0";
         }
+
+        public static int LastQuestionToPoints(int lastQuestion, bool gameWasLose)
+        {
+            if (!gameWasLose)
+                return lastQuestion;
+
+            if (lastQuestion < 5)
+                return 0;
+            if (lastQuestion >= 5 && lastQuestion < 10)
+                return 5;
+            if (lastQuestion >= 10)
+                return 10;
+
+            return 0;
+        }
     }
 }
