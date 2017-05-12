@@ -48,7 +48,17 @@ namespace BM.Droid.Sources
                 .SetPositiveButton("«¿ –€“‹", ConfirmButtonClicked)
                 .Create();
 
+            ProcessRecord();
+
             return dialog;
+        }
+
+        private void ProcessRecord()
+        {
+            var records = new PreferencesHelper(Activity);
+            records.ProcessRecord(lastQuestion: _lastQuestion, gotMillion: _gotMillion);
+
+            var a = records.GetRecords();
         }
 
         public override void OnResume()

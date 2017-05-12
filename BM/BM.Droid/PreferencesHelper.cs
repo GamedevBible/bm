@@ -11,7 +11,7 @@ namespace BM.Droid
         private ISharedPreferences _prefs;
         private ISharedPreferencesEditor _editor;
         private List<GameRecord> _records;
-        private int[] _questionNumbers;
+        private int[] _questionNumbers = new int[7];
 
         public PreferencesHelper(Context context)
         {
@@ -19,23 +19,24 @@ namespace BM.Droid
             _editor = _prefs.Edit();
 
             _records = new List<GameRecord>();
-            _records[0].QuestionNumber = _questionNumbers[0] = _prefs.GetInt("record1Number", 0);
-            _records[0].RecordDate = _prefs.GetString("record1Date", "-");
-            _records[1].QuestionNumber = _questionNumbers[1] = _prefs.GetInt("record2Number", 0);
-            _records[1].RecordDate = _prefs.GetString("record2Date", "-");
-            _records[2].QuestionNumber = _questionNumbers[2] = _prefs.GetInt("record3Number", 0);
-            _records[2].RecordDate = _prefs.GetString("record3Date", "-");
-            _records[3].QuestionNumber = _questionNumbers[3] = _prefs.GetInt("record4Number", 0);
-            _records[3].RecordDate = _prefs.GetString("record4Date", "-");
-            _records[4].QuestionNumber = _questionNumbers[4] = _prefs.GetInt("record5Number", 0);
-            _records[4].RecordDate = _prefs.GetString("record5Date", "-");
-            _records[5].QuestionNumber = _questionNumbers[5] = _prefs.GetInt("record6Number", 0);
-            _records[5].RecordDate = _prefs.GetString("record6Date", "-");
-            _records[6].QuestionNumber = _questionNumbers[6] = _prefs.GetInt("record7Number", 0);
-            _records[6].RecordDate = _prefs.GetString("record7Date", "-");
+            _records.Add(new GameRecord() { QuestionNumber = _prefs.GetInt("record1Number", 0), RecordDate = _prefs.GetString("record1Date", "-") });
+            _records.Add(new GameRecord() { QuestionNumber = _prefs.GetInt("record2Number", 0), RecordDate = _prefs.GetString("record2Date", "-") });
+            _records.Add(new GameRecord() { QuestionNumber = _prefs.GetInt("record3Number", 0), RecordDate = _prefs.GetString("record3Date", "-") });
+            _records.Add(new GameRecord() { QuestionNumber = _prefs.GetInt("record4Number", 0), RecordDate = _prefs.GetString("record4Date", "-") });
+            _records.Add(new GameRecord() { QuestionNumber = _prefs.GetInt("record5Number", 0), RecordDate = _prefs.GetString("record5Date", "-") });
+            _records.Add(new GameRecord() { QuestionNumber = _prefs.GetInt("record6Number", 0), RecordDate = _prefs.GetString("record6Date", "-") });
+            _records.Add(new GameRecord() { QuestionNumber = _prefs.GetInt("record7Number", 0), RecordDate = _prefs.GetString("record7Date", "-") });
 
-            // editor.Commit();    // applies changes synchronously on older APIs
-            _editor.Apply();
+            _questionNumbers[0] = _prefs.GetInt("record1Number", 0);
+            _questionNumbers[1] = _prefs.GetInt("record2Number", 0);
+            _questionNumbers[2] = _prefs.GetInt("record3Number", 0);
+            _questionNumbers[3] = _prefs.GetInt("record4Number", 0);
+            _questionNumbers[4] = _prefs.GetInt("record5Number", 0);
+            _questionNumbers[5] = _prefs.GetInt("record6Number", 0);
+            _questionNumbers[6] = _prefs.GetInt("record7Number", 0);
+
+            _editor.Commit();    // applies changes synchronously on older APIs
+            //_editor.Apply();
         }
 
         private void SaveRecords()
@@ -78,6 +79,8 @@ namespace BM.Droid
                     QuestionNumber = 17,
                     RecordDate = DateTime.Now.ToString("dd/MM/yyyy")
                 });
+
+                SaveRecords();
                 return;
             }
 
@@ -87,8 +90,12 @@ namespace BM.Droid
                 {
                     _records.Insert(i, new GameRecord()
                     {
-                        QuestionNumber = lastQuestion, RecordDate = DateTime.Now.ToString("dd/MM/yyyy")
+                        QuestionNumber = lastQuestion,
+                        RecordDate = DateTime.Now.ToString("dd/MM/yyyy")
                     });
+
+                    SaveRecords();
+                    return;
                 }
             }
         }
