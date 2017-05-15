@@ -60,8 +60,8 @@ namespace BM.Droid.Sources
                     "С. Ларионов (ст.)";
 
                 string text = "<font>У вас есть вопросы или предложения?</font><br>" +
-                "<font>Желаете поддержать этот проект и наши дальнейшие проекты?</font><br>" +
-                "<font>Напишите нам: </font><font color=#03a9f4>biblegamedev@gmail.com</font>";
+                "<font>Желаете поддержать наш проект?</font><br>" +
+                "<font>Напишите нам: </font><font color=#03a9f4>biblegamedev@gmail.com</font><font> (кликабельно)</font>";
 
                 _contactUs.SetText(Html.FromHtml(text), TextView.BufferType.Spannable);
             }

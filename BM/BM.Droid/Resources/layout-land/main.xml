@@ -67,7 +67,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Контакты"
+            android:text="Дополнительно"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"

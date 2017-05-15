@@ -51,6 +51,7 @@ namespace BM.Droid.Sources
                     StartActivityForResult(GameActivity.CreateStartIntent(this), _gameActivityCode);
                     break;
                 case Resource.Id.recordsButton:
+                    StartActivity(RecordsActivity.CreateStartIntent(this));
                     break;
                 case Resource.Id.guideButton:
                     break;

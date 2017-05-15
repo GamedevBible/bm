@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Контакты"
+            android:text="Дополнительно"
             android:layout_marginBottom="15dp"
             android:id="@+id/contactsButton"
             style="@style/Widget.AppCompat.Button.Colored"
