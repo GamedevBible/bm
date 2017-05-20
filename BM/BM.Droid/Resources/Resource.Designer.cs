@@ -2414,6 +2414,9 @@ namespace BM.Droid
 			// aapt resource value: 0x7f080030
 			public const int center = 2131230768;
 			
+			// aapt resource value: 0x7f0800c5
+			public const int centerView = 2131230917;
+			
 			// aapt resource value: 0x7f080031
 			public const int center_horizontal = 2131230769;
 			
@@ -2449,6 +2452,30 @@ namespace BM.Droid
 			
 			// aapt resource value: 0x7f080054
 			public const int customPanel = 2131230804;
+			
+			// aapt resource value: 0x7f0800ce
+			public const int date = 2131230926;
+			
+			// aapt resource value: 0x7f0800cf
+			public const int date1 = 2131230927;
+			
+			// aapt resource value: 0x7f0800d0
+			public const int date2 = 2131230928;
+			
+			// aapt resource value: 0x7f0800d1
+			public const int date3 = 2131230929;
+			
+			// aapt resource value: 0x7f0800d2
+			public const int date4 = 2131230930;
+			
+			// aapt resource value: 0x7f0800d3
+			public const int date5 = 2131230931;
+			
+			// aapt resource value: 0x7f0800d4
+			public const int date6 = 2131230932;
+			
+			// aapt resource value: 0x7f0800d5
+			public const int date7 = 2131230933;
 			
 			// aapt resource value: 0x7f080062
 			public const int decor_content_parent = 2131230818;
@@ -2567,8 +2594,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f080048
 			public const int list_item = 2131230792;
 			
-			// aapt resource value: 0x7f0800c6
-			public const int masked = 2131230918;
+			// aapt resource value: 0x7f0800d7
+			public const int masked = 2131230935;
 			
 			// aapt resource value: 0x7f0800b5
 			public const int media_actions = 2131230901;
@@ -2617,6 +2644,30 @@ namespace BM.Droid
 			
 			// aapt resource value: 0x7f080038
 			public const int pin = 2131230776;
+			
+			// aapt resource value: 0x7f0800c6
+			public const int points = 2131230918;
+			
+			// aapt resource value: 0x7f0800c7
+			public const int points1 = 2131230919;
+			
+			// aapt resource value: 0x7f0800c8
+			public const int points2 = 2131230920;
+			
+			// aapt resource value: 0x7f0800c9
+			public const int points3 = 2131230921;
+			
+			// aapt resource value: 0x7f0800ca
+			public const int points4 = 2131230922;
+			
+			// aapt resource value: 0x7f0800cb
+			public const int points5 = 2131230923;
+			
+			// aapt resource value: 0x7f0800cc
+			public const int points6 = 2131230924;
+			
+			// aapt resource value: 0x7f0800cd
+			public const int points7 = 2131230925;
 			
 			// aapt resource value: 0x7f0800a8
 			public const int pointsButton = 2131230888;
@@ -2885,8 +2936,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f08000e
 			public const int view_offset_helper = 2131230734;
 			
-			// aapt resource value: 0x7f0800c5
-			public const int visible = 2131230917;
+			// aapt resource value: 0x7f0800d6
+			public const int visible = 2131230934;
 			
 			// aapt resource value: 0x7f080027
 			public const int withText = 2131230759;
