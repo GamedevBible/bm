@@ -6,6 +6,8 @@ using System;
 using Android.Content;
 using Android.Runtime;
 using Android.Content.PM;
+using Android.Media;
+using System.Threading.Tasks;
 
 namespace BM.Droid.Sources
 {
@@ -18,6 +20,7 @@ namespace BM.Droid.Sources
         private int _lastQuestion = -1;
         private bool _gotMillion = false;
         private bool _gameWasLose;
+        private MediaPlayer _millionPlayer;
 
         private Button _startButton;
         private Button _recordsButton;
@@ -39,6 +42,8 @@ namespace BM.Droid.Sources
             _recordsButton.Click += OnButtonClicked;
             _guideButton.Click += OnButtonClicked;
             _contactsButton.Click += OnButtonClicked;
+
+            _millionPlayer = MediaPlayer.Create(this, Resource.Raw.million);
         }
 
         private void OnButtonClicked(object sender, EventArgs e)
@@ -91,12 +96,24 @@ namespace BM.Droid.Sources
                 }
                 ft.AddToBackStack(null);
 
+                if (_gotMillion)
+                    PlayMillion(_millionPlayer);
+
                 var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gameWasLose, _gotMillion);
                 dialogCallFriend.Cancelable = false;
                 dialogCallFriend.Show(ft, nameof(GameInformationFragment));
 
                 _lastQuestion = -1;
             }
+        }
+
+        private void PlayMillion(MediaPlayer mediaPlayer)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                mediaPlayer = mediaPlayer ?? MediaPlayer.Create(this, Resource.Raw.million);
+                mediaPlayer.Start();
+            });
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
