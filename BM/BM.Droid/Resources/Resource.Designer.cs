@@ -2600,8 +2600,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f090048
 			public const int list_item = 2131296328;
 			
-			// aapt resource value: 0x7f0900da
-			public const int masked = 2131296474;
+			// aapt resource value: 0x7f0900db
+			public const int masked = 2131296475;
 			
 			// aapt resource value: 0x7f0900b8
 			public const int media_actions = 2131296440;
@@ -2888,6 +2888,9 @@ namespace BM.Droid
 			// aapt resource value: 0x7f090078
 			public const int thanksButton = 2131296376;
 			
+			// aapt resource value: 0x7f0900d9
+			public const int thanksTextView = 2131296473;
+			
 			// aapt resource value: 0x7f0900bd
 			public const int time = 2131296445;
 			
@@ -2948,8 +2951,8 @@ namespace BM.Droid
 			// aapt resource value: 0x7f09000e
 			public const int view_offset_helper = 2131296270;
 			
-			// aapt resource value: 0x7f0900d9
-			public const int visible = 2131296473;
+			// aapt resource value: 0x7f0900da
+			public const int visible = 2131296474;
 			
 			// aapt resource value: 0x7f090027
 			public const int withText = 2131296295;
@@ -3213,6 +3216,9 @@ namespace BM.Droid
 			
 			// aapt resource value: 0x7f040043
 			public const int support_simple_spinner_dropdown_item = 2130968643;
+			
+			// aapt resource value: 0x7f040044
+			public const int thanks = 2130968644;
 			
 			static Layout()
 			{

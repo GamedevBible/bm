@@ -22,6 +22,7 @@ namespace BM.Droid.Sources
         private ImageButton _historiesButton;
         private bool _historiesButtonEnabled;
         private Button _supportButton;
+        private ImageButton _thanksButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,6 +33,7 @@ namespace BM.Droid.Sources
             _appVersion = FindViewById<TextView>(Resource.Id.appVersion);
             _contactUs = FindViewById<TextView>(Resource.Id.contactUs);
             _historiesButton = FindViewById<ImageButton>(Resource.Id.historiesButton);
+            _thanksButton = FindViewById<ImageButton>(Resource.Id.thanksButton);
             _supportButton = FindViewById<Button>(Resource.Id.supportButton);
             _supportButton.Text = "Поддержать проект";
 
@@ -50,6 +52,7 @@ namespace BM.Droid.Sources
                 _historiesButton.SetImageResource(Resource.Drawable.book_open_page_variant_disabled);
 
             _historiesButton.Click += OnHistoriesButtonClicked;
+            _thanksButton.Click += OnThanksButtonClicked;
 
             //if Landscape
             if (WindowManager.DefaultDisplay.Rotation == SurfaceOrientation.Rotation90 || WindowManager.DefaultDisplay.Rotation == SurfaceOrientation.Rotation270)
@@ -72,6 +75,11 @@ namespace BM.Droid.Sources
 
             _contactUs.Click += OnContactUsClicked;
             _contactUs.LongClick += OnContactUsLongClicked;
+        }
+
+        private void OnThanksButtonClicked(object sender, EventArgs e)
+        {
+            StartActivity(ThanksActivity.CreateStartIntent(this));
         }
 
         private void OnHistoriesButtonClicked(object sender, EventArgs e)
