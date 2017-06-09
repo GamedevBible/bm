@@ -2859,7 +2859,7 @@ namespace BM.Droid
 			public const int submit_area = 2131296367;
 			
 			// aapt resource value: 0x7f090075
-			public const int supportButton = 2131296373;
+			public const int supportUs = 2131296373;
 			
 			// aapt resource value: 0x7f090011
 			public const int tabMode = 2131296273;

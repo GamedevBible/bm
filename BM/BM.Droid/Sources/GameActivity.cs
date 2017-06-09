@@ -232,7 +232,10 @@ namespace BM.Droid.Sources
             _gameQuestions = await Task.Run(() => _questionsDatabase.GetAllItems());
 
             if (_lastQuestionId == -1)
+            {
                 _currentQuestion = 0;
+                PlayMedia(_startPlayer);
+            }
             else
             {
                 _questionsDatabase = new QuestionsDatabase(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal));
@@ -244,8 +247,6 @@ namespace BM.Droid.Sources
                 _progressDialog.Dismiss();
 
             InstallCurrentQuestion(_currentQuestion);
-
-            PlayMedia(_startPlayer);
         }
 
         protected override void OnSaveInstanceState(Bundle outState)

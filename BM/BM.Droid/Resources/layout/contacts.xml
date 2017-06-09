@@ -9,6 +9,18 @@
       android:background="@drawable/gradient_blue_down_up"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/appVersion"
+        android:layout_alignParentTop="true">
+      <ImageView
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:layout_gravity="center"
+          android:background="@color/transparent"
+          android:src="@drawable/logoBible"/>
+    </FrameLayout>
     <TextView
         android:layout_width="wrap_content"
         android:ems="20"
@@ -20,6 +32,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:maxLines="20"
         android:scrollbars="vertical"
         android:gravity="center"
@@ -45,17 +58,24 @@
         android:padding="10dp"
         android:text="Дизайн и разработка с любовью :)"
         android:background="@drawable/rounded_corners"/>
-    <Button
-      android:layout_below="@+id/contactUs"
-      android:layout_width="wrap_content"
+    <TextView
+        android:layout_below="@+id/contactUs"
+        android:layout_width="wrap_content"
         android:ems="20"
         android:layout_height="wrap_content"
-      style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-      android:background="?attr/selectableItemBackground"
-      android:textColor="@color/dark_gray"
-      android:id="@+id/supportButton"
-      android:layout_centerHorizontal="true"
-      android:layout_margin="10dp"/>
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:maxLines="20"
+        android:gravity="center"
+        android:id="@+id/supportUs"
+        android:padding="10dp"
+        android:text="Поддержать нас :)"
+        android:background="@drawable/rounded_corners"/>
     <android.support.v7.widget.AppCompatImageButton
             android:background="?attr/selectableItemBackground"
             android:layout_width="60dp"

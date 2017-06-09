@@ -18,10 +18,10 @@ namespace BM.Droid.Sources
     {
         private TextView _appVersion;
         private TextView _contactUs;
+        private TextView _supportUs;
         private const int _emailRequestCode = 11234;
         private ImageButton _historiesButton;
         private bool _historiesButtonEnabled;
-        private Button _supportButton;
         private ImageButton _thanksButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -32,10 +32,9 @@ namespace BM.Droid.Sources
             
             _appVersion = FindViewById<TextView>(Resource.Id.appVersion);
             _contactUs = FindViewById<TextView>(Resource.Id.contactUs);
+            _supportUs = FindViewById<TextView>(Resource.Id.supportUs);
             _historiesButton = FindViewById<ImageButton>(Resource.Id.historiesButton);
             _thanksButton = FindViewById<ImageButton>(Resource.Id.thanksButton);
-            _supportButton = FindViewById<Button>(Resource.Id.supportButton);
-            _supportButton.Text = "Поддержать проект";
 
             var recordsHelper = new PreferencesHelper(this);
 
@@ -73,8 +72,37 @@ namespace BM.Droid.Sources
             _appVersion.Text = 
                 $"Версия приложения {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}";
 
+            string supportText = "</font><font color=#03a9f4>- Поддержать нас -</font>";
+
+            _supportUs.SetText(Html.FromHtml(supportText), TextView.BufferType.Spannable);
+
+            _appVersion.Click += OnAppVersionClicked;
             _contactUs.Click += OnContactUsClicked;
             _contactUs.LongClick += OnContactUsLongClicked;
+            _supportUs.Click += OnSupportUsClicked;
+        }
+
+        private void OnAppVersionClicked(object sender, EventArgs e)
+        {
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
+                    .SetTitle($"Версия {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}")
+                    .SetMessage("Приложение добавлено в Google Play. Мы подготовили и оформили для вас более трех тысяч вопросов. " +
+                                "Еще мы создали в приложении раздел с историями.")
+                    .SetPositiveButton("OK", AlertConfirmButtonClicked)
+                    .Create();
+
+            dialog.Show();
+        }
+
+        private void OnSupportUsClicked(object sender, EventArgs e)
+        {
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
+                    .SetTitle("Поддержка BibleGameDev")
+                    .SetMessage("Поддержать нас можно переводом на карту: 1234567890")
+                    .SetPositiveButton("Скопировать номер", AlertConfirmButtonClicked)
+                    .Create();
+
+            dialog.Show();
         }
 
         private void OnThanksButtonClicked(object sender, EventArgs e)
