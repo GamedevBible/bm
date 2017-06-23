@@ -12,8 +12,14 @@ namespace BM.Droid
         private ISharedPreferencesEditor _editor;
         private List<GameRecord> _records;
         private int[] _questionNumbers = new int[7];
+        private bool _isSoundEnabled;
 
-        public PreferencesHelper(Context context)
+        public PreferencesHelper()
+        {
+            
+        }
+
+        public void InitHelperForRecords(Context context)
         {
             _prefs = PreferenceManager.GetDefaultSharedPreferences(context);
             _editor = _prefs.Edit();
@@ -37,6 +43,30 @@ namespace BM.Droid
 
             _editor.Commit();    // applies changes synchronously on older APIs
             //_editor.Apply();
+        }
+
+        public void InitHeplerForSound(Context context)
+        {
+            if (_prefs == null || _editor == null)
+            {
+                _prefs = PreferenceManager.GetDefaultSharedPreferences(context);
+                _editor = _prefs.Edit();
+            }
+
+            _isSoundEnabled = _prefs.GetBoolean("soundEnabled", true);
+            _editor.Commit();
+        }
+
+        public bool GetSoundEnabled()
+        {
+            return _isSoundEnabled;
+        }
+
+        public void SetSoundEnabled(bool enabled)
+        {
+            _editor.PutBoolean("soundEnabled", enabled);
+            _isSoundEnabled = enabled;
+            _editor.Commit();
         }
 
         private void SaveRecords()

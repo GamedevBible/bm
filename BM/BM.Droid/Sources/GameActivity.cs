@@ -50,6 +50,7 @@ namespace BM.Droid.Sources
         private int _badColor;
         private bool _inactive;
         private bool _gotMillion;
+        private bool _soundEnabled;
         private MediaPlayer _hintPlayer;
         private MediaPlayer _wrongPlayer;
         private MediaPlayer _successPlayer;

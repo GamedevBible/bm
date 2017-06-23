@@ -26,6 +26,9 @@ namespace BM.Droid.Sources
         private Button _recordsButton;
         private Button _guideButton;
         private Button _contactsButton;
+        private ImageButton _soundButton;
+        private PreferencesHelper _recordsHelper;
+        private bool _soundEnabled = true;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -37,13 +40,44 @@ namespace BM.Droid.Sources
             _recordsButton = FindViewById<Button>(Resource.Id.recordsButton);
             _guideButton = FindViewById<Button>(Resource.Id.guideButton);
             _contactsButton = FindViewById<Button>(Resource.Id.contactsButton);
+            _soundButton = FindViewById<ImageButton>(Resource.Id.soundButton);
+
+            _recordsHelper = new PreferencesHelper();
+            _recordsHelper.InitHeplerForSound(this);
+            _soundEnabled = _recordsHelper.GetSoundEnabled();
+
+            RefreshSoundButton();
 
             _startButton.Click += OnButtonClicked;
             _recordsButton.Click += OnButtonClicked;
             _guideButton.Click += OnButtonClicked;
             _contactsButton.Click += OnButtonClicked;
+            _soundButton.Click += OnSoundButtonClicked;
 
             _millionPlayer = MediaPlayer.Create(this, Resource.Raw.million);
+        }
+
+        private void OnSoundButtonClicked(object sender, EventArgs e)
+        {
+            if (_recordsHelper == null)
+            {
+                _recordsHelper = new PreferencesHelper();
+                _recordsHelper.InitHeplerForSound(this);
+                _soundEnabled = _recordsHelper.GetSoundEnabled();
+            }
+
+            _soundEnabled = !_soundEnabled;
+            _recordsHelper.SetSoundEnabled(_soundEnabled);
+            
+            RefreshSoundButton();
+        }
+
+        private void RefreshSoundButton()
+        {
+            if (_soundEnabled)
+                _soundButton.SetImageResource(Resource.Drawable.volume_high);
+            else
+                _soundButton.SetImageResource(Resource.Drawable.volume_off);
         }
 
         private void OnButtonClicked(object sender, EventArgs e)
@@ -62,19 +96,6 @@ namespace BM.Droid.Sources
                     break;
                 case Resource.Id.contactsButton:
                     StartActivityForResult(ContactsActivity.CreateStartIntent(this), _contactsActivityCode);
-
-                    /*var versionName = PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName;
-
-                    Toast.MakeText(this, versionName, ToastLength.Short).Show();
-
-                    var emailIntent = new Intent(Intent.ActionSend);
-                    // The intent does not have a URI, so declare the "text/plain" MIME type
-                    emailIntent.SetType("vnd.android.cursor.dir/email");
-                    emailIntent.PutExtra(Intent.ExtraEmail, new[] { "biblegamedev@gmail.com" }); // recipients
-                    emailIntent.PutExtra(Intent.ExtraSubject, "Message from game");
-                    emailIntent.PutExtra(Intent.ExtraText, string.Empty);
-
-                    StartActivityForResult(emailIntent, _emailRequestCode);*/
                     break;
                 default:
                     break;
@@ -96,7 +117,14 @@ namespace BM.Droid.Sources
                 }
                 ft.AddToBackStack(null);
 
-                if (_gotMillion)
+                if (_recordsHelper == null)
+                {
+                    _recordsHelper = new PreferencesHelper();
+                    _recordsHelper.InitHeplerForSound(this);
+                    _soundEnabled = _recordsHelper.GetSoundEnabled();
+                }
+
+                if (_gotMillion && _soundEnabled)
                     PlayMillion(_millionPlayer);
 
                 var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gameWasLose, _gotMillion);

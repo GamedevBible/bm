@@ -55,7 +55,8 @@ namespace BM.Droid.Sources
 
         private void ProcessRecord()
         {
-            var records = new PreferencesHelper(Activity);
+            var records = new PreferencesHelper();
+            records.InitHelperForRecords(Activity);
             records.ProcessRecord(lastQuestion: _lastQuestion, gotMillion: _gotMillion, gameWasLose: _gameWasLose);
         }
 

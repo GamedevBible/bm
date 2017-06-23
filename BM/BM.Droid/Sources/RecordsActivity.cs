@@ -55,7 +55,8 @@ namespace BM.Droid.Sources
             _date6 = FindViewById<TextView>(Resource.Id.date6);
             _date7 = FindViewById<TextView>(Resource.Id.date7);
 
-            var recordsHelper = new PreferencesHelper(this);
+            var recordsHelper = new PreferencesHelper();
+            recordsHelper.InitHelperForRecords(this);
 
             var records = recordsHelper.GetRecords();
             records.OrderByDescending(t => t.QuestionNumber);

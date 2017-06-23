@@ -19,6 +19,16 @@
             android:layout_gravity="center_vertical|right"
             android:background="@color/transparent"
             android:src="@drawable/logoBible"/>
+        <android.support.v7.widget.AppCompatImageButton
+          android:background="?attr/selectableItemBackground"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_marginLeft="30dp"
+          android:id="@+id/soundButton"
+          android:layout_gravity="right|bottom"
+          style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+          app:srcCompat="@drawable/volume_high"
+          android:layout_margin="10dp"/>
     </FrameLayout>
     <LinearLayout
         android:layout_width="0dp"

@@ -37,7 +37,8 @@ namespace BM.Droid.Sources
             _historiesButton = FindViewById<ImageButton>(Resource.Id.historiesButton);
             _thanksButton = FindViewById<ImageButton>(Resource.Id.thanksButton);
 
-            var recordsHelper = new PreferencesHelper(this);
+            var recordsHelper = new PreferencesHelper();
+            recordsHelper.InitHelperForRecords(this);
 
             var records = recordsHelper.GetRecords();
             records.OrderByDescending(t => t.QuestionNumber);
