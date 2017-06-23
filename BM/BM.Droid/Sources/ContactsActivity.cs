@@ -23,6 +23,7 @@ namespace BM.Droid.Sources
         private ImageButton _historiesButton;
         private bool _historiesButtonEnabled;
         private ImageButton _thanksButton;
+        private bool _inactive;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -84,11 +85,16 @@ namespace BM.Droid.Sources
 
         private void OnAppVersionClicked(object sender, EventArgs e)
         {
+            if (_inactive)
+                return;
+            _inactive = true;
+
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle($"Версия {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}")
                     .SetMessage("Приложение добавлено в Google Play. Мы подготовили и оформили для вас более трех тысяч вопросов. " +
                                 "Еще мы создали в приложении раздел с историями.")
                     .SetPositiveButton("OK", AlertConfirmButtonClicked)
+                    .SetCancelable(false)
                     .Create();
 
             dialog.Show();
@@ -96,10 +102,15 @@ namespace BM.Droid.Sources
 
         private void OnSupportUsClicked(object sender, EventArgs e)
         {
+            if (_inactive)
+                return;
+            _inactive = true;
+
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle("Поддержка BibleGameDev")
                     .SetMessage("Поддержать нас можно переводом на карту: 1234567890")
-                    .SetPositiveButton("Скопировать номер", AlertConfirmButtonClicked)
+                    .SetPositiveButton("OK", AlertConfirmButtonClicked)
+                    .SetCancelable(false)
                     .Create();
 
             dialog.Show();
@@ -107,17 +118,31 @@ namespace BM.Droid.Sources
 
         private void OnThanksButtonClicked(object sender, EventArgs e)
         {
-            StartActivity(ThanksActivity.CreateStartIntent(this));
+            var ft = SupportFragmentManager.BeginTransaction();
+            var prev = SupportFragmentManager.FindFragmentByTag(nameof(ThanksFragment));
+            if (prev != null)
+            {
+                ft.Remove(prev);
+            }
+            ft.AddToBackStack(null);
+
+            var dialog = ThanksFragment.NewInstance();
+            dialog.Show(ft, nameof(ThanksFragment));
         }
 
         private void OnHistoriesButtonClicked(object sender, EventArgs e)
         {
+            if (_inactive)
+                return;
+            _inactive = true;
+
             if (!_historiesButtonEnabled)
             {
                 var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle("Закрыто")
                     .SetMessage("Сейчас вы не можете читать истории. Выиграйте игру несколько раз, и экран историй станет доступным.")
                     .SetPositiveButton("OK", AlertConfirmButtonClicked)
+                    .SetCancelable(false)
                     .Create();
 
                 dialog.Show();
@@ -130,6 +155,7 @@ namespace BM.Droid.Sources
 
         private void AlertConfirmButtonClicked(object sender, DialogClickEventArgs e)
         {
+            _inactive = false;
             ((Android.Support.V7.App.AlertDialog)sender).Dismiss();
         }
 
