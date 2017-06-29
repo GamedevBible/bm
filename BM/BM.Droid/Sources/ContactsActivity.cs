@@ -133,11 +133,7 @@ namespace BM.Droid.Sources
 
         private void OnHistoriesButtonClicked(object sender, EventArgs e)
         {
-            if (_inactive)
-                return;
-            _inactive = true;
-
-            if (!_historiesButtonEnabled)
+            if (_historiesButtonEnabled)
             {
                 var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle("Закрыто")
@@ -150,7 +146,7 @@ namespace BM.Droid.Sources
             }
             else
             {
-                // TODO
+                StartActivity(HistoriesActivity.CreateStartIntent(this));
             }
         }
 

@@ -149,6 +149,7 @@
     <Compile Include="Sources\ContactsActivity.cs" />
     <Compile Include="Sources\GameActivity.cs" />
     <Compile Include="Sources\GameInformationFragment.cs" />
+    <Compile Include="Sources\HistoriesActivity.cs" />
     <Compile Include="Sources\MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -360,6 +361,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\volume_high.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\histories.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
