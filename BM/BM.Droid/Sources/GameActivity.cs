@@ -50,11 +50,12 @@ namespace BM.Droid.Sources
         private int _badColor;
         private bool _inactive;
         private bool _gotMillion;
-        private bool _soundEnabled;
         private MediaPlayer _hintPlayer;
         private MediaPlayer _wrongPlayer;
         private MediaPlayer _successPlayer;
         private MediaPlayer _startPlayer;
+        private PreferencesHelper _recordsHelper;
+        private bool _soundEnabled = true;
 
         private bool Inactive
         {
@@ -120,6 +121,10 @@ namespace BM.Droid.Sources
             _goodColor = ContextCompat.GetColor(this, Resource.Color.good_answer);
             _badColor = ContextCompat.GetColor(this, Resource.Color.bad_answer);
 
+            _recordsHelper = new PreferencesHelper();
+            _recordsHelper.InitHeplerForSound(this);
+            _soundEnabled = _recordsHelper.GetSoundEnabled();
+
             CopyDatabase("");
                         
             if (savedInstanceState != null)
@@ -168,6 +173,16 @@ namespace BM.Droid.Sources
         private void PlayMedia(MediaPlayer mediaPlayer)
         {
             if (mediaPlayer == null)
+                return;
+
+            if (_recordsHelper == null)
+            {
+                _recordsHelper = new PreferencesHelper();
+                _recordsHelper.InitHeplerForSound(this);
+                _soundEnabled = _recordsHelper.GetSoundEnabled();
+            }
+
+            if (!_soundEnabled)
                 return;
 
             Task.Factory.StartNew(() =>
