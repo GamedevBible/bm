@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
@@ -23,6 +20,7 @@ namespace BM.Droid.Sources
         private ImageView _millionImage;
         private int _imageForMillion = -1;
         private bool _gameWasLose;
+        private bool _recordWasSaved;
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
@@ -47,8 +45,6 @@ namespace BM.Droid.Sources
                 .SetView(view)
                 .SetPositiveButton("«¿ –€“‹", ConfirmButtonClicked)
                 .Create();
-
-            ProcessRecord();
 
             return dialog;
         }
@@ -110,19 +106,25 @@ namespace BM.Droid.Sources
             outState.PutBoolean(nameof(_gotMillionTag), _gotMillion);
             outState.PutBoolean(nameof(_gameWasLoseTag), _gameWasLose);
             outState.PutInt(nameof(_imageForMillion), _imageForMillion);
+            outState.PutBoolean(nameof(_recordWasSaved), _recordWasSaved);
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
-            base.OnActivityCreated(savedInstanceState);
-
             if (savedInstanceState != null)
             {
                 _lastQuestion = savedInstanceState.GetInt(nameof(_questionTag));
                 _gotMillion = savedInstanceState.GetBoolean(nameof(_gotMillionTag));
                 _gameWasLose = savedInstanceState.GetBoolean(nameof(_gameWasLoseTag));
                 _imageForMillion = savedInstanceState.GetInt(nameof(_imageForMillion));
+                _recordWasSaved = savedInstanceState.GetBoolean(nameof(_recordWasSaved));
             }
+
+            if (!_recordWasSaved)
+                ProcessRecord();
+            _recordWasSaved = true;
+
+            base.OnActivityCreated(savedInstanceState);            
         }
 
         public static GameInformationFragment NewInstance(int question, bool gameWasLose, bool gotMillion = false)
