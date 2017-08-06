@@ -42,7 +42,7 @@ namespace BM.Droid.Sources
 
             var records = recordsHelper.GetRecords();
             records.OrderByDescending(t => t.QuestionNumber);
-
+            
             _historiesButtonEnabled = ValuesConverter.QuestionNumberToPoints(records[0].QuestionNumber).Equals("1 000 000")
                 && ValuesConverter.QuestionNumberToPoints(records[1].QuestionNumber).Equals("1 000 000")
                 && ValuesConverter.QuestionNumberToPoints(records[2].QuestionNumber).Equals("1 000 000");

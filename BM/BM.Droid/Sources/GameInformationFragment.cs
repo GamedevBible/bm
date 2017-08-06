@@ -14,6 +14,7 @@ namespace BM.Droid.Sources
         private const string _questionTag = nameof(_questionTag);
         private const string _gotMillionTag = nameof(_gotMillionTag);
         private const string _gameWasLoseTag = nameof(_gameWasLoseTag);
+        private const string _bibleTextForAnswerTag = nameof(_bibleTextForAnswerTag);
         private int _lastQuestion;
         private bool _gotMillion = false;
         private TextView _questionInfo;
@@ -21,6 +22,7 @@ namespace BM.Droid.Sources
         private int _imageForMillion = -1;
         private bool _gameWasLose;
         private bool _recordWasSaved;
+        private string _bibleTextForAnswer;
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
         {
@@ -31,13 +33,15 @@ namespace BM.Droid.Sources
             _lastQuestion = Arguments.GetInt(_questionTag);
             _gotMillion = Arguments.GetBoolean(_gotMillionTag);
             _gameWasLose = Arguments.GetBoolean(_gameWasLoseTag);
+            _bibleTextForAnswer = Arguments.GetString(_bibleTextForAnswerTag);
 
             _millionImage.Visibility = _gotMillion ? ViewStates.Visible : ViewStates.Gone;
+            var bibleText = string.IsNullOrEmpty(_bibleTextForAnswer) ? string.Empty : "(вопрос взят из " + _bibleTextForAnswer + ")";
 
             _questionInfo.Text = _gotMillion
                 ? "Вы дошли до самого конца и выиграли! Поздравляем!"
                 : $"Вы смогли дойти до {_lastQuestion}-го вопроса" + (_gameWasLose 
-                    ? $", но ответили неверно. Ваши итоговые очки: {ValuesConverter.LevelToCheckPoints(_lastQuestion - 1)}" 
+                    ? $", но ответили неверно. Ваши итоговые очки: {ValuesConverter.LevelToCheckPoints(_lastQuestion - 1)}. {bibleText}" 
                     : $"! Ваши очки: {ValuesConverter.LevelToPoints(_lastQuestion)}");
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(Activity, Resource.Style.AlertDialogTheme)
@@ -107,6 +111,7 @@ namespace BM.Droid.Sources
             outState.PutBoolean(nameof(_gameWasLoseTag), _gameWasLose);
             outState.PutInt(nameof(_imageForMillion), _imageForMillion);
             outState.PutBoolean(nameof(_recordWasSaved), _recordWasSaved);
+            outState.PutString(nameof(_bibleTextForAnswerTag), _bibleTextForAnswer);
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -118,6 +123,7 @@ namespace BM.Droid.Sources
                 _gameWasLose = savedInstanceState.GetBoolean(nameof(_gameWasLoseTag));
                 _imageForMillion = savedInstanceState.GetInt(nameof(_imageForMillion));
                 _recordWasSaved = savedInstanceState.GetBoolean(nameof(_recordWasSaved));
+                _bibleTextForAnswer = savedInstanceState.GetString(nameof(_bibleTextForAnswerTag));
             }
 
             if (!_recordWasSaved)
@@ -127,12 +133,13 @@ namespace BM.Droid.Sources
             base.OnActivityCreated(savedInstanceState);            
         }
 
-        public static GameInformationFragment NewInstance(int question, bool gameWasLose, bool gotMillion = false)
+        public static GameInformationFragment NewInstance(int question, bool gameWasLose, bool gotMillion = false, string bibleTextForAnswer = "")
         {
             var args = new Bundle();
             args.PutInt(_questionTag, question);
             args.PutBoolean(_gotMillionTag, gotMillion);
             args.PutBoolean(_gameWasLoseTag, gameWasLose);
+            args.PutString(_bibleTextForAnswerTag, bibleTextForAnswer);
 
             return new GameInformationFragment { Arguments = args };
         }

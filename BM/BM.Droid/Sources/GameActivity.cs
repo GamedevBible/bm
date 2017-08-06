@@ -300,6 +300,7 @@ namespace BM.Droid.Sources
                 myIntent.PutExtra("lastQuestion", _currentQuestion);
                 myIntent.PutExtra("gotMillion", _gotMillion);
                 myIntent.PutExtra("needFinishActivity", _needFinishActivity);
+                myIntent.PutExtra("bibleTextForAnswer", _gameQuestions[_currentQuestion - 1]?.bibleText ?? string.Empty);
                 SetResult(Result.Ok, myIntent);
                 Finish();
                 return;

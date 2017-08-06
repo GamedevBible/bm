@@ -29,6 +29,7 @@ namespace BM.Droid.Sources
         private ImageButton _soundButton;
         private PreferencesHelper _recordsHelper;
         private bool _soundEnabled = true;
+        private string _bibleTextForAnswer;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -127,7 +128,7 @@ namespace BM.Droid.Sources
                 if (_gotMillion && _soundEnabled)
                     PlayMillion(_millionPlayer);
 
-                var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gameWasLose, _gotMillion);
+                var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gameWasLose, _gotMillion, _bibleTextForAnswer);
                 dialogCallFriend.Cancelable = false;
                 dialogCallFriend.Show(ft, nameof(GameInformationFragment));
 
@@ -155,6 +156,7 @@ namespace BM.Droid.Sources
                     _lastQuestion = data.GetIntExtra("lastQuestion", -1);
                     _gotMillion = data.GetBooleanExtra("gotMillion", false);
                     _gameWasLose = data.GetBooleanExtra("needFinishActivity", true);
+                    _bibleTextForAnswer = data.GetStringExtra("bibleTextForAnswer");
                 }
             }
         }
