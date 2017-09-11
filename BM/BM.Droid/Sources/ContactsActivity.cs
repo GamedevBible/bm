@@ -109,12 +109,27 @@ namespace BM.Droid.Sources
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle("Поддержка BibleGameDev")
-                    .SetMessage("Поддержать нас можно переводом на карту: 1234567890")
+                    .SetMessage("Вся оказываемая поддержка проектов BibleGameDev является добровольной и безвозмездной."+
+                    " Поддержать нас можно своими пожертвованиями, переводом на счет Яндекс.Деньги: 410015425804928."+
+                    " По желанию, в сообщении к пожертвованию вы можете указать свое имя или инициалы."+
+                    " Благодарим вас за оказанную помощь! С вашей помощью наши новые проекты будут более качественными!"+
+                    " Вы помогаете пробудить у людей интерес к изучению Библии!")
+                    .SetNegativeButton("Скопировать номер счета", YandexMoneyCopied)
                     .SetPositiveButton("OK", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
 
             dialog.Show();
+        }
+
+        private void YandexMoneyCopied(object sender, DialogClickEventArgs e)
+        {
+            Android.Content.ClipboardManager clipboard = (Android.Content.ClipboardManager)GetSystemService(ClipboardService);
+            ClipData clip = ClipData.NewPlainText("label", "410015425804928");
+            clipboard.PrimaryClip = clip;
+
+            Toast.MakeText(this, "Номер счета скопирован", ToastLength.Short).Show();
+            _inactive = false;
         }
 
         private void OnThanksButtonClicked(object sender, EventArgs e)
