@@ -10,6 +10,20 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent">
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/lessons"
+        android:maxLines="1"
+        android:gravity="center"
+        android:id="@+id/appVersion"
+        android:text="Версия"/>
+    <TextView
         android:layout_width="wrap_content"
         android:ems="30"
         android:layout_height="42sp"
@@ -23,12 +37,12 @@
         android:maxLines="20"
         android:scrollbars="vertical"
         android:gravity="center"
-        android:id="@+id/appVersion"
+        android:id="@+id/lessons"
         android:padding="10dp"
         android:text="Версия"
         android:background="@drawable/rounded_corners"/>
     <TextView
-        android:layout_below="@+id/appVersion"
+        android:layout_below="@+id/lessons"
         android:layout_width="wrap_content"
         android:ems="30"
         android:layout_height="77sp"

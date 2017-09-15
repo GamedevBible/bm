@@ -16,7 +16,8 @@ namespace BM.Droid.Sources
         Icon = "@mipmap/ic_launcher")]
     public class ContactsActivity : AppCompatActivity
     {
-        private TextView _appVersion;
+        private TextView _version;
+        private TextView _lessons;
         private TextView _contactUs;
         private TextView _supportUs;
         private const int _emailRequestCode = 11234;
@@ -30,8 +31,9 @@ namespace BM.Droid.Sources
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.contacts);
-            
-            _appVersion = FindViewById<TextView>(Resource.Id.appVersion);
+
+            _version = FindViewById<TextView>(Resource.Id.appVersion);
+            _lessons = FindViewById<TextView>(Resource.Id.lessons);
             _contactUs = FindViewById<TextView>(Resource.Id.contactUs);
             _supportUs = FindViewById<TextView>(Resource.Id.supportUs);
             _historiesButton = FindViewById<ImageButton>(Resource.Id.historiesButton);
@@ -42,7 +44,9 @@ namespace BM.Droid.Sources
 
             var records = recordsHelper.GetRecords();
             records.OrderByDescending(t => t.QuestionNumber);
-            
+
+            _version.Text = $"Версия приложения {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}";
+
             _historiesButtonEnabled = ValuesConverter.QuestionNumberToPoints(records[0].QuestionNumber).Equals("1 000 000")
                 && ValuesConverter.QuestionNumberToPoints(records[1].QuestionNumber).Equals("1 000 000")
                 && ValuesConverter.QuestionNumberToPoints(records[2].QuestionNumber).Equals("1 000 000");
@@ -71,14 +75,14 @@ namespace BM.Droid.Sources
                 _contactUs.SetText(Html.FromHtml(text), TextView.BufferType.Spannable);
             }
 
-            _appVersion.Text = 
-                $"Версия приложения {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}";
+            _lessons.Text = 
+                $"Изучение Библии";
 
             string supportText = "</font><font color=#03a9f4>- Поддержать нас -</font>";
 
             _supportUs.SetText(Html.FromHtml(supportText), TextView.BufferType.Spannable);
 
-            _appVersion.Click += OnAppVersionClicked;
+            _lessons.Click += OnAppVersionClicked;
             _contactUs.Click += OnContactUsClicked;
             _contactUs.LongClick += OnContactUsLongClicked;
             _supportUs.Click += OnSupportUsClicked;
@@ -91,14 +95,24 @@ namespace BM.Droid.Sources
             _inactive = true;
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
-                    .SetTitle($"Версия {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}")
-                    .SetMessage("Приложение добавлено в Google Play. Мы подготовили и оформили для вас более трех тысяч вопросов. " +
-                                "Еще мы создали в приложении раздел с историями.")
-                    .SetPositiveButton("OK", AlertConfirmButtonClicked)
+                    .SetTitle($"Изучение Библии")
+                    .SetMessage("У вас есть вопросы по Библии? Вы всегда можете задать их нам на Email! "+
+                    "Также вы можете изучать Библию самостоятельно при помощи уроков по изучению! Хороший сайт с уроками имеется по адресу http://apologetica.ru.")
+                    .SetNegativeButton("Перейти на сайт", GoToLessonsSite)
+                    .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
 
             dialog.Show();
+        }
+
+        private void GoToLessonsSite(object sender, DialogClickEventArgs e)
+        {
+            _inactive = false;
+
+            var uri = Android.Net.Uri.Parse("http://apologetica.ru/uroki/uroki-po-izucheniyu-biblii.html");
+            var intent = new Intent(Intent.ActionView, uri);
+            StartActivity(intent);
         }
 
         private void OnSupportUsClicked(object sender, EventArgs e)
@@ -114,8 +128,8 @@ namespace BM.Droid.Sources
                     " По желанию, в сообщении к пожертвованию вы можете указать свое имя или инициалы."+
                     " Благодарим вас за оказанную помощь! С вашей помощью наши новые проекты будут более качественными!"+
                     " Вы помогаете пробудить у людей интерес к изучению Библии!")
-                    .SetNegativeButton("Скопировать номер счета", YandexMoneyCopied)
-                    .SetPositiveButton("OK", AlertConfirmButtonClicked)
+                    .SetPositiveButton("Скопировать номер счета", YandexMoneyCopied)
+                    .SetNegativeButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
 

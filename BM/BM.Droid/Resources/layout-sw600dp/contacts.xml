@@ -17,6 +17,20 @@
         android:background="@color/transparent"
         android:src="@drawable/logoBible"/>
   </FrameLayout>
+  <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/lessons"
+        android:maxLines="1"
+        android:gravity="center"
+        android:id="@+id/appVersion"
+        android:text="Версия"/>
     <TextView
         android:layout_width="wrap_content"
         android:ems="20"
@@ -31,7 +45,7 @@
         android:maxLines="20"
         android:scrollbars="vertical"
         android:gravity="center"
-        android:id="@+id/appVersion"
+        android:id="@+id/lessons"
         android:padding="10dp"
         android:text="Версия"
         android:layout_above="@+id/contactUs"
