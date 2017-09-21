@@ -122,9 +122,31 @@ namespace BM.Droid.Sources
             _inactive = true;
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
+                    .SetTitle("Поддержать нас")
+                    .SetMessage("Поддержать нас можно: поставив нашему приложению 5 звездочек в магазине Play Market, "+
+                    "молясь за пробуждение у людей интереса к Библии, рассказывая друзьям и знакомым об этом приложении, "+
+                    "помогая нам добровольными пожертвованиями.")
+                    .SetPositiveButton("О пожертвованиях", OnDonateUsClicked)
+                    .SetNegativeButton("Закрыть", AlertConfirmButtonClicked)
+                    .SetCancelable(false)
+                    .Create();
+
+            dialog.Show();
+        }
+
+        private void OnDonateUsClicked(object sender, EventArgs e)
+        {
+            _inactive = false;
+            ((Android.Support.V7.App.AlertDialog)sender).Dismiss();
+
+            if (_inactive)
+                return;
+            _inactive = true;
+
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle("Поддержка BibleGameDev")
                     .SetMessage("Вся оказываемая поддержка проектов BibleGameDev является добровольной и безвозмездной."+
-                    " Поддержать нас можно своими пожертвованиями, переводом на счет Яндекс.Деньги: 410015425804928."+
+                    " Поддержать нас своими пожертвованиями можно переводом на счет Яндекс.Деньги: 410015425804928."+
                     " По желанию, в сообщении к пожертвованию вы можете указать свое имя или инициалы."+
                     " Благодарим вас за оказанную помощь! С вашей помощью наши новые проекты будут более качественными!"+
                     " Вы помогаете пробудить у людей интерес к изучению Библии!")
