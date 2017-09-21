@@ -94,6 +94,7 @@ namespace BM.Droid.Sources
                     StartActivity(RecordsActivity.CreateStartIntent(this));
                     break;
                 case Resource.Id.guideButton:
+                    Toast.MakeText(this, "Экран справки об игре еще в разработке", ToastLength.Short).Show();
                     break;
                 case Resource.Id.contactsButton:
                     StartActivityForResult(ContactsActivity.CreateStartIntent(this), _contactsActivityCode);
