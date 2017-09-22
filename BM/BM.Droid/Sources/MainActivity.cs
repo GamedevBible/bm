@@ -8,6 +8,9 @@ using Android.Runtime;
 using Android.Content.PM;
 using Android.Media;
 using System.Threading.Tasks;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 
 namespace BM.Droid.Sources
 {
@@ -34,7 +37,10 @@ namespace BM.Droid.Sources
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            
+
+            MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
+                   typeof(Analytics), typeof(Crashes));
+
             SetContentView (Resource.Layout.main);
 
             _startButton = FindViewById<Button>(Resource.Id.startButton);
