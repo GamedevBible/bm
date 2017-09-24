@@ -123,9 +123,9 @@ namespace BM.Droid.Sources
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle("Поддержать нас")
-                    .SetMessage("Поддержать нас можно: поставив нашему приложению 5 звездочек в магазине Play Market, "+
-                    "молясь за пробуждение у людей интереса к Библии, рассказывая друзьям и знакомым об этом приложении, "+
-                    "помогая нам добровольными пожертвованиями.")
+                    .SetMessage("Дорогие друзья! Вы всегда можете поддержать нас: поставив нашему приложению 5 звезд в магазине Play Market, "+
+                    "молясь за пробуждение у людей интереса к изучению Библии, рассказывая друзьям и знакомым об этом приложении, "+
+                    "помогая нам добровольными пожертвованиями. Спасибо вам за вашу поддержку!")
                     .SetPositiveButton("О пожертвованиях", OnDonateUsClicked)
                     .SetNegativeButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
@@ -179,6 +179,7 @@ namespace BM.Droid.Sources
             ft.AddToBackStack(null);
 
             var dialog = ThanksFragment.NewInstance();
+            dialog.Cancelable = false;
             dialog.Show(ft, nameof(ThanksFragment));
         }
 
