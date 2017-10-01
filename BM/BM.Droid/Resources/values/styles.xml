@@ -23,6 +23,10 @@
         <item name="colorAccent">@color/bm_blue</item>
     </style>
 
+  <style name="ActivitySplash" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="android:windowBackground">@drawable/splash_background</item>
+  </style>
+
   <style name="ProgressDialogTheme" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
     <item name="colorPrimary">@color/bm_blue</item>
     <item name="colorPrimaryDark">@color/bm_dark_blue</item>
