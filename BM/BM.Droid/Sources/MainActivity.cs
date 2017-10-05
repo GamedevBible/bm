@@ -5,7 +5,6 @@ using Android.Support.V7.App;
 using System;
 using Android.Content;
 using Android.Runtime;
-using Android.Content.PM;
 using Android.Media;
 using System.Threading.Tasks;
 using Microsoft.Azure.Mobile;
