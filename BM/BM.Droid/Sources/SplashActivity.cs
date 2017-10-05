@@ -13,9 +13,14 @@ namespace BM.Droid.Sources
     [Activity(Label = "@string/ApplicationName", Theme = "@style/ActivitySplash", MainLauncher = true, Icon = "@mipmap/ic_launcher", NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
+        private PreferencesHelper _recordsHelper;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            _recordsHelper = new PreferencesHelper();
+            _recordsHelper.ProcessFirstStarted(this);
         }
 
         protected override void OnResume()

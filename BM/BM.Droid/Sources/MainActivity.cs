@@ -65,7 +65,7 @@ namespace BM.Droid.Sources
 
             _millionPlayer = MediaPlayer.Create(this, Resource.Raw.million);
 
-            if (_recordsHelper.ProcessFirstStarted(this) == 0)
+            if (_recordsHelper.GetEntersCount() == 1)
             {
                 ShowGreetingsAlert();
             }

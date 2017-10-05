@@ -22,21 +22,18 @@ namespace BM.Droid
             
         }
 
-        public int ProcessFirstStarted(Context context)
+        public void ProcessFirstStarted(Context context)
         {
             if (_prefs == null)
                 _prefs = PreferenceManager.GetDefaultSharedPreferences(context);
 
             _firstStarted = _prefs.GetInt("firstStarted", 0);
-
-            if(_editor == null)
+            
+            if (_editor == null)
                 _editor = _prefs.Edit();
-
-            var timesOfOpening = _firstStarted;
 
             _editor.PutInt("firstStarted", _firstStarted >= 365 ? 365 : _firstStarted + 1);
             _editor.Commit();
-            return timesOfOpening;
         }
 
         public void InitHelperForRecords(Context context)
@@ -76,6 +73,8 @@ namespace BM.Droid
                 _prefs = PreferenceManager.GetDefaultSharedPreferences(context);
                 _editor = _prefs.Edit();
             }
+
+            _firstStarted = _prefs.GetInt("firstStarted", 0);
 
             _isSoundEnabled = _prefs.GetBoolean("soundEnabled", true);
             _editor.Commit();
@@ -174,7 +173,7 @@ namespace BM.Droid
             }
         }
 
-        public void ProcessMillionsCount()
+        private void ProcessMillionsCount()
         {
             _millionsCount = _prefs.GetInt("millionsCount", 0);
 
@@ -185,7 +184,7 @@ namespace BM.Droid
             _editor.Commit();
         }
 
-        public void ProcessCleverCount()
+        private void ProcessCleverCount()
         {
             _cleverCount = _prefs.GetInt("cleverCount", 0);
 
