@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
+using Java.Util;
 
 namespace BM.Droid.Sources
 {
-    [Activity(Label = "@string/ApplicationName", Theme = "@style/AppTheme.Main", MainLauncher = true,
+    [Activity(Label = "@string/ApplicationName", Theme = "@style/AppTheme.Main",
         Icon = "@mipmap/ic_launcher")]
     public class MainActivity : AppCompatActivity
     {
@@ -24,6 +25,7 @@ namespace BM.Droid.Sources
         private bool _gotMillion = false;
         private bool _gameWasLose;
         private MediaPlayer _millionPlayer;
+        private bool _inactive;
 
         private Button _startButton;
         private Button _recordsButton;
@@ -62,6 +64,38 @@ namespace BM.Droid.Sources
             _soundButton.Click += OnSoundButtonClicked;
 
             _millionPlayer = MediaPlayer.Create(this, Resource.Raw.million);
+
+            //if (_recordsHelper.GetFirstStarted(this) == 0)
+            //{
+                ShowGreetingsAlert();
+            //}
+        }
+
+        private void ShowGreetingsAlert()
+        {
+            var locale = Locale.Default.DisplayLanguage;
+
+            var title = locale == "en" || locale == "en-US" || locale == "English" ? "Welcome!" : "Добро пожаловать!";
+
+            var message = locale == "en" || locale == "en-US" || locale == "English"
+                ? "Dear friend! This time our app supports only russian language. We are sorry for that." 
+                : "Дорогой друг! Мы очень рады, что ты присоединился к нашему приложению! Желаем тебе прекрасного настроения!";
+
+            var closeButton = locale == "en" || locale == "en-US" || locale == "English" ? "Close" : "Закрыть";
+
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
+                    .SetTitle(title)
+                    .SetMessage(message)
+                    .SetPositiveButton(closeButton, CloseDialog)
+                    .SetCancelable(false)
+                    .Create();
+
+            dialog.Show();
+        }
+
+        private void CloseDialog(object sender, DialogClickEventArgs e)
+        {
+            ((Android.Support.V7.App.AlertDialog)sender).Dismiss();
         }
 
         private void OnSoundButtonClicked(object sender, EventArgs e)
@@ -89,21 +123,29 @@ namespace BM.Droid.Sources
 
         private void OnButtonClicked(object sender, EventArgs e)
         {
+            if (_inactive)
+                return;
+            _inactive = true;
+
             var clickedButton = (Button)sender;
 
             switch (clickedButton.Id)
             {
                 case Resource.Id.startButton:
                     StartActivityForResult(GameActivity.CreateStartIntent(this), _gameActivityCode);
+                    _inactive = false;
                     break;
                 case Resource.Id.recordsButton:
                     StartActivity(RecordsActivity.CreateStartIntent(this));
+                    _inactive = false;
                     break;
                 case Resource.Id.guideButton:
                     Toast.MakeText(this, "Экран справки об игре еще в разработке", ToastLength.Short).Show();
+                    _inactive = false;
                     break;
                 case Resource.Id.contactsButton:
                     StartActivityForResult(ContactsActivity.CreateStartIntent(this), _contactsActivityCode);
+                    _inactive = false;
                     break;
                 default:
                     break;

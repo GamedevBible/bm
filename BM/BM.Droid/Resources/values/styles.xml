@@ -23,8 +23,9 @@
         <item name="colorAccent">@color/bm_blue</item>
     </style>
 
-  <style name="ActivitySplash" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="ActivitySplash" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="android:windowBackground">@drawable/splash_background</item>
+    <item name="android:windowFullscreen">true</item>
   </style>
 
   <style name="ProgressDialogTheme" parent="@style/Theme.AppCompat.Light.Dialog.Alert">

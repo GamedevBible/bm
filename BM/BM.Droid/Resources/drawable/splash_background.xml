@@ -5,11 +5,9 @@
       <solid android:color="#0EB4FF" />
     </shape>
   </item>
-  <item
-    android:left="20dp"
-    android:right="20dp">
+  <item>
     <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
-        android:src="@drawable/logoBible"
+        android:src="@drawable/bm_splash"
         android:tileMode="disabled"
         android:gravity="center"
         android:antialias="true"

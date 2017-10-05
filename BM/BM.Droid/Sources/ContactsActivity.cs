@@ -126,8 +126,8 @@ namespace BM.Droid.Sources
                     .SetMessage("Дорогие друзья! Вы всегда можете поддержать нас: поставив нашему приложению 5 звезд в магазине Play Market, "+
                     "молясь за пробуждение у людей интереса к изучению Библии, рассказывая друзьям и знакомым об этом приложении, "+
                     "помогая нам добровольными пожертвованиями. Спасибо вам за вашу поддержку!")
-                    .SetPositiveButton("О пожертвованиях", OnDonateUsClicked)
-                    .SetNegativeButton("Закрыть", AlertConfirmButtonClicked)
+                    .SetNegativeButton("О пожертвованиях", OnDonateUsClicked)
+                    .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
 
@@ -150,8 +150,8 @@ namespace BM.Droid.Sources
                     " По желанию, в сообщении к пожертвованию вы можете указать свое имя или инициалы."+
                     " Благодарим вас за оказанную помощь! С вашей помощью наши новые проекты будут более качественными!"+
                     " Вы помогаете пробудить у людей интерес к изучению Библии!")
-                    .SetPositiveButton("Скопировать номер счета", YandexMoneyCopied)
-                    .SetNegativeButton("Закрыть", AlertConfirmButtonClicked)
+                    .SetNegativeButton("Скопировать номер счета", YandexMoneyCopied)
+                    .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
 

@@ -13,10 +13,28 @@ namespace BM.Droid
         private List<GameRecord> _records;
         private int[] _questionNumbers = new int[7];
         private bool _isSoundEnabled;
+        private int _firstStarted;
 
         public PreferencesHelper()
         {
             
+        }
+
+        public int GetFirstStarted(Context context)
+        {
+            if (_prefs == null)
+                _prefs = PreferenceManager.GetDefaultSharedPreferences(context);
+
+            _firstStarted = _prefs.GetInt("firstStarted", 0);
+
+            if(_editor == null)
+                _editor = _prefs.Edit();
+
+            var timesOfOpening = _firstStarted;
+
+            _editor.PutInt("firstStarted", _firstStarted >= 1000 ? 1000 : _firstStarted + 1);
+            _editor.Commit();
+            return timesOfOpening;
         }
 
         public void InitHelperForRecords(Context context)
