@@ -132,7 +132,6 @@ namespace BM.Droid.Sources
             {
                 case Resource.Id.startButton:
                     StartActivityForResult(GameActivity.CreateStartIntent(this), _gameActivityCode);
-                    _inactive = false;
                     break;
                 case Resource.Id.recordsButton:
                     StartActivity(RecordsActivity.CreateStartIntent(this));
@@ -144,7 +143,6 @@ namespace BM.Droid.Sources
                     break;
                 case Resource.Id.contactsButton:
                     StartActivityForResult(ContactsActivity.CreateStartIntent(this), _contactsActivityCode);
-                    _inactive = false;
                     break;
                 default:
                     break;
@@ -157,6 +155,8 @@ namespace BM.Droid.Sources
 
             if (_lastQuestion != -1)
             {
+                _inactive = false;
+
                 var ft = SupportFragmentManager.BeginTransaction();
 
                 var prev = SupportFragmentManager.FindFragmentByTag(nameof(GameInformationFragment));
@@ -196,6 +196,8 @@ namespace BM.Droid.Sources
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
+
+            _inactive = false;
 
             if (resultCode == Result.Ok)
             {
