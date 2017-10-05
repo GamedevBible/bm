@@ -50,6 +50,7 @@ namespace BM.Droid.Sources
         private int _badColor;
         private bool _inactive;
         private bool _gotMillion;
+        private bool _withoutHelp = true;
         private MediaPlayer _hintPlayer;
         private MediaPlayer _wrongPlayer;
         private MediaPlayer _successPlayer;
@@ -142,6 +143,7 @@ namespace BM.Droid.Sources
                 _answer1SwapWith = savedInstanceState.GetInt(nameof(_answer1SwapWith));
                 _anotherAnswersSwap = savedInstanceState.GetBoolean(nameof(_anotherAnswersSwap));
                 _gotMillion = savedInstanceState.GetBoolean(nameof(_gotMillion));
+                _withoutHelp = savedInstanceState.GetBoolean(nameof(_withoutHelp));
 
                 if (_needEnableButtons)
                 {
@@ -164,6 +166,7 @@ namespace BM.Droid.Sources
                 Intent myIntent = new Intent(this, typeof(MainActivity));
                 myIntent.PutExtra("lastQuestion", _currentQuestion);
                 myIntent.PutExtra("gotMillion", _gotMillion);
+                myIntent.PutExtra("withoutHelp", _withoutHelp);
                 myIntent.PutExtra("needFinishActivity", _needFinishActivity);
                 SetResult(Result.Ok, myIntent);
                 Finish();
@@ -282,6 +285,7 @@ namespace BM.Droid.Sources
             outState.PutInt(nameof(_answer1SwapWith), _answer1SwapWith);
             outState.PutBoolean(nameof(_anotherAnswersSwap), _anotherAnswersSwap);
             outState.PutBoolean(nameof(_gotMillion), _gotMillion);
+            outState.PutBoolean(nameof(_withoutHelp), _withoutHelp);
 
             if (_needEnableButtons)
             {
@@ -299,6 +303,7 @@ namespace BM.Droid.Sources
                 Intent myIntent = new Intent(this, typeof(MainActivity));
                 myIntent.PutExtra("lastQuestion", _currentQuestion);
                 myIntent.PutExtra("gotMillion", _gotMillion);
+                myIntent.PutExtra("withoutHelp", _withoutHelp);
                 myIntent.PutExtra("needFinishActivity", _needFinishActivity);
                 myIntent.PutExtra("bibleTextForAnswer", _gameQuestions[_currentQuestion - 1]?.bibleText ?? string.Empty);
                 SetResult(Result.Ok, myIntent);
@@ -579,11 +584,13 @@ namespace BM.Droid.Sources
                     Intent myIntent = new Intent(this, typeof(MainActivity));
                     myIntent.PutExtra("lastQuestion", _currentQuestion);
                     myIntent.PutExtra("gotMillion", _gotMillion);
+                    myIntent.PutExtra("withoutHelp", _withoutHelp);
                     myIntent.PutExtra("needFinishActivity", false);
                     SetResult(Result.Ok, myIntent);
                     Finish();
                     break;
                 case Resource.Id.callButton:
+                    _withoutHelp = false;
                     PlayMedia(_hintPlayer);
                     _callButton.Enabled = false;
                     _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
@@ -594,6 +601,7 @@ namespace BM.Droid.Sources
                     dialogCallFriend.Show(ft, nameof(CallFriendFragment));
                     break;
                 case Resource.Id.peopleButton:
+                    _withoutHelp = false;
                     PlayMedia(_hintPlayer);
                     _peopleButton.Enabled = false;
                     _peopleButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
@@ -604,6 +612,7 @@ namespace BM.Droid.Sources
                     dialogPeopleHelp.Show(ft, nameof(AuditoryHelpFragment));
                     break;
                 case Resource.Id.fiftyButton:
+                    _withoutHelp = false;
                     PlayMedia(_hintPlayer);
                     _twoVariantsButton.Enabled = false;
                     _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
@@ -758,6 +767,7 @@ namespace BM.Droid.Sources
                 Intent myIntent = new Intent(this, typeof(MainActivity));
                 myIntent.PutExtra("lastQuestion", _currentQuestion);
                 myIntent.PutExtra("gotMillion", _gotMillion);
+                myIntent.PutExtra("withoutHelp", _withoutHelp);
                 myIntent.PutExtra("needFinishActivity", false);
                 SetResult(Result.Ok, myIntent);
                 Finish();

@@ -14,14 +14,16 @@ namespace BM.Droid.Sources
         private const string _questionTag = nameof(_questionTag);
         private const string _gotMillionTag = nameof(_gotMillionTag);
         private const string _gameWasLoseTag = nameof(_gameWasLoseTag);
+        private const string _withoutHelpTag = nameof(_withoutHelpTag);
         private const string _bibleTextForAnswerTag = nameof(_bibleTextForAnswerTag);
         private int _lastQuestion;
-        private bool _gotMillion = false;
+        private bool _gotMillion;
         private TextView _questionInfo;
         private ImageView _millionImage;
         private int _imageForMillion = -1;
         private bool _gameWasLose;
         private bool _recordWasSaved;
+        private bool _withoutHelp;
         private string _bibleTextForAnswer;
 
         public override Dialog OnCreateDialog(Bundle savedInstanceState)
@@ -33,6 +35,7 @@ namespace BM.Droid.Sources
             _lastQuestion = Arguments.GetInt(_questionTag);
             _gotMillion = Arguments.GetBoolean(_gotMillionTag);
             _gameWasLose = Arguments.GetBoolean(_gameWasLoseTag);
+            _withoutHelp = Arguments.GetBoolean(_withoutHelpTag);
             _bibleTextForAnswer = Arguments.GetString(_bibleTextForAnswerTag);
 
             _millionImage.Visibility = _gotMillion ? ViewStates.Visible : ViewStates.Gone;
@@ -57,7 +60,7 @@ namespace BM.Droid.Sources
         {
             var records = new PreferencesHelper();
             records.InitHelperForRecords(Activity);
-            records.ProcessRecord(lastQuestion: _lastQuestion, gotMillion: _gotMillion, gameWasLose: _gameWasLose);
+            records.ProcessRecord(lastQuestion: _lastQuestion, gotMillion: _gotMillion, gameWasLose: _gameWasLose, withoutHelp : _withoutHelp);
         }
 
         public override void OnResume()
@@ -109,6 +112,7 @@ namespace BM.Droid.Sources
             outState.PutInt(nameof(_questionTag), _lastQuestion);
             outState.PutBoolean(nameof(_gotMillionTag), _gotMillion);
             outState.PutBoolean(nameof(_gameWasLoseTag), _gameWasLose);
+            outState.PutBoolean(nameof(_withoutHelpTag), _withoutHelp);
             outState.PutInt(nameof(_imageForMillion), _imageForMillion);
             outState.PutBoolean(nameof(_recordWasSaved), _recordWasSaved);
             outState.PutString(nameof(_bibleTextForAnswerTag), _bibleTextForAnswer);
@@ -121,6 +125,7 @@ namespace BM.Droid.Sources
                 _lastQuestion = savedInstanceState.GetInt(nameof(_questionTag));
                 _gotMillion = savedInstanceState.GetBoolean(nameof(_gotMillionTag));
                 _gameWasLose = savedInstanceState.GetBoolean(nameof(_gameWasLoseTag));
+                _withoutHelp = savedInstanceState.GetBoolean(nameof(_withoutHelpTag));
                 _imageForMillion = savedInstanceState.GetInt(nameof(_imageForMillion));
                 _recordWasSaved = savedInstanceState.GetBoolean(nameof(_recordWasSaved));
                 _bibleTextForAnswer = savedInstanceState.GetString(nameof(_bibleTextForAnswerTag));
@@ -133,12 +138,13 @@ namespace BM.Droid.Sources
             base.OnActivityCreated(savedInstanceState);            
         }
 
-        public static GameInformationFragment NewInstance(int question, bool gameWasLose, bool gotMillion = false, string bibleTextForAnswer = "")
+        public static GameInformationFragment NewInstance(int question, bool gameWasLose, bool withoutHelp, bool gotMillion = false, string bibleTextForAnswer = "")
         {
             var args = new Bundle();
             args.PutInt(_questionTag, question);
             args.PutBoolean(_gotMillionTag, gotMillion);
             args.PutBoolean(_gameWasLoseTag, gameWasLose);
+            args.PutBoolean(_withoutHelpTag, withoutHelp);
             args.PutString(_bibleTextForAnswerTag, bibleTextForAnswer);
 
             return new GameInformationFragment { Arguments = args };

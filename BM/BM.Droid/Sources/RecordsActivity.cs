@@ -25,6 +25,10 @@ namespace BM.Droid.Sources
         private TextView _points6;
         private TextView _points7;
 
+        private ImageButton _millionsButton;
+        private ImageButton _cleverButton;
+        private ImageButton _entersButton;
+
         private TextView _date1;
         private TextView _date2;
         private TextView _date3;
@@ -32,6 +36,11 @@ namespace BM.Droid.Sources
         private TextView _date5;
         private TextView _date6;
         private TextView _date7;
+
+        private bool _inactive;
+        private int _millionsCount;
+        private int _entersCount;
+        private int _cleverCount;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -46,6 +55,10 @@ namespace BM.Droid.Sources
             _points5 = FindViewById<TextView>(Resource.Id.points5);
             _points6 = FindViewById<TextView>(Resource.Id.points6);
             _points7 = FindViewById<TextView>(Resource.Id.points7);
+
+            _entersButton = FindViewById<ImageButton>(Resource.Id.enterGameButton);
+            _millionsButton = FindViewById<ImageButton>(Resource.Id.millionsButton);
+            _cleverButton = FindViewById<ImageButton>(Resource.Id.cleverButton);
 
             _date1 = FindViewById<TextView>(Resource.Id.date1);
             _date2 = FindViewById<TextView>(Resource.Id.date2);
@@ -76,6 +89,72 @@ namespace BM.Droid.Sources
             _date5.Text = records[4].RecordDate;
             _date6.Text = records[5].RecordDate;
             _date7.Text = records[6].RecordDate;
+
+            _millionsCount = recordsHelper.GetMillionsCount();
+            _entersCount = recordsHelper.GetEntersCount();
+            _cleverCount = recordsHelper.GetCleverCount();
+
+            _entersButton.SetImageResource(_entersCount >= 100 ? Resource.Drawable.calendar_check : Resource.Drawable.calendar_check_disabled);
+            _millionsButton.SetImageResource(_millionsCount >= 50 ? Resource.Drawable.briefcase_check : Resource.Drawable.briefcase_check_disabled);
+            _cleverButton.SetImageResource(_cleverCount >= 20 ? Resource.Drawable.account_check : Resource.Drawable.account_check_disabled);
+
+            _entersButton.Click += OnEntersButtonClicked;
+            _millionsButton.Click += OnMillionsButtonClicked;
+            _cleverButton.Click += OnCleverButtonClicked;
+        }
+
+        private void OnEntersButtonClicked(object sender, EventArgs e)
+        {
+            if (_inactive)
+                return;
+            _inactive = true;
+
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
+                    .SetTitle(_entersCount >= 100 ? "Популярное приложение!" : "Популярное приложение")
+                    .SetMessage(_entersCount >= 100 ? "Вы открыли приложение более 100 раз! Поздравляем с достижением!" : "Это достижение еще не получено.")
+                    .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
+                    .SetCancelable(false)
+                    .Create();
+
+            dialog.Show();
+        }
+
+        private void OnMillionsButtonClicked(object sender, EventArgs e)
+        {
+            if (_inactive)
+                return;
+            _inactive = true;
+
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
+                    .SetTitle(_millionsCount >= 50 ? "Настоящий победитель!" : "Настоящий победитель")
+                    .SetMessage(_millionsCount >= 50 ? "Вы выиграли миллион очков более 50 раз! Поздравляем с достижением!" : "Это достижение еще не получено.")
+                    .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
+                    .SetCancelable(false)
+                    .Create();
+
+            dialog.Show();
+        }
+
+        private void OnCleverButtonClicked(object sender, EventArgs e)
+        {
+            if (_inactive)
+                return;
+            _inactive = true;
+
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
+                    .SetTitle(_cleverCount >= 20 ? "Умный победитель!" : "Умный победитель")
+                    .SetMessage(_cleverCount >= 20 ? "Вы выиграли миллион очков более 20 раз! И все это без подсказок! Поздравляем с достижением!" : "Это достижение еще не получено.")
+                    .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
+                    .SetCancelable(false)
+                    .Create();
+
+            dialog.Show();
+        }
+
+        private void AlertConfirmButtonClicked(object sender, DialogClickEventArgs e)
+        {
+            _inactive = false;
+            ((Android.Support.V7.App.AlertDialog)sender).Dismiss();
         }
 
         public static Intent CreateStartIntent(Context context, string message = null)

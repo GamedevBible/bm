@@ -21,7 +21,8 @@ namespace BM.Droid.Sources
         private const int _gameActivityCode = 11;
         private const int _contactsActivityCode = 14;
         private int _lastQuestion = -1;
-        private bool _gotMillion = false;
+        private bool _gotMillion;
+        private bool _withoutHelp;
         private bool _gameWasLose;
         private MediaPlayer _millionPlayer;
         private bool _inactive;
@@ -64,10 +65,10 @@ namespace BM.Droid.Sources
 
             _millionPlayer = MediaPlayer.Create(this, Resource.Raw.million);
 
-            //if (_recordsHelper.GetFirstStarted(this) == 0)
-            //{
+            if (_recordsHelper.ProcessFirstStarted(this) == 0)
+            {
                 ShowGreetingsAlert();
-            //}
+            }
         }
 
         private void ShowGreetingsAlert()
@@ -78,7 +79,7 @@ namespace BM.Droid.Sources
 
             var message = locale == "en" || locale == "en-US" || locale == "English"
                 ? "Dear friend! This time our app supports only russian language. We are sorry for that." 
-                : "Дорогой друг! Мы очень рады, что ты присоединился к нашему приложению! Желаем тебе прекрасного настроения!";
+                : "Дорогой друг! Мы очень рады, что ты присоединился к нашему приложению! Тебя ждут более 3000 вопросов! Желаем тебе успехов и хорошего настроения!";
 
             var closeButton = locale == "en" || locale == "en-US" || locale == "English" ? "Close" : "Закрыть";
 
@@ -176,7 +177,7 @@ namespace BM.Droid.Sources
                 if (_gotMillion && _soundEnabled)
                     PlayMillion(_millionPlayer);
 
-                var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gameWasLose, _gotMillion, _bibleTextForAnswer);
+                var dialogCallFriend = GameInformationFragment.NewInstance(_lastQuestion, _gameWasLose, _withoutHelp, gotMillion : _gotMillion, bibleTextForAnswer : _bibleTextForAnswer);
                 dialogCallFriend.Cancelable = false;
                 dialogCallFriend.Show(ft, nameof(GameInformationFragment));
 
@@ -206,6 +207,7 @@ namespace BM.Droid.Sources
                     _lastQuestion = data.GetIntExtra("lastQuestion", -1);
                     _gotMillion = data.GetBooleanExtra("gotMillion", false);
                     _gameWasLose = data.GetBooleanExtra("needFinishActivity", true);
+                    _withoutHelp = data.GetBooleanExtra("withoutHelp", false);
                     _bibleTextForAnswer = data.GetStringExtra("bibleTextForAnswer");
                 }
             }

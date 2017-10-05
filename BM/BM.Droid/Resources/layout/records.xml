@@ -1,12 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_blue_down_up">
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="right">
+    <android.support.v7.widget.AppCompatImageButton
+        android:background="?attr/selectableItemBackground"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/enterGameButton"
+        android:layout_centerHorizontal="true"
+        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+        app:srcCompat="@drawable/calendar_check_disabled"
+        android:layout_margin="5dp"/>
+    <android.support.v7.widget.AppCompatImageButton
+      android:background="?attr/selectableItemBackground"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:id="@+id/millionsButton"
+      android:layout_centerHorizontal="true"
+      style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+      app:srcCompat="@drawable/briefcase_check_disabled"
+      android:layout_margin="5dp"/>
+    <android.support.v7.widget.AppCompatImageButton
+      android:background="?attr/selectableItemBackground"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:id="@+id/cleverButton"
+      android:layout_centerHorizontal="true"
+      style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+      app:srcCompat="@drawable/account_check_disabled"
+      android:layout_margin="5dp"/>
+  </LinearLayout>
+<ScrollView
     android:gravity="center"
-    android:background="@drawable/gradient_blue_down_up"
     android:layout_gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="match_parent">
   <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:fillViewport="true"
@@ -329,3 +365,4 @@
     </LinearLayout>
   </RelativeLayout>
 </ScrollView>
+</LinearLayout>

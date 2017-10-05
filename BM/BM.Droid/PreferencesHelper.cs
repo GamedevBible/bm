@@ -14,13 +14,15 @@ namespace BM.Droid
         private int[] _questionNumbers = new int[7];
         private bool _isSoundEnabled;
         private int _firstStarted;
+        private int _millionsCount;
+        private int _cleverCount;
 
         public PreferencesHelper()
         {
             
         }
 
-        public int GetFirstStarted(Context context)
+        public int ProcessFirstStarted(Context context)
         {
             if (_prefs == null)
                 _prefs = PreferenceManager.GetDefaultSharedPreferences(context);
@@ -32,7 +34,7 @@ namespace BM.Droid
 
             var timesOfOpening = _firstStarted;
 
-            _editor.PutInt("firstStarted", _firstStarted >= 1000 ? 1000 : _firstStarted + 1);
+            _editor.PutInt("firstStarted", _firstStarted >= 365 ? 365 : _firstStarted + 1);
             _editor.Commit();
             return timesOfOpening;
         }
@@ -41,6 +43,10 @@ namespace BM.Droid
         {
             _prefs = PreferenceManager.GetDefaultSharedPreferences(context);
             _editor = _prefs.Edit();
+
+            _firstStarted = _prefs.GetInt("firstStarted", 0);
+            _millionsCount = _prefs.GetInt("millionsCount", 0);
+            _cleverCount = _prefs.GetInt("cleverCount", 0);
 
             _records = new List<GameRecord>();
             _records.Add(new GameRecord() { QuestionNumber = _prefs.GetInt("record1Number", 0), RecordDate = _prefs.GetString("record1Date", "-") });
@@ -113,7 +119,22 @@ namespace BM.Droid
             return _records;
         }
 
-        public void ProcessRecord(int lastQuestion, bool gotMillion, bool gameWasLose)
+        public int GetMillionsCount()
+        {
+            return _millionsCount;
+        }
+
+        public int GetEntersCount()
+        {
+            return _firstStarted;
+        }
+
+        public int GetCleverCount()
+        {
+            return _cleverCount;
+        }
+
+        public void ProcessRecord(int lastQuestion, bool gotMillion, bool gameWasLose, bool withoutHelp)
         {
             _questionNumbers.OrderByDescending(t => t);
 
@@ -127,6 +148,11 @@ namespace BM.Droid
                     QuestionNumber = 17,
                     RecordDate = DateTime.Now.ToString("dd/MM/yyyy")
                 });
+
+                ProcessMillionsCount();
+
+                if (withoutHelp)
+                    ProcessCleverCount();
 
                 SaveRecords();
                 return;
@@ -146,6 +172,28 @@ namespace BM.Droid
                     return;
                 }
             }
+        }
+
+        public void ProcessMillionsCount()
+        {
+            _millionsCount = _prefs.GetInt("millionsCount", 0);
+
+            if (_editor == null)
+                _editor = _prefs.Edit();
+
+            _editor.PutInt("millionsCount", _millionsCount >= 50 ? 50 : _millionsCount + 1);
+            _editor.Commit();
+        }
+
+        public void ProcessCleverCount()
+        {
+            _cleverCount = _prefs.GetInt("cleverCount", 0);
+
+            if (_editor == null)
+                _editor = _prefs.Edit();
+
+            _editor.PutInt("cleverCount", _cleverCount >= 20 ? 20 : _cleverCount + 1);
+            _editor.Commit();
         }
     }
 }
