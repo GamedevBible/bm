@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Preferences;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace BM.Droid
 {
@@ -147,6 +148,8 @@ namespace BM.Droid
                     QuestionNumber = 17,
                     RecordDate = DateTime.Now.ToString("dd/MM/yyyy")
                 });
+
+                Analytics.TrackEvent("User got million");
 
                 ProcessMillionsCount();
 

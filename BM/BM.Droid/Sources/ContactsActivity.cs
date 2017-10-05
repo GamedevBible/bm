@@ -9,6 +9,7 @@ using Android.Support.V7.App;
 using Android.Content.PM;
 using Android.Text;
 using System.Linq;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace BM.Droid.Sources
 {
@@ -110,6 +111,8 @@ namespace BM.Droid.Sources
         {
             _inactive = false;
 
+            Analytics.TrackEvent("User go to Bible lessons site");
+
             var uri = Android.Net.Uri.Parse("http://apologetica.ru/uroki/uroki-po-izucheniyu-biblii.html");
             var intent = new Intent(Intent.ActionView, uri);
             StartActivity(intent);
@@ -154,6 +157,8 @@ namespace BM.Droid.Sources
                     .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
+
+            Analytics.TrackEvent("User open donate alert");
 
             dialog.Show();
         }
