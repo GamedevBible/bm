@@ -194,7 +194,7 @@ namespace BM.Droid.Sources
                 var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle("Закрыто")
                     .SetMessage("Сейчас вы не можете читать истории. Выиграйте игру несколько раз, и экран историй станет доступным.")
-                    .SetPositiveButton("OK", AlertConfirmButtonClicked)
+                    .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
 

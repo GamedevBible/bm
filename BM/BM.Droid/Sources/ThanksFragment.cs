@@ -27,7 +27,7 @@ namespace BM.Droid.Sources
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(Activity, Resource.Style.AlertDialogTheme)
                 .SetTitle("Благодарности")
                 .SetView(view)
-                .SetPositiveButton("OK", ConfirmButtonClicked)
+                .SetPositiveButton("Закрыть", ConfirmButtonClicked)
                 .SetCancelable(false)
                 .Create();
             
