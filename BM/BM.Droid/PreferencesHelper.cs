@@ -33,6 +33,9 @@ namespace BM.Droid
             if (_editor == null)
                 _editor = _prefs.Edit();
 
+            if(_firstStarted == 99)
+                Analytics.TrackEvent("User got 100 enters to game");
+
             _editor.PutInt("firstStarted", _firstStarted >= 365 ? 365 : _firstStarted + 1);
             _editor.Commit();
         }
@@ -183,6 +186,9 @@ namespace BM.Droid
             if (_editor == null)
                 _editor = _prefs.Edit();
 
+            if(_millionsCount == 49)
+                Analytics.TrackEvent("User got 50 millions");
+
             _editor.PutInt("millionsCount", _millionsCount >= 50 ? 50 : _millionsCount + 1);
             _editor.Commit();
         }
@@ -193,6 +199,9 @@ namespace BM.Droid
 
             if (_editor == null)
                 _editor = _prefs.Edit();
+
+            if(_cleverCount == 19)
+                Analytics.TrackEvent("User got 20 millions without hints");
 
             _editor.PutInt("cleverCount", _cleverCount >= 20 ? 20 : _cleverCount + 1);
             _editor.Commit();
