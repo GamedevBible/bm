@@ -11,6 +11,14 @@ using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 using Java.Util;
+using Android.Content.PM;
+
+/*Что сделать перед выкатыванием новой версии:
+ - Повысить версию
+ - Обновить Alert Whats New
+ - Посмотреть есть ли новые истории
+ - Посмотреть, стоит ли обновить благодарности
+ - */
 
 namespace BM.Droid.Sources
 {
@@ -68,7 +76,26 @@ namespace BM.Droid.Sources
             if (_recordsHelper.GetEntersCount() == 1)
             {
                 ShowGreetingsAlert();
+                _recordsHelper.PutLastVersion(this, PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName);
             }
+            else
+            if (!_recordsHelper.GetLastVersion().Equals(PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName))
+            {
+                ShowWhatsNewAlert();
+                _recordsHelper.PutLastVersion(this, PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName);
+            }
+        }
+
+        private void ShowWhatsNewAlert()
+        {
+            var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
+                    .SetTitle($"Версия {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}")
+                    .SetMessage("Что нового:" + "\n" + "(пока ничего)")
+                    .SetPositiveButton("Закрыть", CloseDialog)
+                    .SetCancelable(false)
+                    .Create();
+
+            dialog.Show();
         }
 
         private void ShowGreetingsAlert()

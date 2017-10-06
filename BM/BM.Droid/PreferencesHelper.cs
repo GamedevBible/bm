@@ -4,6 +4,7 @@ using System.Linq;
 using Android.Content;
 using Android.Preferences;
 using Microsoft.Azure.Mobile.Analytics;
+using Android.Content.PM;
 
 namespace BM.Droid
 {
@@ -17,6 +18,7 @@ namespace BM.Droid
         private int _firstStarted;
         private int _millionsCount;
         private int _cleverCount;
+        private string _lastVersion;
 
         public PreferencesHelper()
         {
@@ -79,8 +81,26 @@ namespace BM.Droid
             }
 
             _firstStarted = _prefs.GetInt("firstStarted", 0);
+            _lastVersion = _prefs.GetString("lastVersion", string.Empty);
 
             _isSoundEnabled = _prefs.GetBoolean("soundEnabled", true);
+            _editor.Commit();
+        }
+
+        public string GetLastVersion()
+        {
+            return _lastVersion;
+        }
+
+        public void PutLastVersion(Context context, string version)
+        {
+            if (_prefs == null)
+                _prefs = PreferenceManager.GetDefaultSharedPreferences(context);
+
+            if (_editor == null)
+                _editor = _prefs.Edit();
+
+            _editor.PutString("lastVersion", version);
             _editor.Commit();
         }
 

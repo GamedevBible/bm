@@ -111,7 +111,7 @@ namespace BM.Droid.Sources
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle(_entersCount >= 100 ? "Популярное приложение!" : "Популярное приложение")
-                    .SetMessage(_entersCount >= 100 ? "Вы открыли приложение более 100 раз! Поздравляем с достижением!" : "Это достижение еще не получено.")
+                    .SetMessage(_entersCount >= 100 ? "Вы открыли приложение более 100 раз! Поздравляем с достижением!" : "Это достижение еще не получено." + "\n" + "(при удалении приложения достижения также удаляются)")
                     .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
@@ -127,7 +127,7 @@ namespace BM.Droid.Sources
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle(_millionsCount >= 50 ? "Настоящий победитель!" : "Настоящий победитель")
-                    .SetMessage(_millionsCount >= 50 ? "Вы выиграли миллион очков более 50 раз! Поздравляем с достижением!" : "Это достижение еще не получено.")
+                    .SetMessage(_millionsCount >= 50 ? "Вы выиграли миллион очков более 50 раз! Поздравляем с достижением!" : "Это достижение еще не получено." + "\n" + "(при удалении приложения достижения также удаляются)")
                     .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
@@ -142,8 +142,8 @@ namespace BM.Droid.Sources
             _inactive = true;
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
-                    .SetTitle(_cleverCount >= 20 ? "Умный победитель!" : "Умный победитель")
-                    .SetMessage(_cleverCount >= 20 ? "Вы выиграли миллион очков более 20 раз! И все это без подсказок! Поздравляем с достижением!" : "Это достижение еще не получено.")
+                    .SetTitle(_cleverCount >= 20 ? "Опытнейший победитель!" : "Опытнейший победитель")
+                    .SetMessage(_cleverCount >= 20 ? "Вы выиграли миллион очков более 20 раз! И все это без подсказок! Поздравляем с достижением!" : "Это достижение еще не получено." + "\n" + "(при удалении приложения достижения также удаляются)")
                     .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
