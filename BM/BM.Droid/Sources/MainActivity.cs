@@ -34,6 +34,7 @@ namespace BM.Droid.Sources
         private bool _gameWasLose;
         private MediaPlayer _millionPlayer;
         private bool _inactive;
+        private bool _greetingsWasShowed;
 
         private Button _startButton;
         private Button _recordsButton;
@@ -50,6 +51,11 @@ namespace BM.Droid.Sources
 
             MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
                    typeof(Analytics), typeof(Crashes));
+
+            if (bundle != null)
+            {
+                _greetingsWasShowed = bundle.GetBoolean(nameof(_greetingsWasShowed));
+            }
 
             SetContentView (Resource.Layout.main);
 
@@ -73,9 +79,10 @@ namespace BM.Droid.Sources
 
             _millionPlayer = MediaPlayer.Create(this, Resource.Raw.million);
 
-            if (_recordsHelper.GetEntersCount() == 1)
+            if (_recordsHelper.GetEntersCount() == 1 && !_greetingsWasShowed)
             {
                 ShowGreetingsAlert();
+                _greetingsWasShowed = true;
                 _recordsHelper.PutLastVersion(this, PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName);
             }
             else
@@ -84,6 +91,13 @@ namespace BM.Droid.Sources
                 ShowWhatsNewAlert();
                 _recordsHelper.PutLastVersion(this, PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName);
             }
+        }
+
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            outState.PutBoolean(nameof(_greetingsWasShowed), true);
         }
 
         private void ShowWhatsNewAlert()
