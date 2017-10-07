@@ -74,6 +74,8 @@ namespace BM.Droid.Sources
 
             SetContentView(Resource.Layout.game);
 
+            this.Window.SetFlags(WindowManagerFlags.KeepScreenOn, WindowManagerFlags.KeepScreenOn);
+
             _needEnableButtons = false;
             //_question = FindViewById<TextView>(Resource.Id.question);
             //_question.MovementMethod = new ScrollingMovementMethod();
