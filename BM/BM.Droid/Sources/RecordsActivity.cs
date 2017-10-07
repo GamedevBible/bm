@@ -142,7 +142,7 @@ namespace BM.Droid.Sources
             _inactive = true;
 
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
-                    .SetTitle(_cleverCount >= 20 ? "Опытнейший победитель!" : "Опытнейший победитель")
+                    .SetTitle(_cleverCount >= 20 ? "Настоящий знаток!" : "Настоящий знаток")
                     .SetMessage(_cleverCount >= 20 ? "Вы выиграли миллион очков более 20 раз! И все это без подсказок! Поздравляем с достижением!" : "Это достижение еще не получено." + "\n" + "(при удалении приложения достижения также удаляются)")
                     .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
