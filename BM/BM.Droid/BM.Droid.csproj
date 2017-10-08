@@ -251,7 +251,9 @@
     <AndroidResource Include="Resources\drawable\format_list_checks.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rounded_corners.xml" />
+    <AndroidResource Include="Resources\drawable\rounded_corners.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\fragment_points.xml">
@@ -330,7 +332,9 @@
     <AndroidResource Include="Resources\drawable\million1.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\contacts.xml" />
+    <AndroidResource Include="Resources\layout\contacts.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout-land\contacts.xml" />

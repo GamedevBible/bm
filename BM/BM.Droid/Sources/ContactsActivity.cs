@@ -27,6 +27,10 @@ namespace BM.Droid.Sources
         private ImageButton _thanksButton;
         private bool _inactive;
 
+        private View _lessonsLayout;
+        private View _contactUsLayout;
+        private View _supportUsLayout;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -39,6 +43,10 @@ namespace BM.Droid.Sources
             _supportUs = FindViewById<TextView>(Resource.Id.supportUs);
             _historiesButton = FindViewById<ImageButton>(Resource.Id.historiesButton);
             _thanksButton = FindViewById<ImageButton>(Resource.Id.thanksButton);
+
+            _lessonsLayout = FindViewById<View>(Resource.Id.lessonsLayout);
+            _contactUsLayout = FindViewById<View>(Resource.Id.contactUsLayout);
+            _supportUsLayout = FindViewById<View>(Resource.Id.supportUsLayout);
 
             var recordsHelper = new PreferencesHelper();
             recordsHelper.InitHelperForRecords(this);
@@ -79,14 +87,16 @@ namespace BM.Droid.Sources
             _lessons.Text = 
                 $"Изучение Библии";
 
-            string supportText = "</font><font color=#03a9f4>- Поддержать нас -</font>";
+            //string supportText = "</font><font color=#03a9f4>- Поддержать нас -</font>";
 
-            _supportUs.SetText(Html.FromHtml(supportText), TextView.BufferType.Spannable);
+            //_supportUs.SetText(Html.FromHtml(supportText), TextView.BufferType.Spannable);
 
-            _lessons.Click += OnAppVersionClicked;
-            _contactUs.Click += OnContactUsClicked;
-            _contactUs.LongClick += OnContactUsLongClicked;
-            _supportUs.Click += OnSupportUsClicked;
+            _supportUs.Text = "Поддержать нас";
+
+            _lessonsLayout.Click += OnAppVersionClicked;
+            _contactUsLayout.Click += OnContactUsClicked;
+            _contactUsLayout.LongClick += OnContactUsLongClicked;
+            _supportUsLayout.Click += OnSupportUsClicked;
         }
 
         private void OnAppVersionClicked(object sender, EventArgs e)
