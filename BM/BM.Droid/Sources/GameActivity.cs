@@ -302,13 +302,16 @@ namespace BM.Droid.Sources
         {
             base.OnSaveInstanceState(outState);
 
+            if (_progressDialog.IsShowing)
+                _progressDialog.Dismiss();
+
             outState.PutBoolean(nameof(_callButton), _callButton.Enabled);
             outState.PutBoolean(nameof(_peopleButton), _peopleButton.Enabled);
             outState.PutBoolean(nameof(_twoVariantsButton), _twoVariantsButton.Enabled);
             outState.PutBoolean(nameof(_needEnableButtons), _needEnableButtons);
             outState.PutInt(nameof(_currentQuestion), _currentQuestion);
             if (_currentQuestion >= 0 && _currentQuestion <= 14)
-                outState.PutInt(nameof(_lastQuestionIdTag), _gameQuestions[_currentQuestion]?._id ?? 0);
+                outState.PutInt(nameof(_lastQuestionIdTag), _lastQuestionId);
             else
                 outState.PutInt(nameof(_lastQuestionIdTag), 0);
             outState.PutBoolean(nameof(_needFinishActivity), _needFinishActivity);
@@ -426,7 +429,7 @@ namespace BM.Droid.Sources
                 default:
                     break;
             }
-
+            
             _question.Text = _gameQuestions[currentQuestion].questionText;
             _question.ScrollTo(0, 0);
             _variant1Button.Text = _gameQuestions[currentQuestion].variant1;
@@ -458,6 +461,8 @@ namespace BM.Droid.Sources
                             _gotMillion = true;
                             _needFinishActivity = true;
                         }
+                        else
+                            _lastQuestionId = _gameQuestions[_currentQuestion]._id;
                         PlayMedia(1);
                         StartAnimationButtonClick(_variant1Button, true);
                     }
@@ -476,6 +481,8 @@ namespace BM.Droid.Sources
                             _gotMillion = true;
                             _needFinishActivity = true;
                         }
+                        else
+                            _lastQuestionId = _gameQuestions[_currentQuestion]._id;
                         PlayMedia(1);
                         StartAnimationButtonClick(_variant2Button, true);
                     }
@@ -494,6 +501,8 @@ namespace BM.Droid.Sources
                             _gotMillion = true;
                             _needFinishActivity = true;
                         }
+                        else
+                            _lastQuestionId = _gameQuestions[_currentQuestion]._id;
                         PlayMedia(1);
                         StartAnimationButtonClick(_variant3Button, true);
                     }
@@ -512,6 +521,8 @@ namespace BM.Droid.Sources
                             _gotMillion = true;
                             _needFinishActivity = true;
                         }
+                        else
+                            _lastQuestionId = _gameQuestions[_currentQuestion]._id;
                         PlayMedia(1);
                         StartAnimationButtonClick(_variant4Button, true);
                     }  
