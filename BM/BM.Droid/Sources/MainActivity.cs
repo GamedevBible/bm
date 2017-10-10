@@ -18,6 +18,7 @@ using Android.Content.PM;
  - Обновить Alert Whats New
  - Посмотреть есть ли новые истории
  - Посмотреть, стоит ли обновить благодарности
+ - Проверить, включена ли аналитика релиза
  - */
 
 namespace BM.Droid.Sources
@@ -35,6 +36,7 @@ namespace BM.Droid.Sources
         private MediaPlayer _millionPlayer;
         private bool _inactive;
         private bool _greetingsWasShowed;
+        private bool _needShowWhatsNew;
 
         private Button _startButton;
         private Button _recordsButton;
@@ -50,7 +52,10 @@ namespace BM.Droid.Sources
             base.OnCreate(bundle);
 
             MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
-                   typeof(Analytics), typeof(Crashes));
+                   typeof(Analytics), typeof(Crashes)); // DEBUG
+
+            /*MobileCenter.Start("40d1e1c0-0450-4ef1-bda4-8d5f1365f069",
+                   typeof(Analytics), typeof(Crashes));*/ // PLAY MARKET
 
             if (bundle != null)
             {
@@ -88,7 +93,8 @@ namespace BM.Droid.Sources
             else
             if (!_recordsHelper.GetLastVersion().Equals(PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName))
             {
-                ShowWhatsNewAlert();
+                if (_needShowWhatsNew)
+                    ShowWhatsNewAlert();
                 _recordsHelper.PutLastVersion(this, PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName);
             }
         }
@@ -120,7 +126,7 @@ namespace BM.Droid.Sources
 
             var message = locale == "en" || locale == "en-US" || locale == "English"
                 ? "Dear friend! This time our app supports only russian language. We are sorry for that." 
-                : "Дорогой друг! Мы очень рады, что ты присоединился к нашему приложению! Тебя ждут более 3000 вопросов! Желаем тебе успехов и хорошего настроения!";
+                : "Дорогой друг! Мы очень рады, что ты присоединился к нашему приложению! Тебя ждут более 3000 вопросов! Желаем тебе успехов!";
 
             var closeButton = locale == "en" || locale == "en-US" || locale == "English" ? "Close" : "Закрыть";
 

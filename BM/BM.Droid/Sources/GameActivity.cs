@@ -99,7 +99,7 @@ namespace BM.Droid.Sources
             _progressDialog = new ProgressDialog(this, Resource.Style.ProgressDialogTheme) { Indeterminate = true };
             _progressDialog.SetCancelable(false);
             _progressDialog.SetProgressStyle(ProgressDialogStyle.Spinner);
-            _progressDialog.SetMessage("Загрузка вопросов...");
+            _progressDialog.SetMessage("Загрузка...");
 
             _variant1Layout.Click += OnAnswerButtonClick;
             _variant2Layout.Click += OnAnswerButtonClick;
