@@ -115,10 +115,10 @@ namespace BM.Droid.Sources
             _twoVariantsButton.LongClick += OnImageButtonLongClick;
             _pointsButton.Click += OnButtonClicked;
 
-            _hintPlayer = MediaPlayer.Create(this, Resource.Raw.hint);
-            _wrongPlayer = MediaPlayer.Create(this, Resource.Raw.wrong);
             _startPlayer = MediaPlayer.Create(this, Resource.Raw.start);
             _successPlayer = MediaPlayer.Create(this, Resource.Raw.success);
+            _hintPlayer = MediaPlayer.Create(this, Resource.Raw.hint);
+            _wrongPlayer = MediaPlayer.Create(this, Resource.Raw.wrong);
 
             _defaultColor =  ContextCompat.GetColor(this, Resource.Color.bm_blue);
             _goodColor = ContextCompat.GetColor(this, Resource.Color.good_answer);
@@ -175,11 +175,8 @@ namespace BM.Droid.Sources
             }
         }
 
-        private void PlayMedia(MediaPlayer mediaPlayer)
+        private void PlayMedia(int mediaPlayer)
         {
-            if (mediaPlayer == null)
-                return;
-
             if (_recordsHelper == null)
             {
                 _recordsHelper = new PreferencesHelper();
@@ -190,10 +187,41 @@ namespace BM.Droid.Sources
             if (!_soundEnabled)
                 return;
 
-            Task.Factory.StartNew(() =>
+            switch (mediaPlayer)
             {
-                mediaPlayer.Start();
-            });
+                case 0:
+                    if (_startPlayer == null)
+                        _startPlayer = MediaPlayer.Create(this, Resource.Raw.start);
+                    Task.Factory.StartNew(() =>
+                    {
+                        _startPlayer.Start();
+                    });
+                    break;
+                case 1:
+                    if (_successPlayer == null)
+                        _successPlayer = MediaPlayer.Create(this, Resource.Raw.start);
+                    Task.Factory.StartNew(() =>
+                    {
+                        _successPlayer.Start();
+                    });
+                    break;
+                case 2:
+                    if (_hintPlayer == null)
+                        _hintPlayer = MediaPlayer.Create(this, Resource.Raw.start);
+                    Task.Factory.StartNew(() =>
+                    {
+                        _hintPlayer.Start();
+                    });
+                    break;
+                case 3:
+                    if (_wrongPlayer == null)
+                        _wrongPlayer = MediaPlayer.Create(this, Resource.Raw.start);
+                    Task.Factory.StartNew(() =>
+                    {
+                        _wrongPlayer.Start();
+                    });
+                    break;
+            }
         }
 
         private void OnImageButtonLongClick(object sender, View.LongClickEventArgs e)
@@ -255,7 +283,7 @@ namespace BM.Droid.Sources
             if (_lastQuestionId == -1)
             {
                 _currentQuestion = 0;
-                PlayMedia(_startPlayer);
+                PlayMedia(0);
             }
             else
             {
@@ -430,13 +458,13 @@ namespace BM.Droid.Sources
                             _gotMillion = true;
                             _needFinishActivity = true;
                         }
-                        PlayMedia(_successPlayer);
+                        PlayMedia(1);
                         StartAnimationButtonClick(_variant1Button, true);
                     }
                     else
                     {
                         _needFinishActivity = true;
-                        PlayMedia(_wrongPlayer);
+                        PlayMedia(3);
                         StartAnimationButtonClick(_variant1Button, false, question.answer);
                     }
                     break;
@@ -448,13 +476,13 @@ namespace BM.Droid.Sources
                             _gotMillion = true;
                             _needFinishActivity = true;
                         }
-                        PlayMedia(_successPlayer);
+                        PlayMedia(1);
                         StartAnimationButtonClick(_variant2Button, true);
                     }
                     else
                     {
                         _needFinishActivity = true;
-                        PlayMedia(_wrongPlayer);
+                        PlayMedia(3);
                         StartAnimationButtonClick(_variant2Button, false, question.answer);
                     }
                     break;
@@ -466,13 +494,13 @@ namespace BM.Droid.Sources
                             _gotMillion = true;
                             _needFinishActivity = true;
                         }
-                        PlayMedia(_successPlayer);
+                        PlayMedia(1);
                         StartAnimationButtonClick(_variant3Button, true);
                     }
                     else
                     {
                         _needFinishActivity = true;
-                        PlayMedia(_wrongPlayer);
+                        PlayMedia(3);
                         StartAnimationButtonClick(_variant3Button, false, question.answer);
                     }
                     break;
@@ -484,13 +512,13 @@ namespace BM.Droid.Sources
                             _gotMillion = true;
                             _needFinishActivity = true;
                         }
-                        PlayMedia(_successPlayer);
+                        PlayMedia(1);
                         StartAnimationButtonClick(_variant4Button, true);
                     }  
                     else
                     {
                         _needFinishActivity = true;
-                        PlayMedia(_wrongPlayer);
+                        PlayMedia(3);
                         StartAnimationButtonClick(_variant4Button, false, question.answer);
                     }
                     break;
@@ -593,7 +621,7 @@ namespace BM.Droid.Sources
                     break;
                 case Resource.Id.callButton:
                     _withoutHelp = false;
-                    PlayMedia(_hintPlayer);
+                    PlayMedia(2);
                     _callButton.Enabled = false;
                     _callButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     RemoveFragmentIfOpened(ft, nameof(CallFriendFragment));
@@ -604,7 +632,7 @@ namespace BM.Droid.Sources
                     break;
                 case Resource.Id.peopleButton:
                     _withoutHelp = false;
-                    PlayMedia(_hintPlayer);
+                    PlayMedia(2);
                     _peopleButton.Enabled = false;
                     _peopleButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     RemoveFragmentIfOpened(ft, nameof(AuditoryHelpFragment));
@@ -615,7 +643,7 @@ namespace BM.Droid.Sources
                     break;
                 case Resource.Id.fiftyButton:
                     _withoutHelp = false;
-                    PlayMedia(_hintPlayer);
+                    PlayMedia(2);
                     _twoVariantsButton.Enabled = false;
                     _twoVariantsButton.SetColorFilter(new Android.Graphics.Color(ContextCompat.GetColor(this, Resource.Color.lighter_gray)));
                     LeaveTwoVariants(_gameQuestions[_currentQuestion]);
