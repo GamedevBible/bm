@@ -32,7 +32,7 @@ namespace BM.Droid.Sources
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(Activity, Resource.Style.AlertDialogTheme)
                 .SetTitle("Помощь зала")
                 .SetView(view)
-                .SetPositiveButton("OK", ConfirmButtonClicked)
+                .SetPositiveButton("ЗАКРЫТЬ", ConfirmButtonClicked)
                 .Create();
 
             return dialog;

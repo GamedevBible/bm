@@ -29,7 +29,7 @@ namespace BM.Droid.Sources
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(Activity, Resource.Style.AlertDialogTheme)
                 .SetTitle("Звонок другу")
                 .SetView(view)
-                .SetPositiveButton("OK", ConfirmButtonClicked)
+                .SetPositiveButton("ЗАКРЫТЬ", ConfirmButtonClicked)
                 .Create();
             
             return dialog;
