@@ -84,6 +84,8 @@ namespace BM.Droid.Sources
 
             _millionPlayer = MediaPlayer.Create(this, Resource.Raw.million);
 
+            //_needShowWhatsNew = true;
+
             if (_recordsHelper.GetEntersCount() == 1 && !_greetingsWasShowed)
             {
                 ShowGreetingsAlert();
