@@ -52,7 +52,7 @@ namespace BM.Droid.Sources
         // Simulates background work that happens behind the splash screen
         async void SimulateStartup()
         {
-            await Task.Delay(1000);
+            await Task.Delay(500);
             StartActivity(MainActivity.CreateStartIntent(this));
         }
     }
