@@ -263,7 +263,7 @@ namespace BM.Droid.Sources
         public static Intent CreateStartIntent(Context context, string message = null)
         {
             var intent = new Intent(context, typeof(MainActivity));
-
+            intent.SetFlags(ActivityFlags.ClearTask | ActivityFlags.NewTask);
             return intent;
         }
     }

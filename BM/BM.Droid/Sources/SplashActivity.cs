@@ -11,7 +11,7 @@ using Android.Content.Res;
 
 namespace BM.Droid.Sources
 {
-    [Activity(Label = "@string/ApplicationName", Theme = "@style/ActivitySplash", MainLauncher = true, Icon = "@mipmap/ic_launcher", NoHistory = true)]
+    [Activity(Label = "@string/ApplicationName", Theme = "@style/ActivitySplash", MainLauncher = true, Icon = "@mipmap/ic_launcher"/*, NoHistory = true*/)]
     public class SplashActivity : AppCompatActivity
     {
         private PreferencesHelper _recordsHelper;
