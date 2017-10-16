@@ -194,31 +194,59 @@ namespace BM.Droid.Sources
                         _startPlayer = MediaPlayer.Create(this, Resource.Raw.start);
                     Task.Factory.StartNew(() =>
                     {
-                        _startPlayer.Start();
+                        _startPlayer.Completion += (sender, args) => {
+                            if (_startPlayer != null && !_startPlayer.IsPlaying)
+                            {
+                                _startPlayer.Release();
+                                _startPlayer = null;
+                            }
+                        };
+                        _startPlayer?.Start();
                     });
                     break;
                 case 1:
                     if (_successPlayer == null)
-                        _successPlayer = MediaPlayer.Create(this, Resource.Raw.start);
+                        _successPlayer = MediaPlayer.Create(this, Resource.Raw.success);
                     Task.Factory.StartNew(() =>
                     {
-                        _successPlayer.Start();
+                        _successPlayer.Completion += (sender, args) => {
+                            if (_successPlayer != null && !_successPlayer.IsPlaying)
+                            {
+                                _successPlayer.Release();
+                                _successPlayer = null;
+                            }
+                        };
+                        _successPlayer?.Start();
                     });
                     break;
                 case 2:
                     if (_hintPlayer == null)
-                        _hintPlayer = MediaPlayer.Create(this, Resource.Raw.start);
+                        _hintPlayer = MediaPlayer.Create(this, Resource.Raw.hint);
                     Task.Factory.StartNew(() =>
                     {
-                        _hintPlayer.Start();
+                        _hintPlayer.Completion += (sender, args) => {
+                            if (_hintPlayer != null && !_hintPlayer.IsPlaying)
+                            {
+                                _hintPlayer.Release();
+                                _hintPlayer = null;
+                            }
+                        };
+                        _hintPlayer?.Start();
                     });
                     break;
                 case 3:
                     if (_wrongPlayer == null)
-                        _wrongPlayer = MediaPlayer.Create(this, Resource.Raw.start);
+                        _wrongPlayer = MediaPlayer.Create(this, Resource.Raw.wrong);
                     Task.Factory.StartNew(() =>
                     {
-                        _wrongPlayer.Start();
+                        _wrongPlayer.Completion += (sender, args) => {
+                            if (_wrongPlayer != null && !_wrongPlayer.IsPlaying)
+                            {
+                                _wrongPlayer.Release();
+                                _wrongPlayer = null;
+                            }
+                        };
+                        _wrongPlayer?.Start();
                     });
                     break;
             }

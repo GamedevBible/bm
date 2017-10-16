@@ -239,6 +239,13 @@ namespace BM.Droid.Sources
             Task.Factory.StartNew(() =>
             {
                 mediaPlayer = mediaPlayer ?? MediaPlayer.Create(this, Resource.Raw.million);
+                mediaPlayer.Completion += (sender, args) => {
+                    if (mediaPlayer != null && !mediaPlayer.IsPlaying)
+                    {
+                        mediaPlayer.Release();
+                        mediaPlayer = null;
+                    }
+                };
                 mediaPlayer.Start();
             });
         }
