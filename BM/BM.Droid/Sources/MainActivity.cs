@@ -7,9 +7,6 @@ using Android.Content;
 using Android.Runtime;
 using Android.Media;
 using System.Threading.Tasks;
-using Microsoft.Azure.Mobile;
-using Microsoft.Azure.Mobile.Analytics;
-using Microsoft.Azure.Mobile.Crashes;
 using Java.Util;
 using Android.Content.PM;
 
@@ -18,7 +15,7 @@ using Android.Content.PM;
  - Обновить Alert Whats New
  - Посмотреть есть ли новые истории
  - Посмотреть, стоит ли обновить благодарности
- - Проверить, включена ли аналитика релиза
+ - Проверить, включена ли аналитика релиза в SplashActivity
  - */
 
 namespace BM.Droid.Sources
@@ -50,12 +47,6 @@ namespace BM.Droid.Sources
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
-                   typeof(Analytics), typeof(Crashes)); // DEBUG
-
-            /*MobileCenter.Start("40d1e1c0-0450-4ef1-bda4-8d5f1365f069",
-                   typeof(Analytics), typeof(Crashes));*/ // PLAY MARKET
 
             if (bundle != null)
             {
@@ -112,7 +103,7 @@ namespace BM.Droid.Sources
         {
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle($"Версия {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}")
-                    .SetMessage("Что нового:" + "\n" + "(пока ничего)")
+                    .SetMessage("Что нового:" + "\n" + "- исправлены найденные ошибки в вопросах." + "\n" + "\n" + "Мы очень рады, что вы участвуете в нашей викторине! А мы будем делать наше приложение все более интересным для вас!")
                     .SetPositiveButton("Закрыть", CloseDialog)
                     .SetCancelable(false)
                     .Create();

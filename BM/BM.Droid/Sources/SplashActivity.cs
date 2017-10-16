@@ -8,6 +8,9 @@ using Android.OS;
 using Android.Support.V7.App;
 using System.Threading.Tasks;
 using Android.Content.Res;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 
 namespace BM.Droid.Sources
 {
@@ -42,7 +45,22 @@ namespace BM.Droid.Sources
             base.OnResume();
 
             if (!_needStartApp)
+            {
+                MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
+                   typeof(Analytics), typeof(Crashes)); // DEBUG
+
+                /*MobileCenter.Start("40d1e1c0-0450-4ef1-bda4-8d5f1365f069",
+                       typeof(Analytics), typeof(Crashes));*/ // PLAY MARKET
+
                 return;
+            }
+
+           MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
+                   typeof(Analytics), typeof(Crashes)); // DEBUG
+
+            /*MobileCenter.Start("40d1e1c0-0450-4ef1-bda4-8d5f1365f069",
+                   typeof(Analytics), typeof(Crashes));*/ // PLAY MARKET
+
             _needStartApp = false;
 
             Task startupWork = new Task(() => { SimulateStartup(); });
