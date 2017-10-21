@@ -80,6 +80,7 @@ namespace BM.Droid.Sources
             if (_recordsHelper.GetEntersCount() == 1 && !_greetingsWasShowed)
             {
                 ShowGreetingsAlert();
+                CopyDatabase("");
                 _greetingsWasShowed = true;
                 _recordsHelper.PutLastVersion(this, PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName);
             }
