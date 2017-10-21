@@ -163,7 +163,7 @@ namespace BM.Droid.Sources
                     " По желанию, в сообщении к пожертвованию вы можете указать свое имя или инициалы."+
                     " Благодарим вас за оказанную помощь! С вашей помощью наши новые проекты будут более качественными!"+
                     " Вы помогаете пробудить у людей интерес к изучению Библии!")
-                    .SetNegativeButton("Скопировать номер счета", YandexMoneyCopied)
+                    .SetNegativeButton("Перейти на сайт", YandexMoneyCopied)
                     .SetPositiveButton("Закрыть", AlertConfirmButtonClicked)
                     .SetCancelable(false)
                     .Create();
@@ -175,11 +175,14 @@ namespace BM.Droid.Sources
 
         private void YandexMoneyCopied(object sender, DialogClickEventArgs e)
         {
-            Android.Content.ClipboardManager clipboard = (Android.Content.ClipboardManager)GetSystemService(ClipboardService);
+            var uri = Android.Net.Uri.Parse("https://money.yandex.ru/to/410015425804928");
+            var intent = new Intent(Intent.ActionView, uri);
+            StartActivity(intent);
+            /*Android.Content.ClipboardManager clipboard = (Android.Content.ClipboardManager)GetSystemService(ClipboardService);
             ClipData clip = ClipData.NewPlainText("label", "410015425804928");
             clipboard.PrimaryClip = clip;
 
-            Toast.MakeText(this, "Номер счета скопирован", ToastLength.Short).Show();
+            Toast.MakeText(this, "Номер счета скопирован", ToastLength.Short).Show();*/
             _inactive = false;
         }
 

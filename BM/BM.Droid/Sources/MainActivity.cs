@@ -227,9 +227,9 @@ namespace BM.Droid.Sources
 
         private void PlayMillion(MediaPlayer mediaPlayer)
         {
+            mediaPlayer = mediaPlayer ?? MediaPlayer.Create(this, Resource.Raw.million);
             Task.Factory.StartNew(() =>
             {
-                mediaPlayer = mediaPlayer ?? MediaPlayer.Create(this, Resource.Raw.million);
                 mediaPlayer.Completion += (sender, args) => {
                     if (mediaPlayer != null && !mediaPlayer.IsPlaying)
                     {
@@ -237,7 +237,7 @@ namespace BM.Droid.Sources
                         mediaPlayer = null;
                     }
                 };
-                mediaPlayer.Start();
+                mediaPlayer?.Start();
             });
         }
 
