@@ -27,9 +27,39 @@ namespace BM.Droid.Sources
             _recordsHelper = new PreferencesHelper();
             _recordsHelper.ProcessFirstStarted(this);
 
+            CopyDatabase("");
+
             if (savedInstanceState != null)
             {
                 _needStartApp = savedInstanceState.GetBoolean(nameof(_needStartApp));
+            }
+        }
+
+        private void CopyDatabase(string dataBaseName)
+        {
+            dataBaseName = "millionaire.db";
+            var dbPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/" + dataBaseName;
+
+            if (System.IO.File.Exists(dbPath))
+                System.IO.File.Delete(dbPath);
+
+            if (!System.IO.File.Exists(dbPath))
+            {
+                var dbAssetStream = Assets.Open(dataBaseName);
+                var dbFileStream = new System.IO.FileStream(dbPath, System.IO.FileMode.OpenOrCreate);
+                var buffer = new byte[1024];
+
+                int b = buffer.Length;
+                int length;
+
+                while ((length = dbAssetStream.Read(buffer, 0, b)) > 0)
+                {
+                    dbFileStream.Write(buffer, 0, length);
+                }
+
+                dbFileStream.Flush();
+                dbFileStream.Close();
+                dbAssetStream.Close();
             }
         }
 
@@ -44,22 +74,16 @@ namespace BM.Droid.Sources
         {
             base.OnResume();
 
-            if (!_needStartApp)
-            {
-                MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
-                   typeof(Analytics), typeof(Crashes)); // DEBUG
-
-                /*MobileCenter.Start("40d1e1c0-0450-4ef1-bda4-8d5f1365f069",
-                       typeof(Analytics), typeof(Crashes));*/ // PLAY MARKET
-
-                return;
-            }
-
-           MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
+            MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
                    typeof(Analytics), typeof(Crashes)); // DEBUG
 
             /*MobileCenter.Start("40d1e1c0-0450-4ef1-bda4-8d5f1365f069",
                    typeof(Analytics), typeof(Crashes));*/ // PLAY MARKET
+
+            if (!_needStartApp)
+            {
+                return;
+            }
 
             _needStartApp = false;
 
