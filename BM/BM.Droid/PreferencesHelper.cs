@@ -209,7 +209,7 @@ namespace BM.Droid
             if(_millionsCount == 49)
                 Analytics.TrackEvent("User got 50 millions");
 
-            _editor.PutInt("millionsCount", _millionsCount >= 50 ? 50 : _millionsCount + 1);
+            _editor.PutInt("millionsCount", _millionsCount >= 1000 ? 1000 : _millionsCount + 1);
             _editor.Commit();
         }
 
@@ -223,7 +223,7 @@ namespace BM.Droid
             if(_cleverCount == 19)
                 Analytics.TrackEvent("User got 20 millions without hints");
 
-            _editor.PutInt("cleverCount", _cleverCount >= 20 ? 20 : _cleverCount + 1);
+            _editor.PutInt("cleverCount", _cleverCount >= 1000 ? 1000 : _cleverCount + 1);
             _editor.Commit();
         }
     }
