@@ -72,14 +72,14 @@ namespace BM.Droid.Sources
             if (WindowManager.DefaultDisplay.Rotation == SurfaceOrientation.Rotation90 || WindowManager.DefaultDisplay.Rotation == SurfaceOrientation.Rotation270)
             {
                 string text = "<font>У вас есть вопросы или предложения? </font>" +
-                "<font>Напишите нам: </font><font color=#03a9f4>biblegamedev@gmail.com</font>";
+                "<font>Напишите нам: </font><font color=#01A7F2>biblegamedev@gmail.com</font>";
 
                 _contactUs.SetText(Html.FromHtml(text), TextView.BufferType.Spannable);
             }
             else
             {
                 string text = "<font>У вас есть вопросы или предложения?</font><br>" +
-                "<font>Напишите нам: </font><font color=#03a9f4>biblegamedev@gmail.com</font>";
+                "<font>Напишите нам: </font><font color=#01A7F2>biblegamedev@gmail.com</font>";
 
                 _contactUs.SetText(Html.FromHtml(text), TextView.BufferType.Spannable);
             }
@@ -87,7 +87,7 @@ namespace BM.Droid.Sources
             _lessons.Text = 
                 $"Изучение Библии";
 
-            //string supportText = "</font><font color=#03a9f4>- Поддержать нас -</font>";
+            //string supportText = "</font><font color=#01A7F2>- Поддержать нас -</font>";
 
             //_supportUs.SetText(Html.FromHtml(supportText), TextView.BufferType.Spannable);
 
