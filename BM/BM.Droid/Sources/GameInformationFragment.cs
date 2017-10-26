@@ -103,6 +103,10 @@ namespace BM.Droid.Sources
 
                 _millionImage.SetImageResource(_imageForMillion);
             }
+
+            if (!_recordWasSaved)
+                ProcessRecord();
+            _recordWasSaved = true;
         }
 
         public override void OnSaveInstanceState(Bundle outState)
