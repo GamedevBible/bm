@@ -161,7 +161,7 @@ namespace BM.Droid
         {
             _questionNumbers.OrderByDescending(t => t);
 
-            if (lastQuestion <= _questionNumbers[6])
+            if (lastQuestion <= _questionNumbers[6] && lastQuestion != 15)
                 return;
 
             if (gotMillion)
