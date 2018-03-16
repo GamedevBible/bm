@@ -75,7 +75,7 @@ namespace BM.Droid.Sources
 
             _millionPlayer = MediaPlayer.Create(this, Resource.Raw.million);
 
-            //_needShowWhatsNew = true;
+            _needShowWhatsNew = true;
 
             if (_recordsHelper.GetEntersCount() == 1 && !_greetingsWasShowed)
             {
@@ -133,7 +133,7 @@ namespace BM.Droid.Sources
         {
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle($"Версия {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}")
-                    .SetMessage("Что нового:" + "\n" + "- исправлены найденные ошибки в вопросах." + "\n" + "\n" + "Мы очень рады, что вы участвуете в нашей викторине! А мы будем делать наше приложение все более интересным для вас!")
+                    .SetMessage("Что нового:" + "\n" + "- исправлены некоторые ошибки в вопросах." + "\n" + "- добавлен новый экран в меню." + "\n" + "\n" + "Мы очень рады, что вы участвуете в нашей викторине! А мы будем делать наше приложение все более интересным для вас! Также мы стараемся исправлять все найденные ошибки в вопросах!")
                     .SetPositiveButton("Закрыть", CloseDialog)
                     .SetCancelable(false)
                     .Create();
@@ -209,7 +209,7 @@ namespace BM.Droid.Sources
                     _inactive = false;
                     break;
                 case Resource.Id.guideButton:
-                    Toast.MakeText(this, "Экран справки об игре еще в разработке", ToastLength.Short).Show();
+                    StartActivity(MoreGamesActivity.CreateStartIntent(this));
                     _inactive = false;
                     break;
                 case Resource.Id.contactsButton:

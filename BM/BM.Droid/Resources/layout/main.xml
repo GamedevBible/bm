@@ -47,19 +47,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:text="Дополнительно"
             android:layout_marginBottom="5dp"
-            android:text="Справка"
-            android:id="@+id/guideButton"
+            android:id="@+id/contactsButton"
             style="@style/Widget.AppCompat.Button.Colored"
             android:ems="18" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Дополнительно"
             android:layout_marginBottom="15dp"
-            android:id="@+id/contactsButton"
+            android:text="Другие наши игры"
+            android:id="@+id/guideButton"
             style="@style/Widget.AppCompat.Button.Colored"
+            android:textColor="@color/dark_gray"
             android:ems="18" />
     </LinearLayout>
     <android.support.v7.widget.AppCompatImageButton

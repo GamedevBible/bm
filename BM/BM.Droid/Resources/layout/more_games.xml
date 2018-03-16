@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_blue_down_up"
+    android:orientation="vertical" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+    <LinearLayout
+      android:background="@drawable/rounded_corners_fpow"
+      android:layout_margin="20dp"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <FrameLayout
+          android:layout_marginTop="20dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+        <ImageView
+            android:background="@drawable/rounded_corners_fpow_icon"
+            android:padding="5dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/fpow_logo"/>
+      </FrameLayout>
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="18sp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginStart="10dp"
+          android:layout_marginRight="10dp"
+          android:layout_marginEnd="10dp"
+          android:layout_marginTop="10dp"
+          android:layout_centerHorizontal="true"
+          android:maxLines="20"
+          android:textColor="@color/dark_gray"
+          android:gravity="center"
+          android:id="@+id/fpowtitletext"
+          android:padding="10dp"
+          android:text="4 ФОТО 1 СЛОВО - БИБЛИЯ"/>
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textSize="16sp"
+          android:layout_marginLeft="10dp"
+          android:layout_marginStart="10dp"
+          android:layout_marginRight="10dp"
+          android:layout_marginEnd="10dp"
+          android:layout_centerHorizontal="true"
+          android:maxLines="20"
+          android:gravity="center"
+          android:id="@+id/fpowtext"
+          android:padding="10dp"
+          android:text="4 ФОТО 1 СЛОВО"/>
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginTop="10dp"
+          android:layout_marginBottom="10dp"
+          android:text="Перейти к игре"
+          android:id="@+id/fpowButton"
+          android:backgroundTint="@color/fpow_green"
+          android:textColor="@color/dark_gray"
+          android:ems="18" />
+    </LinearLayout>
+    </RelativeLayout>
+  </ScrollView>
+</RelativeLayout>
