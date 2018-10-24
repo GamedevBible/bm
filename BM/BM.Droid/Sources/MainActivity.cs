@@ -133,7 +133,7 @@ namespace BM.Droid.Sources
         {
             var dialog = new Android.Support.V7.App.AlertDialog.Builder(this, Resource.Style.AlertDialogTheme)
                     .SetTitle($"Версия {PackageManager.GetPackageInfo(PackageName, PackageInfoFlags.Configurations).VersionName}")
-                    .SetMessage("Что нового:" + "\n" + "- исправлены некоторые ошибки в вопросах." + "\n" + "- добавлен новый экран в меню." + "\n" + "\n" + "Мы очень рады, что вы участвуете в нашей викторине! А мы будем делать наше приложение все более интересным для вас! Также мы стараемся исправлять все найденные ошибки в вопросах!")
+                    .SetMessage("Что нового:" + "\n" + "- переработана база вопросов." + "\n" + "- добавлена ссылка на новую игру по Библии." + "\n" + "\n" + "Мы очень рады, что вы участвуете в нашей викторине! А мы будем делать наше приложение все более интересным для вас! Также мы стараемся исправлять все найденные ошибки в вопросах!")
                     .SetPositiveButton("Закрыть", CloseDialog)
                     .SetCancelable(false)
                     .Create();

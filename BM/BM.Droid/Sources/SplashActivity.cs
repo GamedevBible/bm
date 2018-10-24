@@ -44,11 +44,11 @@ namespace BM.Droid.Sources
         {
             base.OnResume();
 
-            MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
-                   typeof(Analytics), typeof(Crashes)); // DEBUG
+            /*MobileCenter.Start("0f1c66c1-dc0c-4f49-96e0-2f4c017631d4",
+                   typeof(Analytics), typeof(Crashes));*/ // DEBUG
 
-            /*MobileCenter.Start("40d1e1c0-0450-4ef1-bda4-8d5f1365f069",
-                   typeof(Analytics), typeof(Crashes));*/ // PLAY MARKET
+            MobileCenter.Start("40d1e1c0-0450-4ef1-bda4-8d5f1365f069",
+                   typeof(Analytics), typeof(Crashes)); // PLAY MARKET
 
             if (!_needStartApp)
             {

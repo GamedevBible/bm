@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.BM.Droid" android:versionName="1.1.3" android:installLocation="auto" android:versionCode="8">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.BM.Droid" android:versionName="1.1.4" android:installLocation="auto" android:versionCode="9">
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
-	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21" />
+	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="26" />
 	<application android:label="@string/ApplicationName" icon="@mipmap/ic_launcher"></application>
 </manifest>

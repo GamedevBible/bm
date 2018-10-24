@@ -8,12 +8,78 @@
   <ScrollView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <RelativeLayout
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:orientation="vertical"
+      android:layout_height="wrap_content">
+      
+      <LinearLayout
+      android:background="@drawable/rounded_corners_bw"
+      android:layout_margin="20dp"
+      android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+          <ImageView
+              android:padding="5dp"
+              android:layout_width="100dp"
+              android:layout_height="100dp"
+              android:layout_gravity="center"
+              android:src="@drawable/bw_logo"/>
+        </FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="0dp"
+            android:layout_centerHorizontal="true"
+            android:maxLines="20"
+            android:textColor="@color/dark_gray"
+            android:gravity="center"
+            android:id="@+id/bwtitletext"
+            android:padding="10dp"
+            android:text="БИБЛЕЙСКИЕ СЛОВА"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerHorizontal="true"
+            android:maxLines="20"
+            android:gravity="center"
+            android:id="@+id/bwtext"
+            android:padding="10dp"
+            android:text="Библейские слова"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Перейти к игре"
+            android:id="@+id/bwButton"
+            android:backgroundTint="@color/light_brown_color"
+            android:textColor="@color/dark_gray"
+            android:ems="18" />
+      </LinearLayout>
+      
     <LinearLayout
       android:background="@drawable/rounded_corners_fpow"
-      android:layout_margin="20dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginBottom="20dp"
+      android:layout_marginTop="0dp"
       android:orientation="vertical"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
@@ -22,7 +88,6 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
         <ImageView
-            android:background="@drawable/rounded_corners_fpow_icon"
             android:padding="5dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -37,7 +102,7 @@
           android:layout_marginStart="10dp"
           android:layout_marginRight="10dp"
           android:layout_marginEnd="10dp"
-          android:layout_marginTop="10dp"
+          android:layout_marginTop="0dp"
           android:layout_centerHorizontal="true"
           android:maxLines="20"
           android:textColor="@color/dark_gray"
@@ -72,6 +137,6 @@
           android:textColor="@color/dark_gray"
           android:ems="18" />
     </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
   </ScrollView>
 </RelativeLayout>
